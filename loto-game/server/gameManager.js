@@ -3,12 +3,7 @@ const { getAllTicketSets } = require('./utils/ticketGenerator');
 class GameManager {
     constructor(io) {
         this.io = io;
-        this.rooms = new Map(); // roomId -> { players, ... }
-
-        // Auto-generate 30 sets of tickets for users to choose from
-        // In a real app, we might generate on demand or per room.
-        // Requirement: "Chọn 1 trong 30 bộ số (phiếu) còn trống"
-        // So we generate 30 sets per room? Yes.
+        this.rooms = new Map();
     }
 
     createRoom(hostSocketId) {
@@ -49,15 +44,21 @@ class GameManager {
             id: playerSocketId,
             name: playerName,
             setId: null,
-            name: playerName,
-            setId: null,
             tickets: null,
             isReady: false
         };
+
         room.players.push(player);
+
         return {
-            success: true, room: {
-                ...room, // Send full room data including history? Or just what's needed
+            success: true,
+            room: {
+                roomId: room.id,
+                gameState: room.gameState,
+                availableSets: room.availableSets,
+                players: room.players,
+                numbersDrawn: room.numbersDrawn,
+                currentNumber: room.currentNumber,
                 winHistory: room.winHistory
             }
         };
@@ -93,15 +94,30 @@ class GameManager {
         return { success: true, tickets: set.data };
     }
 
+    removePlayer(roomId, playerId) {
+        const room = this.rooms.get(roomId);
+        if (!room) return { error: 'Room not found' };
+
+        const playerIndex = room.players.findIndex(p => p.id === playerId);
+        if (playerIndex === -1) return { error: 'Player not found' };
+
+        const player = room.players[playerIndex];
+
+        // Release the player's ticket set
+        if (player.setId) {
+            const set = room.availableSets.find(s => s.id === player.setId);
+            if (set) set.isTaken = false;
+        }
+
+        // Remove player from the room
+        room.players.splice(playerIndex, 1);
+
+        return { success: true, players: room.players, availableSets: room.availableSets };
+    }
+
     leaveRoom(socketId) {
         // Handle disconnection
-        // If Host leaves, end game? Or keep alive?
-        // If Player leaves, keep their set taken for "reconnection"?
-        // Prompt: "Xử lý trường hợp User bị rớt mạng và quay lại phòng vẫn giữ nguyên bộ số."
-        // We should map socketId to a persistent user ID or just use cookie/localstorage on client.
-        // For now, if socket disconnects, we might keep them in 'players' but mark disconnected.
-        // But socketId changes on reconnect. We need a persistent ID.
-        // Simplification: We won't handle complex auth. Just rejoin with same name? Or handle via client sending prev details.
+        // For now, players remain in the room until host removes them
     }
 
     startGame(roomId) {
@@ -215,7 +231,7 @@ class GameManager {
 
         // Check Bingo?
         // Actually, usually Players check their own and shout Bingo. 
-        // But Prompt says: "Hệ thống phải tự động kiểm tra và thông báo 'Bingo' ngay lập tức".
+        // But Prompt says: \"Hệ thống phải tự động kiểm tra và thông báo 'Bingo' ngay lập tức\".
         this.checkBingo(room);
     }
 

@@ -77,6 +77,23 @@ io.on('connection', (socket) => {
         }
     });
 
+    socket.on('removePlayer', ({ roomId, playerId }, callback) => {
+        const room = gameManager.rooms.get(roomId);
+        if (!room || room.hostId !== socket.id) {
+            if (callback) callback({ error: 'Unauthorized' });
+            return;
+        }
+
+        const res = gameManager.removePlayer(roomId, playerId);
+        if (res && res.success) {
+            if (callback) callback({ success: true });
+            io.to(roomId).emit('playerUpdated', res.players);
+            io.to(roomId).emit('setsUpdated', res.availableSets);
+        } else {
+            if (callback) callback({ error: res ? res.error : 'Failed' });
+        }
+    });
+
     socket.on('action', ({ roomId, action }, callback) => {
         // Host actions
         const room = gameManager.rooms.get(roomId);

@@ -123,6 +123,15 @@ const HostRoom = () => {
         URL.revokeObjectURL(url);
     };
 
+    const removePlayer = (playerId) => {
+        if (!window.confirm('Are you sure you want to remove this player?')) return;
+        socket.emit('removePlayer', { roomId, playerId }, (res) => {
+            if (res && res.error) {
+                alert(res.error);
+            }
+        });
+    };
+
     return (
         <div className="flex flex-col h-screen overflow-hidden bg-slate-900 text-white">
             {/* Toast Notification */}
@@ -284,6 +293,13 @@ const HostRoom = () => {
                                         <span className="text-xs font-bold text-green-400 bg-green-900/50 px-2 py-0.5 rounded">READY</span>
                                     )}
                                     <div className={clsx("w-2 h-2 rounded-full", p.setId ? "bg-green-400" : "bg-yellow-400")}></div>
+                                    <button
+                                        onClick={() => removePlayer(p.id)}
+                                        className="text-slate-400 hover:text-red-400 ml-2 p-1 transition-colors"
+                                        title="Remove Player"
+                                    >
+                                        ✕
+                                    </button>
                                 </div>
                             </div>
                         ))}
