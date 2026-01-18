@@ -64,15 +64,16 @@ class GameManager {
 
     selectSet(roomId, playerId, setId) {
         const room = this.rooms.get(roomId);
-        if (!room) return;
+        if (!room) return { error: 'Room not found' };
 
         const set = room.availableSets.find(s => s.id === setId);
-        if (!set || set.isTaken) return { error: 'Set unavailable' };
+        if (!set) return { error: 'Set not found' }; // Added check for !set
+        if (set.isTaken) return { error: 'Set already taken' };
 
-        const player = room.players.find(p => p.id === playerId);
-        if (!player) return;
+        const player = room.players.find(p => p.id === playerId); // Changed userId to playerId
+        if (!player) return { error: 'Player not found' };
 
-        // Release old set if any
+        // If player already has a set, release it first (Change Ticket)
         if (player.setId) {
             const oldSet = room.availableSets.find(s => s.id === player.setId);
             if (oldSet) oldSet.isTaken = false;
@@ -80,7 +81,13 @@ class GameManager {
 
         set.isTaken = true;
         player.setId = setId;
-        player.tickets = set.data;
+        player.tickets = set.data; // Changed set.tickets to set.data
+
+        // Reset ready status if they change ticket
+        player.isReady = false;
+
+        // Broadcast updates
+        this.emitAvailableSets(roomId);
 
         return { success: true, tickets: set.data };
     }
@@ -152,15 +159,21 @@ class GameManager {
         room.numbersDrawn = [];
         room.currentNumber = null;
 
-        // Reset Players tickets but keep them in room
+        // Reset player state (keep tickets, reset ready)
         room.players.forEach(p => {
-            p.tickets = null;
-            p.setId = null;
+            // p.tickets = null; // Don't clear tickets
+            // p.setId = null;   // Don't clear set ID
             p.isReady = false;
         });
 
-        // Reset available sets
-        room.availableSets.forEach(s => s.isTaken = false);
+        // Re-sync available sets: Mark sets held by players as taken, release dropped ones?
+        // Actually, since we didn't clear setId, the isTaken status in availableSets 
+        // should ideally strictly match players' held sets.
+        // Let's regenerate isTaken integrity just in case
+        room.availableSets.forEach(s => {
+            const heldByPlayer = room.players.some(p => p.setId === s.id);
+            s.isTaken = heldByPlayer;
+        });
 
         this.io.to(roomId).emit('gameRestarted', {
             gameState: room.gameState,

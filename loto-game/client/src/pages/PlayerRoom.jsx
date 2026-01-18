@@ -45,8 +45,10 @@ const PlayerRoom = () => {
 
         socket.on('gameRestarted', () => {
             setGameState('WAITING');
+            setMarkedNumbers([]);
             setCurrentNumber(null);
             setDrawnHistory([]);
+            setIsReady(false); // Reset ready state
             if (data?.winHistory) setWinHistory(data.winHistory);
             alert('New Game Started! Please choose your ticket.');
         });
