@@ -2,20 +2,29 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const path = require('path');
 const GameManager = require('./gameManager');
 
 const app = express();
 app.use(cors());
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "*", // Allow all for dev
+        origin: "*", // Still allow all for flexible deployment, change to specific domain for extra security
         methods: ["GET", "POST"]
     }
 });
 
 const gameManager = new GameManager(io);
+
+// Catch-all route to serve index.html for React Router (using regex for Express 5 compatibility)
+app.get(/^(?!\/socket\.io).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 
 io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
