@@ -122,6 +122,20 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('gameStateChanged', room.gameState);
     });
 
+    socket.on('setDrawInterval', ({ roomId, seconds }, callback) => {
+        const room = gameManager.rooms.get(roomId);
+        if (!room || room.hostId !== socket.id) {
+            if (callback) callback({ error: 'Unauthorized' });
+            return;
+        }
+
+        const res = gameManager.setDrawInterval(roomId, seconds);
+        if (callback) callback(res);
+
+        // Notify all players of the new interval
+        io.to(roomId).emit('drawIntervalChanged', { drawIntervalSeconds: res.drawIntervalSeconds });
+    });
+
     socket.on('kinh', ({ roomId, markedNumbers }, callback) => {
         const res = gameManager.verifyKinh(roomId, socket.id, markedNumbers);
 
@@ -131,6 +145,18 @@ io.on('connection', (socket) => {
         }
 
         const room = gameManager.rooms.get(roomId);
+        const player = room.players.find(p => p.id === socket.id);
+
+        // Emit verification popup to host
+        io.to(room.hostId).emit('kinhVerification', {
+            playerName: player.name,
+            playerTickets: player.tickets,
+            markedNumbers: markedNumbers,
+            drawnNumbers: room.numbersDrawn,
+            success: res.success,
+            reason: res.reason,
+            message: res.message
+        });
 
         if (res.success) {
             // Valid bingo!
@@ -138,10 +164,11 @@ io.on('connection', (socket) => {
             if (callback) callback({ success: true, reason: 'BINGO' });
         } else {
             // Kinh sai (false claim)
-            gameManager.handleKinhSai(room, gameManager.rooms.get(roomId).players.find(p => p.id === socket.id));
+            gameManager.handleKinhSai(room, player);
             if (callback) callback({ success: false, reason: 'KINH_SAI', message: res.message });
         }
     });
+
 
 
     socket.on('disconnect', () => {

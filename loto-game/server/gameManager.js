@@ -63,6 +63,7 @@ class GameManager {
             numbersDrawn: [],
             availableSets: availableSets,
             drawInterval: null,
+            drawIntervalSeconds: 3, // Default 3 seconds
             currentNumber: null,
             winHistory: this.globalWinHistory // Initialize with global history
         });
@@ -240,10 +241,11 @@ class GameManager {
         const room = this.rooms.get(roomId);
         if (room.drawInterval) clearInterval(room.drawInterval);
 
-        // Speed: 5 seconds per number?
+        // Use configurable interval (default 3 seconds)
+        const intervalMs = (room.drawIntervalSeconds || 3) * 1000;
         room.drawInterval = setInterval(() => {
             this.drawNumber(roomId);
-        }, 500);
+        }, intervalMs);
     }
 
     drawNumber(roomId) {
@@ -306,24 +308,16 @@ class GameManager {
         // Pause the game immediately
         this.pauseGame(roomId);
 
-        // Validate that all marked numbers are in the drawn history
-        const allDrawn = markedNumbers.every(num => room.numbersDrawn.includes(num));
-        if (!allDrawn) {
-            return {
-                success: false,
-                reason: 'KINH_SAI',
-                message: 'Some marked numbers have not been drawn yet'
-            };
-        }
-
-        // Check if marked numbers form a valid bingo (5 in a row)
+        // Check if ANY row in player's tickets has all 5 numbers drawn
+        // This is the ACTUAL bingo check, not based on what player marked
         let hasBingo = false;
         for (const ticket of player.tickets) {
             for (let r = 0; r < 3; r++) {
                 let matches = 0;
                 for (let c = 0; c < 9; c++) {
                     const val = ticket[r][c];
-                    if (val !== 0 && markedNumbers.includes(val)) {
+                    // Check if this number has been DRAWN (not marked by player)
+                    if (val !== 0 && room.numbersDrawn.includes(val)) {
                         matches++;
                     }
                 }
@@ -345,7 +339,7 @@ class GameManager {
             return {
                 success: false,
                 reason: 'KINH_SAI',
-                message: 'Marked numbers do not form a complete row'
+                message: 'No complete row found with all numbers drawn'
             };
         }
     }
@@ -418,6 +412,21 @@ class GameManager {
 
     generateRoomId() {
         return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    setDrawInterval(roomId, seconds) {
+        const room = this.rooms.get(roomId);
+        if (!room) return { error: 'Room not found' };
+
+        room.drawIntervalSeconds = Math.max(1, Math.min(60, seconds)); // Clamp between 1-60 seconds
+
+        // If game is playing, restart the interval with new timing
+        if (room.gameState === 'PLAYING' && room.drawInterval) {
+            clearInterval(room.drawInterval);
+            this.startDrawLoop(roomId);
+        }
+
+        return { success: true, drawIntervalSeconds: room.drawIntervalSeconds };
     }
 }
 

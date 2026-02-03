@@ -25,6 +25,9 @@ const PlayerRoom = () => {
     const [winHistory, setWinHistory] = useState(initialRoomData?.winHistory || []);
     const [showHistory, setShowHistory] = useState(false);
     const [isReady, setIsReady] = useState(false);
+    const [kinhClickCount, setKinhClickCount] = useState(0);
+    const [kinhClickTimer, setKinhClickTimer] = useState(null);
+    const [showDrawnNumbers, setShowDrawnNumbers] = useState(false);
 
     const [isSelecting, setIsSelecting] = useState(false);
 
@@ -132,20 +135,56 @@ const PlayerRoom = () => {
             return;
         }
 
-        if (!window.confirm('Are you sure you want to call KINH (Bingo)?')) {
-            return;
+        // Triple-click mechanism
+        const newCount = kinhClickCount + 1;
+        setKinhClickCount(newCount);
+
+        // Clear existing timer
+        if (kinhClickTimer) {
+            clearTimeout(kinhClickTimer);
         }
 
-        socket.emit('kinh', { roomId, markedNumbers }, (res) => {
-            if (res.error) {
-                alert(`Error: ${res.error}`);
-            } else if (res.success) {
-                alert('🎉 BINGO! You won!');
-            } else {
-                alert(`❌ Kinh sai! ${res.message || 'Your claim is incorrect.'}`);
-            }
-        });
+        if (newCount >= 3) {
+            // Submit Kinh after 3 clicks
+            setKinhClickCount(0);
+            setKinhClickTimer(null);
+
+            socket.emit('kinh', { roomId, markedNumbers }, (res) => {
+                if (res.error) {
+                    alert(`Error: ${res.error}`);
+                } else if (res.success) {
+                    alert('🎉 BINGO! You won!');
+                } else {
+                    alert(`❌ Kinh sai! ${res.message || 'Your claim is incorrect.'}`);
+                }
+            });
+        } else {
+            // Reset counter after 2 seconds if not clicked again
+            const timer = setTimeout(() => {
+                setKinhClickCount(0);
+            }, 2000);
+            setKinhClickTimer(timer);
+        }
     };
+
+    const autoMarkDrawnNumbers = () => {
+        // Auto-tick all drawn numbers that are in the player's tickets
+        const numbersInTickets = [];
+        if (myTickets) {
+            myTickets.forEach(ticket => {
+                ticket.forEach(row => {
+                    row.forEach(num => {
+                        if (num !== 0 && drawnHistory.includes(num)) {
+                            numbersInTickets.push(num);
+                        }
+                    });
+                });
+            });
+        }
+        setMarkedNumbers(numbersInTickets);
+        setShowDrawnNumbers(false);
+    };
+
 
     if (!roomId) return null;
 
@@ -195,9 +234,38 @@ const PlayerRoom = () => {
                 </div>
             )}
 
+            {/* Drawn Numbers Popup */}
+            {showDrawnNumbers && (
+                <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+                    <div className="bg-slate-800 rounded-xl p-6 w-full max-w-2xl max-h-[80vh] flex flex-col">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3 className="text-xl font-bold text-yellow-400">📋 Drawn Numbers ({drawnHistory.length})</h3>
+                            <button onClick={() => setShowDrawnNumbers(false)} className="text-slate-400 hover:text-white">✕</button>
+                        </div>
+                        <div className="flex-1 overflow-y-auto">
+                            <div className="grid grid-cols-10 gap-2">
+                                {drawnHistory.map((num, idx) => (
+                                    <div key={idx} className="aspect-square flex items-center justify-center rounded bg-violet-600 text-white font-bold">
+                                        {num}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <button
+                                onClick={autoMarkDrawnNumbers}
+                                className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 rounded-lg font-bold"
+                            >
+                                ✓ Auto Mark My Numbers
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="pt-20 max-w-lg mx-auto">
                 {/* Current Number Display */}
-                {gameState === 'PLAYING' && (
+                {(gameState === 'PLAYING' || gameState === 'PAUSED') && (
                     <div className="mb-6 flex justify-center sticky top-20 z-10">
                         <div className="flex items-center gap-2 sm:gap-4 bg-slate-800/80 p-3 sm:p-4 rounded-full backdrop-blur-sm border border-slate-600 overflow-x-auto max-w-full">
                             {/* Previous */}
@@ -215,7 +283,7 @@ const PlayerRoom = () => {
 
                             {/* Current */}
                             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-pink-500 to-violet-600 flex items-center justify-center shadow-lg ring-4 ring-white/10 animate-pulse flex-shrink-0">
-                                <span className="text-2xl sm:text-3xl font-bold">{currentNumber || '-'}</span>
+                                <span className="text-2xl sm:text-3xl font-bold">{currentNumber || (gameState === 'PAUSED' ? 'II' : '-')}</span>
                             </div>
                         </div>
                     </div>
@@ -300,15 +368,21 @@ const PlayerRoom = () => {
                                     </div>
                                     <button
                                         onClick={handleKinh}
-                                        disabled={markedNumbers.length === 0 || gameState !== 'PLAYING'}
+                                        disabled={markedNumbers.length === 0 || (gameState !== 'PLAYING' && gameState !== 'PAUSED')}
                                         className={clsx(
-                                            "px-8 py-3 rounded-lg font-bold text-lg transition-all shadow-lg",
-                                            markedNumbers.length > 0 && gameState === 'PLAYING'
+                                            "px-8 py-3 rounded-lg font-bold text-lg transition-all shadow-lg relative",
+                                            markedNumbers.length > 0 && (gameState === 'PLAYING' || gameState === 'PAUSED')
                                                 ? "bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-white animate-pulse"
                                                 : "bg-slate-700 text-slate-500 cursor-not-allowed"
                                         )}
                                     >
-                                        🎯 KINH!
+                                        🎯 KINH! {kinhClickCount > 0 && `(${kinhClickCount}/3)`}
+                                    </button>
+                                    <button
+                                        onClick={() => setShowDrawnNumbers(true)}
+                                        className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold text-sm"
+                                    >
+                                        📋 Drawn Numbers
                                     </button>
                                 </div>
                             </div>
