@@ -1,0 +1,130 @@
+[debug] [2026-01-18T11:20:01.160Z] ----------------------------------------------------------------------
+[debug] [2026-01-18T11:20:01.162Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --debug --non-interactive
+[debug] [2026-01-18T11:20:01.163Z] CLI Version:   15.3.1
+[debug] [2026-01-18T11:20:01.163Z] Platform:      win32
+[debug] [2026-01-18T11:20:01.163Z] Node Version:  v24.13.0
+[debug] [2026-01-18T11:20:01.163Z] Time:          Sun Jan 18 2026 18:20:01 GMT+0700 (Indochina Time)
+[debug] [2026-01-18T11:20:01.163Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-01-18T11:20:02.547Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-18T11:20:02.549Z] > authorizing via signed-in user (dangochinh@gmail.com)
+[debug] [2026-01-18T11:20:02.549Z] [iam] checking project chinhloto for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-01-18T11:20:02.550Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:02.550Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:02.551Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/chinhloto:testIamPermissions [none]
+[debug] [2026-01-18T11:20:02.551Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/chinhloto:testIamPermissions x-goog-quota-user=projects/chinhloto
+[debug] [2026-01-18T11:20:02.552Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/chinhloto:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-01-18T11:20:03.645Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/chinhloto:testIamPermissions 200
+[debug] [2026-01-18T11:20:03.646Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/chinhloto:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-01-18T11:20:03.646Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:03.646Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:03.647Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/chinhloto [none]
+[debug] [2026-01-18T11:20:04.217Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/chinhloto 200
+[debug] [2026-01-18T11:20:04.217Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/chinhloto {"projectId":"chinhloto","projectNumber":"919604565070","displayName":"chinhloto","name":"projects/chinhloto","resources":{"hostingSite":"chinhloto"},"state":"ACTIVE","etag":"1_3dfad3c9-80d1-4531-a142-673540049ac3"}
+[info] 
+[info] === Deploying to 'chinhloto'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2026-01-18T11:20:04.221Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:04.222Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:04.222Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions [none]
+[debug] [2026-01-18T11:20:04.222Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2026-01-18T11:20:05.766Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions 200
+[debug] [2026-01-18T11:20:05.767Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions {"name":"projects/919604565070/sites/chinhloto/versions/5b220b333bbb240b","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[chinhloto]: beginning deploy... 
+[info] i  hosting[chinhloto]: found 4 files in client/dist 
+[debug] [2026-01-18T11:20:05.776Z] [hosting] uploading with 200 concurrency
+[debug] [2026-01-18T11:20:05.778Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:05.778Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:05.778Z] [hosting] hash cache [Y2xpZW50XGRpc3Q] stored for 4 files
+[debug] [2026-01-18T11:20:05.779Z] [hosting][hash queue][FINAL] {"max":1,"min":0,"avg":1,"active":0,"complete":4,"success":4,"errored":0,"retried":0,"total":4,"elapsed":2}
+[debug] [2026-01-18T11:20:05.779Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/919604565070/sites/chinhloto/versions/5b220b333bbb240b:populateFiles [none]
+[debug] [2026-01-18T11:20:05.779Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/919604565070/sites/chinhloto/versions/5b220b333bbb240b:populateFiles {"files":{"/vite.svg":"699a02e0e68a579f687d364bbbe7633161244f35af068220aee37b1b33dfb3c7","/index.html":"b3541288ad4944e880c4c6098944920841bd85de0954228ea5617c72a0dd76d8","/assets/index-KKBe5aP_.css":"379ea8e81c8c727ad1a085deb24284010bc328ba61c5c073d9d016146d27fb98","/assets/index-CuvLJRed.js":"9f2b19530109957101d284745c3c92c376a13c8921cc6db43b7376131c452a9a"}}
+[debug] [2026-01-18T11:20:06.101Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/919604565070/sites/chinhloto/versions/5b220b333bbb240b:populateFiles 200
+[debug] [2026-01-18T11:20:06.101Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/919604565070/sites/chinhloto/versions/5b220b333bbb240b:populateFiles {"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/chinhloto/versions/5b220b333bbb240b/files"}
+[debug] [2026-01-18T11:20:06.101Z] [hosting][populate queue][FINAL] {"max":323,"min":323,"avg":323,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":323}
+[debug] [2026-01-18T11:20:06.102Z] [hosting] uploads queued: 0
+[debug] [2026-01-18T11:20:06.102Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":0,"complete":0,"success":0,"errored":0,"retried":0,"total":0,"elapsed":1768735206102}
+[info] i  hosting: upload complete 
+[info] +  hosting[chinhloto]: file upload complete 
+[debug] [2026-01-18T11:20:06.102Z] [hosting] deploy completed after 333ms
+[debug] [2026-01-18T11:20:06.102Z] [
+  {
+    "config": {
+      "public": "client/dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "loto-server",
+            "region": "us-central1"
+          }
+        }
+      ],
+      "site": "chinhloto"
+    },
+    "version": "projects/919604565070/sites/chinhloto/versions/5b220b333bbb240b"
+  }
+]
+[info] i  hosting[chinhloto]: finalizing version... 
+[debug] [2026-01-18T11:20:06.103Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:06.104Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:06.104Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/chinhloto/locations/-/functions [none]
+[debug] [2026-01-18T11:20:06.330Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/chinhloto/locations/-/functions 403
+[debug] [2026-01-18T11:20:06.330Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/chinhloto/locations/-/functions {"error":{"code":403,"message":"Cloud Functions API has not been used in project chinhloto before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"serviceTitle":"Cloud Functions API","containerInfo":"chinhloto","service":"cloudfunctions.googleapis.com","consumer":"projects/chinhloto","activationUrl":"https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Cloud Functions API has not been used in project chinhloto before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto"}]}]}}
+[debug] [2026-01-18T11:20:06.331Z] [functions] failed to list functions for chinhloto
+[debug] [2026-01-18T11:20:06.331Z] [functions] Request to https://cloudfunctions.googleapis.com/v1/projects/chinhloto/locations/-/functions had HTTP Error: 403, Cloud Functions API has not been used in project chinhloto before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+[debug] [2026-01-18T11:20:06.332Z] Deploying hosting site chinhloto, did not have permissions to check for backends:  Failed to list functions for chinhloto {"name":"FirebaseError","children":[],"exit":1,"message":"Failed to list functions for chinhloto","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"Cloud Functions API has not been used in project chinhloto before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"serviceTitle":"Cloud Functions API","containerInfo":"chinhloto","service":"cloudfunctions.googleapis.com","consumer":"projects/chinhloto","activationUrl":"https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Cloud Functions API has not been used in project chinhloto before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto"}]}]}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://cloudfunctions.googleapis.com/v1/projects/chinhloto/locations/-/functions had HTTP Error: 403, Cloud Functions API has not been used in project chinhloto before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudfunctions.googleapis.com/overview?project=chinhloto then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":403},"status":403}
+[debug] [2026-01-18T11:20:06.333Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:06.333Z] Checked if tokens are valid: true, expires at: 1768738679433
+[debug] [2026-01-18T11:20:06.333Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions/5b220b333bbb240b updateMask=status%2Cconfig
+[debug] [2026-01-18T11:20:06.333Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions/5b220b333bbb240b {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","run":{"serviceId":"loto-server","region":"us-central1"}}]}}
+[debug] [2026-01-18T11:20:06.723Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions/5b220b333bbb240b 403
+[debug] [2026-01-18T11:20:06.723Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions/5b220b333bbb240b {"error":{"code":403,"message":"Cloud Run Admin API has not been used in project 919604565070 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.","status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"SERVICE_DISABLED","domain":"googleapis.com","metadata":{"containerInfo":"919604565070","activationUrl":"https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070","consumer":"projects/919604565070","service":"run.googleapis.com","serviceTitle":"Cloud Run Admin API"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Cloud Run Admin API has not been used in project 919604565070 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console API activation","url":"https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070"}]}]}}
+[error] 
+[error] Error: Request to https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/chinhloto/versions/5b220b333bbb240b?updateMask=status%2Cconfig had HTTP Error: 403, Cloud Run Admin API has not been used in project 919604565070 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+[debug] [2026-01-18T11:20:06.864Z] Error Context: {
+  "body": {
+    "error": {
+      "code": 403,
+      "message": "Cloud Run Admin API has not been used in project 919604565070 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.",
+      "status": "PERMISSION_DENIED",
+      "details": [
+        {
+          "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+          "reason": "SERVICE_DISABLED",
+          "domain": "googleapis.com",
+          "metadata": {
+            "containerInfo": "919604565070",
+            "activationUrl": "https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070",
+            "consumer": "projects/919604565070",
+            "service": "run.googleapis.com",
+            "serviceTitle": "Cloud Run Admin API"
+          }
+        },
+        {
+          "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+          "locale": "en-US",
+          "message": "Cloud Run Admin API has not been used in project 919604565070 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."
+        },
+        {
+          "@type": "type.googleapis.com/google.rpc.Help",
+          "links": [
+            {
+              "description": "Google developers console API activation",
+              "url": "https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=919604565070"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "response": {
+    "statusCode": 403
+  }
+}

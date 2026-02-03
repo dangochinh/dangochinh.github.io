@@ -1,9 +1,45 @@
 const { getAllTicketSets } = require('./utils/ticketGenerator');
+const { db } = require('./firebase');
+const { collection, addDoc, getDocs, query, orderBy, limit } = require('firebase/firestore');
 
 class GameManager {
     constructor(io) {
         this.io = io;
         this.rooms = new Map();
+        this.globalWinHistory = [];
+        this.loadWinHistory();
+    }
+
+    async loadWinHistory() {
+        try {
+            const q = query(
+                collection(db, "winHistory"),
+                orderBy("timestamp", "desc"),
+                limit(50)
+            );
+            const querySnapshot = await getDocs(q);
+            const history = [];
+            querySnapshot.forEach((doc) => {
+                history.push(doc.data());
+            });
+            // Reverse because we want oldest first in the array (UI reverses it back)
+            this.globalWinHistory = history.reverse();
+            console.log(`Loaded ${this.globalWinHistory.length} win records from Firestore`);
+        } catch (error) {
+            console.error("Error loading win history:", error);
+        }
+    }
+
+    async saveWinToFirestore(winRecord) {
+        try {
+            await addDoc(collection(db, "winHistory"), {
+                ...winRecord,
+                timestamp: winRecord.timestamp // Already a Date object
+            });
+            console.log("Win record saved to Firestore");
+        } catch (error) {
+            console.error("Error saving win record:", error);
+        }
     }
 
     createRoom(hostSocketId) {
@@ -28,7 +64,7 @@ class GameManager {
             availableSets: availableSets,
             drawInterval: null,
             currentNumber: null,
-            winHistory: [] // To store winners
+            winHistory: this.globalWinHistory // Initialize with global history
         });
 
         return roomId;
@@ -265,18 +301,24 @@ class GameManager {
     handleBingo(room, winner) {
         this.pauseGame(room.id);
 
-        // Add to history with player list
-        room.winHistory.push({
+        const winRecord = {
             name: winner.name,
             timestamp: new Date(),
-            round: room.winHistory.length + 1,
+            round: (this.globalWinHistory.length > 0 ? this.globalWinHistory[this.globalWinHistory.length - 1].round : 0) + 1,
             players: room.players.map(p => ({ name: p.name, setId: p.setId }))
-        });
+        };
 
-        // Cap history at 50
-        if (room.winHistory.length > 50) {
-            room.winHistory = room.winHistory.slice(room.winHistory.length - 50);
+        // Add to global history
+        this.globalWinHistory.push(winRecord);
+        if (this.globalWinHistory.length > 50) {
+            this.globalWinHistory = this.globalWinHistory.slice(-50);
         }
+
+        // Update room's win history reference
+        room.winHistory = this.globalWinHistory;
+
+        // Persist to Firestore
+        this.saveWinToFirestore(winRecord);
 
         this.io.to(room.id).emit('gameEnded', {
             winner: winner.name,
