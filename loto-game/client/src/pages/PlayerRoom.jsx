@@ -307,7 +307,7 @@ const PlayerRoom = () => {
                             </div>
                         )}
 
-                        <div className="grid grid-cols-5 gap-3">
+                        <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
                             {availableSets.map((set) => {
                                 // Color map matching Ticket.jsx backgrounds (rgba with transparency)
                                 const colorMap = {
@@ -321,7 +321,8 @@ const PlayerRoom = () => {
                                     cyan: 'rgba(6, 182, 212, 0.6)',    // cyan-500/60
                                     teal: 'rgba(20, 184, 166, 0.6)',   // teal-500/60
                                     indigo: 'rgba(99, 102, 241, 0.6)', // indigo-500/60
-                                    lime: 'rgba(132, 204, 22, 0.6)'    // lime-500/60
+                                    lime: 'rgba(132, 204, 22, 0.6)',    // lime-500/60
+                                    'lime green': 'rgba(132, 204, 22, 0.6)' // lime-500/60
                                 };
                                 const bgColor = colorMap[set.color?.toLowerCase()] || 'rgba(59, 130, 246, 0.6)';
 

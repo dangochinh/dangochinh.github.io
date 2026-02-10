@@ -10,6 +10,7 @@ const colorMap = {
     'Yellow': 'bg-yellow-500/50',
     'Blue': 'bg-blue-500/50',
     'Lime': 'bg-lime-500/50',
+    'Lime Green': 'bg-lime-500/50',
     'Green': 'bg-green-500/50',
 };
 

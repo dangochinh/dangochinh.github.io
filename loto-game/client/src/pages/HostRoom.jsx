@@ -125,17 +125,17 @@ const HostRoom = () => {
     };
 
     const exportHallOfFame = () => {
-        const data = winHistory.map(game => ({
-            Round: game.round,
-            Winner: game.name,
-            Timestamp: new Date(game.timestamp).toLocaleString(),
-            Players: game.players ? game.players.map(p => `${p.name} (Set ${p.setId})`).join(', ') : 'N/A',
-            Failures: game.failures ? game.failures.map(f => `${f.name} (${new Date(f.timestamp).toLocaleTimeString()})`).join('; ') : 'None'
+        const data = winHistory.map(record => ({
+            Round: record.round,
+            Player: record.name,
+            Type: record.reason === 'BINGO' ? 'BINGO' : 'KINH SAI',
+            Time: new Date(record.timestamp).toLocaleTimeString(),
+            Participants: record.players ? record.players.map(p => `${p.name} (Set ${p.setId})`).join('; ') : 'N/A'
         }));
 
         const csv = [
-            ['Round', 'Winner', 'Timestamp', 'Players', 'Failures'],
-            ...data.map(row => [row.Round, row.Winner, row.Timestamp, row.Players, row.Failures])
+            ['Round', 'Player', 'Type', 'Time', 'Participants'],
+            ...data.map(row => [row.Round, row.Player, row.Type, row.Time, row.Participants])
         ].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
 
         const blob = new Blob([csv], { type: 'text/csv' });

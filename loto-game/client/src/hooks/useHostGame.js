@@ -202,7 +202,8 @@ export const useHostGame = (roomId) => {
                 timestamp: new Date(),
                 round: currentRound,
                 reason: 'KINH_SAI',
-                type: 'fail'
+                type: 'fail',
+                players: JSON.parse(JSON.stringify(playersRef.current))
             };
 
             // Track failure for this round
