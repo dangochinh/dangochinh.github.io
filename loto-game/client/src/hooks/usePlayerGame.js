@@ -22,10 +22,21 @@ export const usePlayerGame = (roomId, playerName) => {
 
     // Initialize my ID
     useEffect(() => {
+        // Simple UUID generator fallback
+        const generateUUID = () => {
+            if (window.crypto && window.crypto.randomUUID) {
+                return window.crypto.randomUUID();
+            }
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        };
+
         // Retrieve or generate ID
         let id = sessionStorage.getItem('bingo_player_id');
         if (!id) {
-            id = crypto.randomUUID();
+            id = generateUUID();
             sessionStorage.setItem('bingo_player_id', id);
         }
         myIdRef.current = id;

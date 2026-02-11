@@ -75,12 +75,12 @@ const IntroModal = ({ onClose }) => {
 
                     {/* Changelog Section */}
                     <div className="border-t border-slate-700 pt-4 mt-2">
-                        <h4 className="text-sm font-bold text-slate-400 mb-2">🚀 Cập nhật v1.0.1</h4>
+                        <h4 className="text-sm font-bold text-slate-400 mb-2">🚀 Cập nhật v1.0.2 (11/02/2026 20:10)</h4>
                         <ul className="list-disc list-inside text-xs text-slate-500 space-y-1">
+                            <li>Sửa lỗi tương thích "randomUUID" trên điện thoại Android/Samsung cũ.</li>
                             <li>Cập nhật bộ vé mới (3 vé/khung).</li>
                             <li>Tối ưu giao diện chọn vé (4 cột Mobile / 6 cột PC).</li>
                             <li>Cải thiện xuất file CSV (Thêm Status & Danh sách người chơi).</li>
-                            <li>Sửa lỗi hiển thị màu vé & lỗi xuất file CSV.</li>
                         </ul>
                     </div>
                 </div>
