@@ -121,12 +121,12 @@ export const useHostGame = (roomId: string | undefined) => {
         const resetPlayers = playersRef.current.map(p => ({ ...p, isReady: false }));
         setPlayers(resetPlayers);
 
-        setWinHistory([]);
+        // setWinHistory([]); // Keep history across restarts!
 
         broadcast('gameRestarted', {
             gameState: 'WAITING',
             players: resetPlayers,
-            winHistory: []
+            winHistory: winHistoryRef.current // Send existing history
         });
     };
 
@@ -149,7 +149,8 @@ export const useHostGame = (roomId: string | undefined) => {
                 players: JSON.parse(JSON.stringify(playersRef.current)),
                 failures: [...failuresRef.current]
             };
-            const newHistory = [...winHistoryRef.current, winRecord];
+            // Keep last 50 rounds
+            const newHistory = [...winHistoryRef.current, winRecord].slice(-50);
             setWinHistory(newHistory); // In memory
             winHistoryRef.current = newHistory; // Update ref immediately
 
@@ -181,7 +182,8 @@ export const useHostGame = (roomId: string | undefined) => {
             failuresRef.current.push(failRecord);
 
             // Update history immediately for "Kinh Sai"
-            const newHistory = [...winHistoryRef.current, failRecord];
+            // Keep last 50 rounds
+            const newHistory = [...winHistoryRef.current, failRecord].slice(-50);
             setWinHistory(newHistory);
             winHistoryRef.current = newHistory;
 
