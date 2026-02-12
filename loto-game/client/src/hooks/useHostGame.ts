@@ -151,6 +151,7 @@ export const useHostGame = (roomId: string | undefined) => {
             };
             const newHistory = [...winHistoryRef.current, winRecord];
             setWinHistory(newHistory); // In memory
+            winHistoryRef.current = newHistory; // Update ref immediately
 
             setVerificationPopup({
                 playerName: player.name,

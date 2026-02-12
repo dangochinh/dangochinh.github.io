@@ -100,6 +100,9 @@ export const usePlayerGame = (roomId: string | undefined, playerName: string | u
             .on('broadcast', { event: 'gameEnded' }, ({ payload }) => {
                 setGameState('ENDED');
                 setLastEvent({ type: 'gameEnded', data: payload });
+                if (payload.winRecord) {
+                    setWinHistory(prev => [...prev, payload.winRecord]);
+                }
             })
             .on('broadcast', { event: 'gameRestarted' }, ({ payload }) => {
                 setGameState(payload.gameState);

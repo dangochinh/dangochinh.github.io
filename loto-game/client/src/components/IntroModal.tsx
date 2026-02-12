@@ -70,6 +70,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ onClose }) => {
                 <section className="border-t border-slate-700 pt-4">
                     <h4 className="text-sm font-bold text-slate-400 mb-2 uppercase tracking-wider">Lịch Sử Cập Nhật</h4>
                     <div className="text-xs text-slate-500 space-y-1 font-mono">
+                        <p><span className="text-cyan-400">v1.2.1</span> (2026-02-12): Hotfix: Sửa lỗi đồng bộ Bảng Vàng.</p>
                         <p><span className="text-cyan-400">v1.2.0</span> (2026-02-12): Giao diện Mobile mới, Xác nhận thoát game, Sửa lỗi kết nối & Tự động thoát khi mất Host.</p>
                         <p><span className="text-cyan-400">v1.1.0</span> (2026-02-12): Chuyển đổi TypeScript & Tái cấu trúc code.</p>
                         <p><span className="text-cyan-400">v1.0.2</span> (2026-02-04): Sửa lỗi crash mobile, cải thiện giao diện.</p>
