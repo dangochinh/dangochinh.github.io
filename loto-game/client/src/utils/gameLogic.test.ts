@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { checkForBingo, TicketSet, TicketGrid } from './gameLogic';
+import { checkForBingo, TicketGrid } from './gameLogic';
 
 describe('checkForBingo', () => {
     // Helper to create a dummy ticket row

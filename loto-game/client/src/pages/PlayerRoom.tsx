@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { usePlayerGame } from '../hooks/usePlayerGame';
 import AlertModal from '../components/AlertModal';
 import Ticket from '../components/Ticket';
 import Modal from '../components/ui/Modal';
-import { PrimaryButton, SecondaryButton, IconButton } from '../components/ui/Button';
+import { PrimaryButton } from '../components/ui/Button';
 import { clsx } from 'clsx';
 import { TicketGrid } from '../utils/gameLogic';
-import type { TicketSetInfo } from '../hooks/usePlayerGame';
+// import type { TicketSetInfo } from '../hooks/usePlayerGame'; // Unused
 
 const PlayerRoom: React.FC = () => {
     const { roomId } = useParams<{ roomId: string }>();
@@ -15,24 +15,20 @@ const PlayerRoom: React.FC = () => {
     const [playerName, setPlayerName] = useState<string>('');
     const [showJoinModal, setShowJoinModal] = useState<boolean>(true);
 
-    // We only init the hook once we have a name and roomId, or we can init it and specific join action?
-    // The hook currently takes roomId and playerName.
-    // Let's defer hook execution or handle the "Not Joined" state.
-    // The hook as written takes params. We can state-control them.
     const [activeRoomId, setActiveRoomId] = useState<string | undefined>(undefined);
     const [activePlayerName, setActivePlayerName] = useState<string | undefined>(undefined);
 
     const {
         gameState,
         availableSets,
-        players,
+        // players, // Unused for now
         isReady,
         numbersDrawn,
-        currentNumber,
+        // currentNumber, // Unused
         winHistory,
         mySetId,
         myTickets,
-        error,
+        // error, // Unused
         lastEvent,
         actions
     } = usePlayerGame(activeRoomId, activePlayerName);

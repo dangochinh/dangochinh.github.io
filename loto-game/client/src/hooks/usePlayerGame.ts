@@ -32,7 +32,7 @@ export const usePlayerGame = (roomId: string | undefined, playerName: string | u
     const [winHistory, setWinHistory] = useState<any[]>([]);
     const [mySetId, setMySetId] = useState<number | null>(null);
     const [myTickets, setMyTickets] = useState<any[] | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [error] = useState<string | null>(null);
     const [lastEvent, setLastEvent] = useState<any>(null); // For toasts/alerts
 
     const channelRef = useRef<RealtimeChannel | null>(null);
@@ -176,6 +176,10 @@ export const usePlayerGame = (roomId: string | undefined, playerName: string | u
         });
     };
 
+    const closeVerificationPopup = () => {
+        setLastEvent(null);
+    };
+
     return {
         gameState,
         availableSets,
@@ -191,7 +195,8 @@ export const usePlayerGame = (roomId: string | undefined, playerName: string | u
         actions: {
             selectTicketSet,
             toggleReady,
-            claimBingo
+            claimBingo,
+            closeVerificationPopup
         }
     };
 };

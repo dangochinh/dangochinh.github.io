@@ -293,7 +293,7 @@ export const useHostGame = (roomId: string | undefined) => {
                 const { playerId, markedNumbers } = payload;
                 verifyKinh(playerId, markedNumbers);
             })
-            .on('broadcast', { event: 'requestSet' }, ({ payload }) => {
+            .on('broadcast', { event: 'requestSet' }, () => {
                 // Handle set change request if we implement it
             })
             .subscribe((status) => {

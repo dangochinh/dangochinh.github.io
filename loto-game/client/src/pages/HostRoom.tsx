@@ -20,7 +20,7 @@ const HostRoom: React.FC = () => {
         currentNumber,
         winHistory,
         verificationPopup,
-        availableSets,
+        // availableSets, // Unused
         drawIntervalSeconds,
         actions
     } = useHostGame(roomId);

@@ -4,7 +4,8 @@ import { PrimaryButton, SecondaryButton } from '../components/ui/Button';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
-    const [roomId, setRoomId] = useState<string>('');
+    // const [roomId, setRoomId] = useState<string>(''); // Unused
+
     const [joinRoomId, setJoinRoomId] = useState<string>('');
 
     const createRoom = () => {
