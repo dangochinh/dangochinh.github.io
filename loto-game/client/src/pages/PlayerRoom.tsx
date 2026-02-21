@@ -213,6 +213,26 @@ const PlayerRoom: React.FC = () => {
         );
     }
 
+    {/* Mid-game join: player has no tickets and game is not WAITING */ }
+    if (gameState !== 'WAITING' && (!myTickets || myTickets.length === 0)) {
+        return (
+            <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-6 text-center text-white">
+                <div className="text-6xl mb-4">⏳</div>
+                <h2 className="text-2xl font-bold text-yellow-400 mb-2">Ván Đang Diễn Ra</h2>
+                <p className="text-slate-300 mb-3">Phòng <span className="font-mono font-bold text-white">{roomId}</span> đang chơi ván hiện tại.</p>
+                <p className="text-slate-400 text-sm mb-6">Vui lòng chờ Host kết thúc ván và bắt đầu ván mới để tham gia.</p>
+                <div className="w-10 h-10 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <p className="text-xs text-slate-500">Tự động tham gia khi ván mới bắt đầu...</p>
+                <button
+                    onClick={() => navigate('/')}
+                    className="mt-6 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-bold text-sm"
+                >
+                    Về Trang Chủ
+                </button>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-slate-900 text-white p-4 pb-20">
             {/* Header - Mobile Optimized */}
