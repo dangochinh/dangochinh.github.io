@@ -282,11 +282,8 @@ export const useHostGame = (roomId: string | undefined) => {
 
         channel
             .on('broadcast', { event: 'requestJoin' }, ({ payload }) => {
-                // If player already exists, just sync?
-                // Check if player exists by ID
+                // If player already exists, just sync
                 if (playersRef.current.some(p => p.id === payload.id)) {
-                    // Maybe update name if changed?
-                    // For now just sync
                     channel.send({
                         type: 'broadcast',
                         event: 'roomDataSync',
@@ -302,11 +299,25 @@ export const useHostGame = (roomId: string | undefined) => {
                     return;
                 }
 
+                // Block new players from joining mid-game
+                if (gameStateRef.current !== 'WAITING') {
+                    channel.send({
+                        type: 'broadcast',
+                        event: 'joinRejected',
+                        payload: {
+                            playerId: payload.id,
+                            reason: 'Ván đang diễn ra. Vui lòng chờ Host bắt đầu ván mới.',
+                            gameState: gameStateRef.current
+                        }
+                    });
+                    return;
+                }
+
                 const newPlayer: Player = {
                     id: payload.id,
                     name: payload.name,
                     isReady: false,
-                    setId: -1, // Initialize with invalid ID
+                    setId: -1,
                     tickets: [] as any,
                     joinedAt: new Date().toISOString()
                 };
@@ -317,21 +328,9 @@ export const useHostGame = (roomId: string | undefined) => {
                     newPlayer.setId = setArg.id;
                     newPlayer.tickets = setArg.data;
 
-                    // Update available sets locally
                     const updatedSets = availableSetsRef.current.map(s => s.id === setArg.id ? { ...s, isTaken: true } : s);
                     setAvailableSets(updatedSets);
-                    // Also update ref immediately for next logic
                     availableSetsRef.current = updatedSets;
-
-                    // Send set info back to player? Not strictly needed if we sync roomDataSync, 
-                    // but logic might expect 'assignSet'
-                    /*
-                    channel.send({
-                        type: 'broadcast',
-                        event: 'assignSet',
-                        payload: { playerId: newPlayer.id, set: setArg }
-                    });
-                    */
                 }
 
                 const updatedPlayers = [...playersRef.current, newPlayer];
@@ -366,6 +365,10 @@ export const useHostGame = (roomId: string | undefined) => {
             })
             .on('broadcast', { event: 'requestSet' }, ({ payload }) => {
                 const { playerId, setId } = payload;
+
+                // Block set changes mid-game
+                if (gameStateRef.current !== 'WAITING') return;
+
                 const player = playersRef.current.find(p => p.id === playerId);
                 if (!player) return;
 

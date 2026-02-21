@@ -127,6 +127,12 @@ export const usePlayerGame = (roomId: string | undefined, playerName: string | u
                     setIsReady(me.isReady);
                 }
             })
+            .on('broadcast', { event: 'joinRejected' }, ({ payload }) => {
+                if (payload.playerId === myIdRef.current) {
+                    setGameState(payload.gameState || 'PLAYING');
+                    setLastEvent({ type: 'joinRejected', data: payload });
+                }
+            })
             .on('broadcast', { event: 'setsUpdated' }, ({ payload }) => {
                 setAvailableSets(payload);
             })
