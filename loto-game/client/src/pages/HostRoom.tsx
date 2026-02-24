@@ -278,6 +278,14 @@ const HostRoom: React.FC = () => {
                                     return nums.every(n => numbersDrawn.includes(n));
                                 };
 
+                                // Helper: check if row has 4/5 drawn (almost bingo)
+                                const getAlmostBingoNum = (row: number[]): number | null => {
+                                    const nums = row.filter(n => n !== 0);
+                                    if (nums.length < 5) return null;
+                                    const undrawn = nums.filter(n => !numbersDrawn.includes(n));
+                                    return undrawn.length === 1 ? undrawn[0] : null;
+                                };
+
                                 return (
                                     <div key={player.id} className="border-2 border-slate-700 bg-slate-900/50 p-4 rounded-lg">
                                         <div className="font-bold mb-2">{player.name} (Set #{player.setId})</div>
@@ -286,16 +294,20 @@ const HostRoom: React.FC = () => {
                                                 <div key={tIdx} className="border border-slate-700 bg-slate-800/50 p-2 rounded">
                                                     {ticket.map((row, rIdx) => {
                                                         const isBingoRow = checkBingoRow(row);
+                                                        const almostBingoNum = !isBingoRow ? getAlmostBingoNum(row) : null;
                                                         return (
                                                             <div key={rIdx} className={clsx(
                                                                 "grid grid-cols-9 gap-0.5 p-1 rounded",
-                                                                isBingoRow ? "bg-green-900/50 border border-green-500 box-content" : ""
+                                                                isBingoRow ? "bg-green-900/50 border border-green-500 box-content" :
+                                                                    almostBingoNum ? "bg-yellow-900/20 border border-yellow-600/50 box-content" : ""
                                                             )}>
                                                                 {row.map((num, cIdx) => (
                                                                     <div key={cIdx} className={clsx(
                                                                         "flex items-center justify-center font-bold text-xs rounded h-7",
                                                                         num === 0 ? "invisible" : "",
-                                                                        numbersDrawn.includes(num) ? "bg-violet-600 text-white" : "bg-slate-700 text-slate-300"
+                                                                        num !== 0 && num === almostBingoNum
+                                                                            ? "bg-yellow-500 text-black animate-pulse ring-2 ring-yellow-400"
+                                                                            : numbersDrawn.includes(num) ? "bg-violet-600 text-white" : "bg-slate-700 text-slate-300"
                                                                     )}>
                                                                         {num !== 0 ? num : ''}
                                                                     </div>
