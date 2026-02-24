@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import IntroModal from '../components/IntroModal';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
     const [roomId, setRoomId] = useState<string>('');
     const [name, setName] = useState<string>('');
+    const [showIntro, setShowIntro] = useState(false);
 
     const createRoom = () => {
         // Generate a random 6-digit room ID (numbers only)
@@ -72,6 +74,18 @@ const Home: React.FC = () => {
                     </div>
                 </form>
             </div>
+
+            {/* Info Button - Fixed bottom right */}
+            <button
+                onClick={() => setShowIntro(true)}
+                className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-300 hover:to-orange-500 flex items-center justify-center text-white shadow-lg transition-all hover:scale-110 border border-orange-300/50 z-50"
+                title="Hướng dẫn & Ủng hộ"
+            >
+                <span className="text-2xl font-bold font-serif italic">i</span>
+            </button>
+
+            {/* Intro Modal */}
+            {showIntro && <IntroModal onClose={() => setShowIntro(false)} />}
         </div>
     );
 };
