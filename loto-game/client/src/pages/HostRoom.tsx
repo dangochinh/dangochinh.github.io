@@ -387,14 +387,14 @@ const HostRoom: React.FC = () => {
                 </div>
             )}
 
-            <header className="bg-slate-800 shadow-md z-10 px-2 md:px-4 py-1.5 md:py-2 flex flex-wrap md:flex-nowrap items-center justify-between gap-1.5 md:gap-3">
+            <header className="bg-slate-800 shadow-md z-10 px-2 md:px-4 py-2 md:py-3 flex flex-wrap md:flex-nowrap items-center justify-between gap-1.5 md:gap-3">
                 {/* Left group: Room Info + Status */}
                 <div className="flex items-center gap-2">
                     <div className="flex items-center gap-1.5">
                         <span className="text-xs text-slate-400">Phòng</span>
-                        <span onClick={copyRoomId} className="cursor-pointer font-mono font-bold text-white text-lg hover:text-cyan-400 transition-colors underline decoration-dashed underline-offset-4" title="Click to copy">{roomId}</span>
+                        <span onClick={copyRoomId} className="cursor-pointer font-mono font-bold text-white text-lg md:text-2xl hover:text-cyan-400 transition-colors underline decoration-dashed underline-offset-4" title="Click to copy">{roomId}</span>
                     </div>
-                    <span className={clsx("px-2 py-0.5 rounded-full text-xs font-bold",
+                    <span className={clsx("px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-bold",
                         gameState === 'WAITING' ? "bg-yellow-500/20 text-yellow-400" :
                             gameState === 'PLAYING' ? "bg-green-500/20 text-green-400" :
                                 gameState === 'PAUSED' ? "bg-orange-500/20 text-orange-400" :
@@ -488,42 +488,42 @@ const HostRoom: React.FC = () => {
                     </div>
 
                     {/* Draw Interval */}
-                    <div className="flex items-center gap-1 bg-slate-700/50 rounded px-1.5 py-1 border border-slate-600">
+                    <div className="flex items-center gap-1 md:gap-2 bg-slate-700/50 rounded-lg px-1.5 py-1 md:px-3 md:py-1.5 border border-slate-600">
                         <label className="text-xs text-slate-400 hidden md:inline">Tốc độ:</label>
                         <input
                             type="number" min="1" max="60"
                             value={drawIntervalSeconds}
                             onChange={(e) => actions.setDrawInterval(Number(e.target.value))}
-                            className="w-10 bg-slate-800 border border-slate-600 rounded px-1 py-0.5 text-sm text-white text-center"
+                            className="w-10 md:w-16 bg-slate-800 border border-slate-600 rounded px-1 md:px-2 py-0.5 md:py-1 text-sm text-white text-center"
                         />
                         <span className="text-xs text-slate-500">s</span>
                     </div>
 
                     {/* Desktop-only action buttons */}
                     <div className="hidden md:flex items-center gap-2">
-                        <button onClick={() => setShowAllTickets(true)} className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold text-sm" title="Xem Vé">
+                        <button onClick={() => setShowAllTickets(true)} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold text-sm" title="Xem Vé">
                             👁️ Xem Vé
                         </button>
-                        <button onClick={() => setShowHistory(true)} className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg font-bold text-sm" title="History">
+                        <button onClick={() => setShowHistory(true)} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg font-bold text-sm" title="History">
                             📜 Lịch Sử
                         </button>
                         {gameState === 'WAITING' && (
                             <button onClick={() => actions.startGame()} disabled={players.length === 0 || !players.every(p => p.isReady)}
-                                className={clsx("px-5 py-1.5 rounded-lg font-bold text-sm transition-all",
+                                className={clsx("px-6 py-2 rounded-lg font-bold transition-all",
                                     players.length > 0 && players.every(p => p.isReady) ? "bg-green-600 hover:bg-green-700 shadow-lg hover:scale-105" : "bg-slate-700 text-slate-500 cursor-not-allowed opacity-50"
                                 )}>
                                 {players.length === 0 ? "Đang Đợi..." : "Bắt Đầu"}
                             </button>
                         )}
                         {gameState === 'PLAYING' && (
-                            <button onClick={actions.pauseGame} className="px-5 py-1.5 bg-yellow-600 hover:bg-yellow-700 rounded-lg font-bold text-sm">Tạm Dừng</button>
+                            <button onClick={actions.pauseGame} className="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 rounded-lg font-bold">Tạm Dừng</button>
                         )}
                         {gameState === 'PAUSED' && (
-                            <button onClick={actions.resumeGame} className="px-5 py-1.5 bg-green-600 hover:bg-green-700 rounded-lg font-bold text-sm">Tiếp Tục</button>
+                            <button onClick={actions.resumeGame} className="px-6 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-bold">Tiếp Tục</button>
                         )}
-                        <button onClick={() => setShowExitConfirmation(true)} className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm" title="Exit">Thoát</button>
-                        <button onClick={() => setShowIntro(true)} className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-300 hover:to-orange-500 flex items-center justify-center text-white shadow-lg transition-all hover:scale-110 border border-orange-300/50" title="Hướng dẫn & Ủng hộ">
-                            <span className="text-lg font-bold font-serif italic">i</span>
+                        <button onClick={() => setShowExitConfirmation(true)} className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg" title="Exit">Thoát</button>
+                        <button onClick={() => setShowIntro(true)} className="w-9 h-9 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-300 hover:to-orange-500 flex items-center justify-center text-white shadow-lg transition-all hover:scale-110 border border-orange-300/50" title="Hướng dẫn & Ủng hộ">
+                            <span className="text-xl font-bold font-serif italic">i</span>
                         </button>
                     </div>
                 </div>
