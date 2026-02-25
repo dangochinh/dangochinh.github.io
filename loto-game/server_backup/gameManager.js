@@ -1,6 +1,7 @@
 const { getAllTicketSets } = require('./utils/ticketGenerator');
 const { db } = require('./firebase');
 const { collection, addDoc, getDocs, query, orderBy, limit } = require('firebase/firestore');
+const LotoController = require('./lotoController');
 
 class GameManager {
     constructor(io) {
@@ -166,6 +167,10 @@ class GameManager {
         if (room.players.length === 0) return; // Can't start empty
         if (!allReady) return { error: 'Not all players are ready' };
 
+        // Khởi tạo LotoController với danh sách người chơi hiện tại
+        room.lotoController = new LotoController(room.players);
+        console.log(`[LotoController] Initialized for room ${roomId} with K=${room.lotoController.k_threshold}, ${room.players.length} players`);
+
         room.gameState = 'PLAYING';
         this.startDrawLoop(roomId);
         return { success: true };
@@ -209,6 +214,7 @@ class GameManager {
         // Reset Game State
         if (room.drawInterval) clearInterval(room.drawInterval);
         room.drawInterval = null;
+        room.lotoController = null; // Xóa LotoController khi restart
         room.gameState = 'WAITING';
         room.numbersDrawn = [];
         room.currentNumber = null;
@@ -257,10 +263,22 @@ class GameManager {
             return;
         }
 
+        // Sử dụng LotoController để bốc số có điều tiết
         let num;
-        do {
-            num = Math.floor(Math.random() * 90) + 1;
-        } while (room.numbersDrawn.includes(num));
+        if (room.lotoController) {
+            const result = room.lotoController.drawNextNumber();
+            if (!result) {
+                this.endGame(roomId);
+                return;
+            }
+            num = result.number;
+            console.log(`[LotoController] Room ${roomId}: Drew #${result.totalDrawn} = ${num} (Stage: ${result.stage})`);
+        } else {
+            // Fallback: random thuần (không nên xảy ra)
+            do {
+                num = Math.floor(Math.random() * 90) + 1;
+            } while (room.numbersDrawn.includes(num));
+        }
 
         room.numbersDrawn.push(num);
         room.currentNumber = num;
