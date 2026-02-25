@@ -387,89 +387,61 @@ const HostRoom: React.FC = () => {
                 </div>
             )}
 
-            <header className="bg-slate-800 p-2 md:p-4 shadow-md flex justify-between items-center z-10">
-                <div className="flex items-center gap-2 md:gap-4">
-                    <h1 className="text-lg md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 flex flex-col md:block">
-                        <span className="md:inline mr-1">Phòng:</span>
-                        <span onClick={copyRoomId} className="cursor-pointer font-mono text-white underline decoration-dashed underline-offset-4 hover:text-cyan-400 transition-colors" title="Click to copy">{roomId}</span>
-                    </h1>
-                    <span className={clsx("px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-bold",
-                        gameState === 'WAITING' ? "bg-yellow-500/20 text-yellow-400" :
-                            gameState === 'PLAYING' ? "bg-green-500/20 text-green-400" :
-                                gameState === 'PAUSED' ? "bg-orange-500/20 text-orange-400" :
-                                    "bg-red-500/20 text-red-400"
-                    )}>
-                        {gameState}
-                    </span>
+            <header className="bg-slate-800 shadow-md z-10">
+                {/* Row 1: Room Info + Voice + Speed */}
+                <div className="flex items-center justify-between px-2 md:px-4 py-1.5 md:py-2 border-b border-slate-700/50">
+                    <div className="flex items-center gap-2 md:gap-3">
+                        <div className="flex items-center gap-1.5">
+                            <span className="text-xs text-slate-400">Phòng</span>
+                            <span onClick={copyRoomId} className="cursor-pointer font-mono font-bold text-white text-lg hover:text-cyan-400 transition-colors underline decoration-dashed underline-offset-4" title="Click to copy">{roomId}</span>
+                        </div>
+                        <span className={clsx("px-2 py-0.5 rounded-full text-xs font-bold",
+                            gameState === 'WAITING' ? "bg-yellow-500/20 text-yellow-400" :
+                                gameState === 'PLAYING' ? "bg-green-500/20 text-green-400" :
+                                    gameState === 'PAUSED' ? "bg-orange-500/20 text-orange-400" :
+                                        "bg-red-500/20 text-red-400"
+                        )}>
+                            {gameState}
+                        </span>
+                    </div>
 
-                    {/* Language Toggle & Voice Settings */}
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1.5">
+                        {/* Mute */}
                         <button
                             onClick={() => setIsMuted(!isMuted)}
-                            className={clsx("p-1.5 rounded border border-slate-600 transition-colors", isMuted ? "bg-red-900/50 text-red-400 border-red-800" : "bg-slate-700/50 hover:bg-slate-600 text-slate-300")}
+                            className={clsx("p-1.5 rounded border border-slate-600 transition-colors text-sm", isMuted ? "bg-red-900/50 text-red-400 border-red-800" : "bg-slate-700/50 hover:bg-slate-600 text-slate-300")}
                             title={isMuted ? "Unmute" : "Mute"}
                         >
                             {isMuted ? "🔇" : "🔊"}
                         </button>
 
+                        {/* Voice Settings */}
                         <div className="relative">
                             <button
                                 onClick={() => setShowVoiceSettings(!showVoiceSettings)}
-                                className="px-2 py-1 md:px-3 md:py-1.5 rounded border border-slate-600 bg-slate-700/50 hover:bg-slate-600 text-xs font-bold transition-colors flex items-center gap-1"
+                                className="px-2 py-1.5 rounded border border-slate-600 bg-slate-700/50 hover:bg-slate-600 text-xs font-bold transition-colors flex items-center gap-1"
                                 title="Click to select specific voice"
                             >
                                 {voiceLang === 'vi' ? '🇻🇳' : '🇺🇸'} <span className="hidden sm:inline">{formatVoiceName(voices.find(v => v.voiceURI === selectedVoiceURI))}</span>
                             </button>
 
-                            {/* Voice Dropdown */}
                             {showVoiceSettings && (
                                 <div className="absolute top-full lg:left-0 right-0 mt-2 w-56 bg-slate-800 border border-slate-600 rounded-lg shadow-xl p-2 z-50">
                                     <div className="flex justify-between items-center mb-2 pb-2 border-b border-slate-700">
                                         <span className="text-xs font-bold text-slate-400">Cài Đặt</span>
                                         <button onClick={() => setShowVoiceSettings(false)} className="text-xs text-slate-500 hover:text-white">✕</button>
                                     </div>
-
                                     <div className="space-y-2">
                                         <div className="flex gap-2 mb-2">
-                                            <button
-                                                onClick={() => { setVoiceLang('vi'); setShowVoiceSettings(false); }}
-                                                className={clsx("flex-1 py-1 text-xs rounded border font-bold", voiceLang === 'vi' ? "bg-red-900/50 border-red-700 text-red-200" : "border-slate-600 hover:bg-slate-700")}
-                                            >
-                                                🇻🇳 VN
-                                            </button>
-                                            <button
-                                                onClick={() => { setVoiceLang('en'); setShowVoiceSettings(false); }}
-                                                className={clsx("flex-1 py-1 text-xs rounded border font-bold", voiceLang === 'en' ? "bg-blue-900/50 border-blue-700 text-blue-200" : "border-slate-600 hover:bg-slate-700")}
-                                            >
-                                                🇺🇸 EN
-                                            </button>
+                                            <button onClick={() => { setVoiceLang('vi'); setShowVoiceSettings(false); }} className={clsx("flex-1 py-1 text-xs rounded border font-bold", voiceLang === 'vi' ? "bg-red-900/50 border-red-700 text-red-200" : "border-slate-600 hover:bg-slate-700")}>🇻🇳 VN</button>
+                                            <button onClick={() => { setVoiceLang('en'); setShowVoiceSettings(false); }} className={clsx("flex-1 py-1 text-xs rounded border font-bold", voiceLang === 'en' ? "bg-blue-900/50 border-blue-700 text-blue-200" : "border-slate-600 hover:bg-slate-700")}>🇺🇸 EN</button>
                                         </div>
-
                                         <div className="text-xs text-slate-500 mb-1">Chọn Giọng Đọc:</div>
                                         <div className="flex flex-col gap-1 max-h-48 overflow-y-auto">
-                                            <button
-                                                onClick={() => { setSelectedVoiceURI(''); setShowVoiceSettings(false); }}
-                                                className={clsx(
-                                                    "text-left px-2 py-1.5 rounded text-xs transition-colors",
-                                                    selectedVoiceURI === '' ? "bg-cyan-900/50 text-cyan-300 border border-cyan-700/50" : "hover:bg-slate-700 text-slate-300"
-                                                )}
-                                            >
-                                                -- Tự Động Chọn --
-                                            </button>
-                                            {voices
-                                                .filter(v => v.lang.includes(voiceLang === 'vi' ? 'vi' : 'en'))
-                                                .map(v => (
-                                                    <button
-                                                        key={v.voiceURI}
-                                                        onClick={() => { setSelectedVoiceURI(v.voiceURI); setShowVoiceSettings(false); }}
-                                                        className={clsx(
-                                                            "text-left px-2 py-1.5 rounded text-xs transition-colors",
-                                                            selectedVoiceURI === v.voiceURI ? "bg-cyan-900/50 text-cyan-300 border border-cyan-700/50" : "hover:bg-slate-700 text-slate-300"
-                                                        )}
-                                                    >
-                                                        {formatVoiceName(v)}
-                                                    </button>
-                                                ))}
+                                            <button onClick={() => { setSelectedVoiceURI(''); setShowVoiceSettings(false); }} className={clsx("text-left px-2 py-1.5 rounded text-xs transition-colors", selectedVoiceURI === '' ? "bg-cyan-900/50 text-cyan-300 border border-cyan-700/50" : "hover:bg-slate-700 text-slate-300")}>-- Tự Động Chọn --</button>
+                                            {voices.filter(v => v.lang.includes(voiceLang === 'vi' ? 'vi' : 'en')).map(v => (
+                                                <button key={v.voiceURI} onClick={() => { setSelectedVoiceURI(v.voiceURI); setShowVoiceSettings(false); }} className={clsx("text-left px-2 py-1.5 rounded text-xs transition-colors", selectedVoiceURI === v.voiceURI ? "bg-cyan-900/50 text-cyan-300 border border-cyan-700/50" : "hover:bg-slate-700 text-slate-300")}>{formatVoiceName(v)}</button>
+                                            ))}
                                             {voices.filter(v => v.lang.includes(voiceLang === 'vi' ? 'vi' : 'en')).length === 0 && (
                                                 <div className="text-xs text-slate-500 italic p-2">Không tìm thấy giọng đọc</div>
                                             )}
@@ -478,82 +450,74 @@ const HostRoom: React.FC = () => {
                                 </div>
                             )}
                         </div>
-                    </div>
 
-                    {/* Draw Interval */}
-                    <div className="flex items-center gap-1 md:gap-2 bg-slate-700/50 rounded-lg px-2 py-1 md:px-3 md:py-1.5 border border-slate-600">
-                        <label className="text-xs text-slate-400 hidden md:inline">Tốc độ (s):</label>
-                        <input
-                            type="number" min="1" max="60"
-                            value={drawIntervalSeconds}
-                            onChange={(e) => actions.setDrawInterval(Number(e.target.value))}
-                            className="w-10 md:w-16 bg-slate-800 border border-slate-600 rounded px-1 md:px-2 py-0.5 md:py-1 text-sm text-white text-center"
-                        />
+                        {/* Draw Interval */}
+                        <div className="flex items-center gap-1 bg-slate-700/50 rounded px-1.5 py-1 border border-slate-600">
+                            <label className="text-xs text-slate-400 hidden md:inline">Tốc độ:</label>
+                            <input
+                                type="number" min="1" max="60"
+                                value={drawIntervalSeconds}
+                                onChange={(e) => actions.setDrawInterval(Number(e.target.value))}
+                                className="w-10 bg-slate-800 border border-slate-600 rounded px-1 py-0.5 text-sm text-white text-center"
+                            />
+                            <span className="text-xs text-slate-500">s</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex gap-2">
-                    <button
-                        onClick={() => setShowPlayerListMobile(!showPlayerListMobile)}
-                        className={clsx(
-                            "md:hidden px-3 py-2 rounded-lg font-bold text-sm",
-                            showPlayerListMobile ? "bg-cyan-600 text-white" : "bg-slate-700 text-slate-300"
-                        )}
-                        title="Toggle Players"
-                    >
-                        👥
-                    </button>
-                    <button
-                        onClick={() => setShowAllTickets(true)}
-                        className="px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold text-sm"
-                        title="Xem Vé"
-                    >
-                        👁️ <span className="hidden md:inline">Xem Vé</span>
-                    </button>
-                    <button
-                        onClick={() => setShowHistory(true)}
-                        className="px-3 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg font-bold text-sm"
-                        title="History"
-                    >
-                        📜 <span className="hidden md:inline">Lịch Sử</span>
-                    </button>
-
-                    {gameState === 'WAITING' && (
+                {/* Row 2: Action Buttons */}
+                <div className="flex items-center justify-between px-2 md:px-4 py-1.5 md:py-2 gap-1.5">
+                    <div className="flex gap-1.5">
                         <button
-                            onClick={() => actions.startGame()}
-                            disabled={players.length === 0 || !players.every(p => p.isReady)}
-                            className={clsx(
-                                "px-4 md:px-6 py-2 rounded-lg font-bold transition-all",
-                                players.length > 0 && players.every(p => p.isReady)
-                                    ? "bg-green-600 hover:bg-green-700 shadow-lg hover:scale-105"
-                                    : "bg-slate-700 text-slate-500 cursor-not-allowed opacity-50"
-                            )}
+                            onClick={() => setShowPlayerListMobile(!showPlayerListMobile)}
+                            className={clsx("md:hidden px-2.5 py-1.5 rounded-lg font-bold text-sm", showPlayerListMobile ? "bg-cyan-600 text-white" : "bg-slate-700 text-slate-300")}
+                            title="Toggle Players"
+                        >👥</button>
+                        <button onClick={() => setShowAllTickets(true)} className="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold text-sm" title="Xem Vé">
+                            👁️ <span className="hidden md:inline">Xem Vé</span>
+                        </button>
+                        <button onClick={() => setShowHistory(true)} className="px-2.5 py-1.5 bg-slate-700 hover:bg-slate-600 border border-slate-600 rounded-lg font-bold text-sm" title="History">
+                            📜 <span className="hidden md:inline">Lịch Sử</span>
+                        </button>
+                    </div>
+
+                    <div className="flex gap-1.5">
+                        {gameState === 'WAITING' && (
+                            <button
+                                onClick={() => actions.startGame()}
+                                disabled={players.length === 0 || !players.every(p => p.isReady)}
+                                className={clsx("px-3 md:px-5 py-1.5 rounded-lg font-bold text-sm transition-all",
+                                    players.length > 0 && players.every(p => p.isReady)
+                                        ? "bg-green-600 hover:bg-green-700 shadow-lg hover:scale-105"
+                                        : "bg-slate-700 text-slate-500 cursor-not-allowed opacity-50"
+                                )}
+                            >
+                                {players.length === 0 ? "Đợi..." : <><span className="md:hidden">▶️</span><span className="hidden md:inline">Bắt Đầu</span></>}
+                            </button>
+                        )}
+                        {gameState === 'PLAYING' && (
+                            <button onClick={actions.pauseGame} className="px-3 md:px-5 py-1.5 bg-yellow-600 hover:bg-yellow-700 rounded-lg font-bold text-sm">
+                                <span className="md:hidden">⏸️</span><span className="hidden md:inline">Tạm Dừng</span>
+                            </button>
+                        )}
+                        {gameState === 'PAUSED' && (
+                            <button onClick={actions.resumeGame} className="px-3 md:px-5 py-1.5 bg-green-600 hover:bg-green-700 rounded-lg font-bold text-sm">
+                                <span className="md:hidden">▶️</span><span className="hidden md:inline">Tiếp Tục</span>
+                            </button>
+                        )}
+                        <button onClick={() => setShowExitConfirmation(true)} className="px-2.5 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm" title="Exit">
+                            <span className="md:hidden">🚪</span><span className="hidden md:inline">Thoát</span>
+                        </button>
+                        <button
+                            onClick={() => setShowIntro(true)}
+                            className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-300 hover:to-orange-500 flex items-center justify-center text-white shadow-lg transition-all hover:scale-110 border border-orange-300/50"
+                            title="Hướng dẫn & Ủng hộ"
                         >
-                            {players.length === 0 ? "Đang Đợi..." : <><span className="md:hidden">▶️</span><span className="hidden md:inline">Bắt Đầu</span></>}
+                            <span className="text-lg font-bold font-serif italic">i</span>
                         </button>
-                    )}
-                    {gameState === 'PLAYING' && (
-                        <button onClick={actions.pauseGame} className="px-4 md:px-6 py-2 bg-yellow-600 hover:bg-yellow-700 rounded-lg font-bold">
-                            <span className="md:hidden">⏸️</span><span className="hidden md:inline">Tạm Dừng</span>
-                        </button>
-                    )}
-                    {gameState === 'PAUSED' && (
-                        <button onClick={actions.resumeGame} className="px-4 md:px-6 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-bold">
-                            <span className="md:hidden">▶️</span><span className="hidden md:inline">Tiếp Tục</span>
-                        </button>
-                    )}
-                    <button onClick={() => setShowExitConfirmation(true)} className="px-3 md:px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg" title="Exit">
-                        <span className="md:hidden">🚪</span><span className="hidden md:inline">Thoát</span>
-                    </button>
-                    <button
-                        onClick={() => setShowIntro(true)}
-                        className="w-9 h-9 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-300 hover:to-orange-500 flex items-center justify-center text-white shadow-lg transition-all hover:scale-110 border border-orange-300/50"
-                        title="Hướng dẫn & Ủng hộ"
-                    >
-                        <span className="text-xl font-bold font-serif italic">i</span>
-                    </button>
+                    </div>
                 </div>
-            </header >
+            </header>
 
             <main className="flex-1 flex overflow-hidden">
                 {/* Board */}
@@ -573,21 +537,28 @@ const HostRoom: React.FC = () => {
                         )}
                     </div>
 
-                    {/* Board Grid */}
+                    {/* Board Grid - Column-major order (top-to-bottom, left-to-right) */}
                     <div className="grid grid-cols-10 gap-2 max-w-4xl mx-auto mt-8">
-                        {Array.from({ length: 90 }, (_, i) => i + 1).map(num => (
-                            <div
-                                key={num}
-                                className={clsx(
-                                    "aspect-square flex items-center justify-center rounded font-medium transition-all duration-500",
-                                    numbersDrawn.includes(num)
-                                        ? "bg-violet-600 text-white scale-105 shadow-lg shadow-violet-500/50"
-                                        : "bg-slate-800 text-slate-500"
-                                )}
-                            >
-                                {num}
-                            </div>
-                        ))}
+                        {Array.from({ length: 90 }, (_, i) => {
+                            // Column-major: col = floor(i/9), row = i%9
+                            // num = row * 10 + col + 1
+                            const col = Math.floor(i / 9);
+                            const row = i % 9;
+                            const num = row * 10 + col + 1;
+                            return (
+                                <div
+                                    key={num}
+                                    className={clsx(
+                                        "aspect-square flex items-center justify-center rounded font-medium transition-all duration-500",
+                                        numbersDrawn.includes(num)
+                                            ? "bg-violet-600 text-white scale-105 shadow-lg shadow-violet-500/50"
+                                            : "bg-slate-800 text-slate-500"
+                                    )}
+                                >
+                                    {num}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 
