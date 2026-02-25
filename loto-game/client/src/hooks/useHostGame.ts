@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { getAllTicketSets } from '../utils/ticketGenerator';
 import { checkForBingo } from '../utils/gameLogic';
+import { LotoController } from '../utils/lotoController';
 import { RealtimeChannel } from '@supabase/supabase-js';
 import { Player, GameState, WinRecord, VerificationPopup, TicketSetInfo } from '../types';
 
@@ -26,6 +27,7 @@ export const useHostGame = (roomId: string | undefined) => {
     const firstWinnerRef = useRef<Player | null>(null);
     const coWinnersRef = useRef<string[]>([]);
     const bingoWindowTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const lotoControllerRef = useRef<LotoController | null>(null);
 
     // Sync refs
     useEffect(() => { gameStateRef.current = gameState; }, [gameState]);
@@ -73,9 +75,25 @@ export const useHostGame = (roomId: string | undefined) => {
         }
 
         let num: number;
-        do {
-            num = Math.floor(Math.random() * 90) + 1;
-        } while (numbersDrawnRef.current.includes(num));
+
+        // Sử dụng LotoController nếu đang ở chế độ REGULATED
+        if (lotoControllerRef.current) {
+            const result = lotoControllerRef.current.drawNextNumber();
+            if (!result) {
+                pauseGame();
+                setGameState('ENDED');
+                broadcast('gameStateChanged', 'ENDED');
+                broadcast('gameEnded', { winner: null, reason: 'Full Board' });
+                return;
+            }
+            num = result.number;
+            console.log(`[LotoController] Drew #${result.totalDrawn} = ${num} (Stage: ${result.stage})`);
+        } else {
+            // Chế độ RANDOM: bốc ngẫu nhiên 100%
+            do {
+                num = Math.floor(Math.random() * 90) + 1;
+            } while (numbersDrawnRef.current.includes(num));
+        }
 
         const newHistory = [...numbersDrawnRef.current, num];
         setNumbersDrawn(newHistory);
@@ -89,6 +107,18 @@ export const useHostGame = (roomId: string | undefined) => {
         if (!allReady) {
             alert("Not all players are ready!");
             return;
+        }
+
+        // Random chọn 1 trong 2 chế độ bốc số:
+        // 1. RANDOM (50%): bốc ngẫu nhiên 100%
+        // 2. REGULATED (50%): thuật toán điều tiết kịch tính
+        const useRegulated = Math.random() < 0.5;
+        if (useRegulated) {
+            lotoControllerRef.current = new LotoController(playersRef.current);
+            console.log(`[Game] Mode = REGULATED (K=${lotoControllerRef.current.k_threshold}, ${playersRef.current.length} players)`);
+        } else {
+            lotoControllerRef.current = null;
+            console.log(`[Game] Mode = RANDOM (${playersRef.current.length} players)`);
         }
 
         setGameState('PLAYING');
@@ -117,6 +147,7 @@ export const useHostGame = (roomId: string | undefined) => {
 
     const restartGame = () => {
         if (drawIntervalRef.current) clearInterval(drawIntervalRef.current);
+        lotoControllerRef.current = null; // Xóa controller khi restart
         setGameState('WAITING');
         setNumbersDrawn([]);
         setCurrentNumber(null);

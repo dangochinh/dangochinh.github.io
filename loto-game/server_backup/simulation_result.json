@@ -1,0 +1,142 @@
+[
+  {
+    "sim": 1,
+    "k_threshold": 15,
+    "stageTransitions": [
+      {
+        "from": "START",
+        "to": "SAFE_INIT",
+        "atDraw": 1
+      },
+      {
+        "from": "SAFE_INIT",
+        "to": "WAITING_PUSH",
+        "atDraw": 16
+      },
+      {
+        "from": "WAITING_PUSH",
+        "to": "NATURAL_FINISH",
+        "atDraw": 31
+      }
+    ],
+    "violations": [],
+    "finalStage": "NATURAL_FINISH",
+    "totalDrawn": 90,
+    "playersWaiting": 16,
+    "playersBingo": 16,
+    "allWaiting": true,
+    "passed": true
+  },
+  {
+    "sim": 2,
+    "k_threshold": 14,
+    "stageTransitions": [
+      {
+        "from": "START",
+        "to": "SAFE_INIT",
+        "atDraw": 1
+      },
+      {
+        "from": "SAFE_INIT",
+        "to": "WAITING_PUSH",
+        "atDraw": 15
+      },
+      {
+        "from": "WAITING_PUSH",
+        "to": "NATURAL_FINISH",
+        "atDraw": 32
+      }
+    ],
+    "violations": [],
+    "finalStage": "NATURAL_FINISH",
+    "totalDrawn": 90,
+    "playersWaiting": 16,
+    "playersBingo": 16,
+    "allWaiting": true,
+    "passed": true
+  },
+  {
+    "sim": 3,
+    "k_threshold": 20,
+    "stageTransitions": [
+      {
+        "from": "START",
+        "to": "SAFE_INIT",
+        "atDraw": 1
+      },
+      {
+        "from": "SAFE_INIT",
+        "to": "WAITING_PUSH",
+        "atDraw": 21
+      },
+      {
+        "from": "WAITING_PUSH",
+        "to": "NATURAL_FINISH",
+        "atDraw": 32
+      }
+    ],
+    "violations": [],
+    "finalStage": "NATURAL_FINISH",
+    "totalDrawn": 90,
+    "playersWaiting": 16,
+    "playersBingo": 16,
+    "allWaiting": true,
+    "passed": true
+  },
+  {
+    "sim": 4,
+    "k_threshold": 16,
+    "stageTransitions": [
+      {
+        "from": "START",
+        "to": "SAFE_INIT",
+        "atDraw": 1
+      },
+      {
+        "from": "SAFE_INIT",
+        "to": "WAITING_PUSH",
+        "atDraw": 17
+      },
+      {
+        "from": "WAITING_PUSH",
+        "to": "NATURAL_FINISH",
+        "atDraw": 32
+      }
+    ],
+    "violations": [],
+    "finalStage": "NATURAL_FINISH",
+    "totalDrawn": 90,
+    "playersWaiting": 16,
+    "playersBingo": 16,
+    "allWaiting": true,
+    "passed": true
+  },
+  {
+    "sim": 5,
+    "k_threshold": 10,
+    "stageTransitions": [
+      {
+        "from": "START",
+        "to": "SAFE_INIT",
+        "atDraw": 1
+      },
+      {
+        "from": "SAFE_INIT",
+        "to": "WAITING_PUSH",
+        "atDraw": 11
+      },
+      {
+        "from": "WAITING_PUSH",
+        "to": "NATURAL_FINISH",
+        "atDraw": 31
+      }
+    ],
+    "violations": [],
+    "finalStage": "NATURAL_FINISH",
+    "totalDrawn": 90,
+    "playersWaiting": 16,
+    "playersBingo": 16,
+    "allWaiting": true,
+    "passed": true
+  }
+]
