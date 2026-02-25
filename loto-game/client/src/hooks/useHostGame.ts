@@ -212,12 +212,15 @@ export const useHostGame = (roomId: string | undefined) => {
         const player = playersRef.current.find(p => p.id === playerId);
         if (!player) return;
 
+        // Block KINH khi game đã kết thúc hoặc chưa bắt đầu
+        if (gameStateRef.current === 'ENDED' || gameStateRef.current === 'WAITING') return;
+
         const hasBingo = checkForBingo(player.tickets, numbersDrawnRef.current);
         const currentRound = winHistoryRef.current.filter(r => r.type === 'win').length + 1;
 
         if (hasBingo) {
             // --- CASE 1: First KINH in this round → open BINGO_WINDOW ---
-            if (gameStateRef.current !== 'BINGO_WINDOW') {
+            if (gameStateRef.current === 'PLAYING' || gameStateRef.current === 'PAUSED') {
                 if (drawIntervalRef.current) clearInterval(drawIntervalRef.current);
                 firstWinnerRef.current = player;
                 coWinnersRef.current = [];
