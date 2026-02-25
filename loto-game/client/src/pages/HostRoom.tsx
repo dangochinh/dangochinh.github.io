@@ -531,11 +531,11 @@ const HostRoom: React.FC = () => {
 
             <main className="flex-1 flex overflow-hidden">
                 {/* Board */}
-                <div className="flex-1 p-6 overflow-y-auto">
-                    <div className="flex justify-center mb-8">
+                <div className="flex-1 p-2 md:p-4 flex flex-col">
+                    <div className="flex justify-center mb-2">
                         {/* Current Number */}
                         {currentNumber && (
-                            <div className="text-5xl font-bold bg-gradient-to-br from-pink-500 to-violet-600 w-24 h-24 rounded-full flex items-center justify-center shadow-lg">
+                            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-br from-pink-500 to-violet-600 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center shadow-lg">
                                 {currentNumber}
                             </div>
                         )}
@@ -548,7 +548,7 @@ const HostRoom: React.FC = () => {
                     </div>
 
                     {/* Board Grid - Column-major order (top-to-bottom, left-to-right) */}
-                    <div className="grid grid-cols-9 gap-2 max-w-4xl mx-auto mt-8">
+                    <div className="grid grid-cols-9 gap-1 md:gap-1.5 max-w-3xl w-full mx-auto flex-1">
                         {Array.from({ length: 90 }, (_, i) => {
                             // 9 cols x 10 rows, numbers go top-to-bottom then left-to-right
                             const gridRow = Math.floor(i / 9);
@@ -558,7 +558,7 @@ const HostRoom: React.FC = () => {
                                 <div
                                     key={num}
                                     className={clsx(
-                                        "aspect-square flex items-center justify-center rounded font-medium transition-all duration-500",
+                                        "flex items-center justify-center rounded font-medium text-sm md:text-base transition-all duration-500",
                                         numbersDrawn.includes(num)
                                             ? "bg-violet-600 text-white scale-105 shadow-lg shadow-violet-500/50"
                                             : "bg-slate-800 text-slate-500"
