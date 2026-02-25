@@ -83,9 +83,9 @@ export class LotoController {
     }
 
     /**
-     * GIAI ĐOẠN 1: Bốc an toàn
-     * - Trước số 10: chặn 4/5 và 5/5
-     * - Từ 10 đến K: chỉ chặn 5/5
+     * GIAI ĐOẠN 1: Bốc số an toàn
+     * - Trước số K: Chặn cả 4/5 (Chờ) và 5/5 (Bingo)
+     * Vi phạm → hủy và bốc lại ngầm
      */
     private drawSafeInit(remaining: number[]): number {
         const pool = [...remaining];
@@ -103,10 +103,8 @@ export class LotoController {
                         const isInRow = row.includes(val);
                         if (!isInRow) continue;
 
-                        // Chặn Bingo (5/5)
-                        if (hits === 4) { isViolated = true; break; }
-                        // Chặn Chờ (4/5) trước số thứ 10
-                        if (this.drawnNumbers.size < 10 && hits === 3) { isViolated = true; break; }
+                        // Chặn cả 4/5 (Chờ) và 5/5 (Bingo)
+                        if (hits >= 3) { isViolated = true; break; }
                     }
                     if (isViolated) break;
                 }

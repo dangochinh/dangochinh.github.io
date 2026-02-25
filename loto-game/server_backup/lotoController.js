@@ -82,8 +82,7 @@ class LotoController {
 
     /**
      * GIAI ĐOẠN 1: Bốc số an toàn
-     * - Trước số thứ 10: Chặn cả 4/5 (Chờ) và 5/5 (Bingo)
-     * - Từ số 10 đến K: Chỉ chặn 5/5 (Bingo)
+     * - Trước số K: Chặn cả 4/5 (Chờ) và 5/5 (Bingo)
      * Vi phạm → hủy và bốc lại ngầm
      */
     _drawSafeInit(remaining) {
@@ -104,14 +103,8 @@ class LotoController {
 
                         if (!isInRow) continue;
 
-                        // Vi phạm Bingo (5/5): nếu row đang 4/5 và val là số cuối
-                        if (hits === 4) {
-                            isViolated = true;
-                            break;
-                        }
-
-                        // Vi phạm Chờ sớm (4/5) trước số thứ 10
-                        if (this.drawnNumbers.size < 10 && hits === 3) {
+                        // Chặn cả 4/5 (Chờ) và 5/5 (Bingo)
+                        if (hits >= 3) {
                             isViolated = true;
                             break;
                         }
