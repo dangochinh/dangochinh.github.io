@@ -46,6 +46,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ onClose }) => {
                     <section className="border-t border-slate-700 pt-3">
                         <h4 className="text-sm font-bold text-slate-400 mb-2 uppercase tracking-wider">Lịch Sử Cập Nhật</h4>
                         <div className="text-xs text-slate-500 space-y-1 font-mono leading-relaxed">
+                            <p><span className="text-cyan-400">v1.5.1</span> (2026-02-28): Giới hạn thắng tối đa, Cân bằng thuật toán ván cứu.</p>
                             <p><span className="text-cyan-400">v1.5.0</span> (2026-02-26): Mã phòng 3 số, Tự Động Dò tự tắt popup, Fix bug Bingo trùng lặp.</p>
                             <p><span className="text-cyan-400">v1.4.0</span> (2026-02-24): Tự kết nối lại, Nút info, Tự Động Dò cooldown 30s, Highlight 4/5.</p>
                             <p><span className="text-cyan-400">v1.3.0</span> (2026-02-22): Bingo Trùng & Chặn tham gia khi ván đang diễn ra.</p>

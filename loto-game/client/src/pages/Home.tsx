@@ -84,6 +84,11 @@ const Home: React.FC = () => {
                 <span className="text-2xl font-bold font-serif italic">i</span>
             </button>
 
+            {/* Footer */}
+            <div className="absolute bottom-4 left-0 right-0 text-center text-slate-500 text-sm font-medium pointer-events-none">
+                From Pe Thúi Loto Online with ❤️ | v1.5.1
+            </div>
+
             {/* Intro Modal */}
             {showIntro && <IntroModal onClose={() => setShowIntro(false)} />}
         </div>
