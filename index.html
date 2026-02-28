@@ -651,6 +651,34 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* Fix Mobile Navbar */
+            .nav-container {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            /* Fix Project Cards Tech Stack */
+            .tech-item {
+                flex-direction: column;
+                gap: 0.2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .tech-label {
+                color: var(--accent-primary);
+            }
         }
     </style>
 </head>
