@@ -1047,6 +1047,11 @@
                     }
                 });
 
+                // Force 'contact' to be active if scrolled to the absolute bottom
+                if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 50) {
+                    current = 'contact';
+                }
+
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${current}` || (current === 'home' && link.getAttribute('href') === '#')) {
