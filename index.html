@@ -95,8 +95,8 @@
         }
 
         .hero h1 {
-            font-family: var(--font-body);
-            /* Switching to Inter for better Vietnamese diacritics */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            /* Using native system fonts for perfect Vietnamese diacritics rendering */
             font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 800;
             margin-bottom: 1rem;
@@ -514,6 +514,42 @@
             font-size: 0.9rem;
         }
 
+        /* Scroll to Top Button */
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-text);
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #scrollTopBtn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #scrollTopBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+        }
+
         /* Responsive */
         @media screen and (max-width: 768px) {
             .timeline::after {
@@ -558,7 +594,9 @@
                     class="badge">
                     <i class="fa-solid fa-certificate"></i> PMI-ACP®
                 </a>
-                <span class="badge"><i class="fa-solid fa-briefcase"></i> 9+ Years Experience</span>
+                <a href="#experience" class="badge" style="cursor: pointer;">
+                    <i class="fa-solid fa-briefcase"></i> 9+ Years Experience
+                </a>
             </div>
 
             <div class="contact-links">
@@ -838,6 +876,11 @@
         </div>
     </footer>
 
+    <!-- Scroll To Top Button -->
+    <button id="scrollTopBtn" title="Go to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
     <!-- Simple Scroll Animation Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -878,6 +921,23 @@
                     content.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
                 });
             }, 1000);
+
+            // Scroll to Top Logic
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
