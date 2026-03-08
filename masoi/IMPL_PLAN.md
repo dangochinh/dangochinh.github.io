@@ -136,23 +136,23 @@
 
 ### Phase 1 — Critical
 
-- [ ] **T1.1** Thêm `--background`, `--border`, `--accent-red`, `--accent-green`, `--accent-purple`, `--text-inactive`, `--surface-hover` vào `index.css`
-- [ ] **T1.2** Sửa HostSetup input class `input-field` → `input-dark`
-- [ ] **T1.3** Thêm `@keyframes scaleIn` và `.animate-scaleIn` trong CSS
-- [ ] **T1.4** Thêm `.scrollbar-hide` hoặc Tailwind plugin
-- [ ] **T1.5** Implement Hunter shot: khi Hunter chết (hang/kill) → prompt chọn target → set `currentNight.shot`
-- [ ] **T1.6** Gọi `archiveGame(next)` trong `hangPlayer` khi `winner` set
-- [ ] **T1.7** Timer: wrap `onEnd` trong `useRef` để không re-run effect
-- [ ] **T1.8** Player ID: `crypto.randomUUID?.() ?? Date.now() + '-' + Math.random()`
-- [ ] **T1.9** Remove `clearGameState` từ App.jsx import
-- [ ] **T1.10** Remove `tesseract.js` từ package.json và lockfile
+- [x] **T1.1** Thêm `--background`, `--border`, `--accent-red`, `--accent-green`, `--accent-purple`, `--text-inactive`, `--surface-hover` vào `index.css`
+- [x] **T1.2** Thêm `.input-field` alias (giữ nguyên class trong HostSetup)
+- [x] **T1.3** Thêm `@keyframes scaleIn` và `.animate-scaleIn` trong CSS
+- [x] **T1.4** Thêm `.scrollbar-hide` trong CSS
+- [x] **T1.5** Implement Hunter shot: khi Hunter chết (hang/kill) → Host chọn target → set `currentNight.shot`
+- [x] **T1.6** Gọi `archiveGame(next)` trong `hangPlayer` khi `winner` set
+- [x] **T1.7** Timer: wrap `onEnd` trong `useRef` để không re-run effect
+- [x] **T1.8** Player ID: `generatePlayerId()` với `crypto.randomUUID` fallback
+- [x] **T1.9** Remove `clearGameState` từ App.jsx import
+- [x] **T1.10** Remove `tesseract.js` từ package.json
 
 ### Phase 2 — UX
 
-- [ ] **T2.1** Thêm slider/stepper `discussionTime` (60–300s) trong HostSetup
+- [x] **T2.1** Thêm slider `discussionTime` (60–300s) trong HostSetup
 - [ ] **T2.2** Implement multi-wolf rule (ví dụ: first vote wins, hoặc majority)
-- [ ] **T2.3** Fix `nextPhase` useCallback deps (thêm players hoặc dùng functional update)
-- [ ] **T2.4** Thêm fade/slide animation cho phase change
+- [x] **T2.3** Fix `nextPhase` useCallback deps (dùng s.players thay vì players)
+- [x] **T2.4** Thêm fade animation cho phase change
 
 ### Phase 3 — Structure
 
