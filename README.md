@@ -22,5 +22,5 @@ I bridge the gap between business requirements and technical execution. With han
 
 ### 📫 How to reach me
 - 🌐 **Portfolio & Blog**: [dangochinh.github.io](https://dangochinh.github.io/)
-- 📧 **Email**: [Thêm email của bạn vào đây]
-- 🔗 **LinkedIn**: [Thêm link LinkedIn của bạn vào đây]
+- 📧 **Email**: [dangochinh@gmail.com](mailto:dangochinh@gmail.com)
+- 🔗 **LinkedIn**: [LinkedIn](https://www.linkedin.com/in/ch%C3%ADnh-%C4%91%E1%BA%B7ng-977456114/)
