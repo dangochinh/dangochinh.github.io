@@ -17,7 +17,7 @@ Dự án sử dụng các công nghệ web hiện đại để tối ưu hiệu 
 
 ## 🌐 Trải Nghiệm Thực Tế (Production)
 Bạn có thể xem và trải nghiệm trực tiếp phiên bản hoạt động của dự án tại đây:
-👉 **[Live Production](https://pethuitracker.vercel.app/)** *(Vui lòng truy cập để xem chi tiết)*
+👉 **[Live Production](https://pethui.vercel.app/)** *(Vui lòng truy cập để xem chi tiết)*
 
 ---
 
