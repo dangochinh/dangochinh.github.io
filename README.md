@@ -1,7 +1,26 @@
----
+# Hi there, I'm Đặng Ngọc Chính 👋
 
-## 🙋‍♂️ Về Tác Giả
-Xin chào, mình là **Đặng Ngọc Chinh**, một PM  đam mê vibe coding việc biến những ý tưởng thú vị thành các sản phẩm có thể tương tác trên môi trường số.
+**Product Manager | Scrum Master | Business Analyst with a Technical Edge**
 
-Để làm quen và tìm hiểu thêm về mình cũng như là các dự án phần mềm đa dạng khác, bạn có thể ghé thăm trang cá nhân/landing page của mình qua đường dẫn phía trên hoặc tại đây nhé:
-🌟 **[dangochinh.github.io](https://dangochinh.github.io/)**
+I bridge the gap between business requirements and technical execution. With hands-on experience in building features and applications, I don't just write requirements—I understand the code behind them.
+
+### 💼 What I Do
+- 📋 **Product Management & BA**: Eliciting requirements, defining product roadmaps, and ensuring successful delivery.
+- 🔄 **Scrum Master**: Facilitating Agile ceremonies, removing blockers, and improving team performance.
+- 💻 **Technical Enthusiast**: Actively coding and building side projects to deeply understand the technologies my teams work with.
+
+### 🛠️ Tech Stack & Tools I Work With
+* **Languages & Frameworks**: JavaScript, TypeScript, React, Node.js
+* **Agile/Scrum**: Jira, Confluence, Trello
+* **Design & Prototyping**: Figma, Balsamiq
+* **Deployment & CI/CD**: Vercel, GitHub Actions
+
+### 🚀 Featured Projects
+- 📊 **[Vietlott Dashboard](https://github.com/dangochinh/vietlotdashboard)**: A dashboard application tracking Vietlott results, fully deployed and automated. 
+- 🎲 **[Loto Online](https://github.com/dangochinh/loto-online)**: A real-time online Bingo (Loto) game application.
+- 🐺 **[PE Thui Tracker](https://github.com/dangochinh/pethuitracker)**: Workspaces tracking and managing custom online board games.
+
+### 📫 How to reach me
+- 🌐 **Portfolio & Blog**: [dangochinh.github.io](https://dangochinh.github.io/)
+- 📧 **Email**: [Thêm email của bạn vào đây]
+- 🔗 **LinkedIn**: [Thêm link LinkedIn của bạn vào đây]
