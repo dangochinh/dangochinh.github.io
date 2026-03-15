@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 👶 Pe Thúi Tracker
 
-## Getting Started
+> *Lưu giữ hành trình khôn lớn* — A personal baby growth tracking application backed by Google Sheets.
 
-First, run the development server:
+**Live App:** [https://pethuitracker.vercel.app/](https://pethuitracker.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📖 About
+
+**Pe Thúi Tracker** is a mobile-friendly web application designed to help parents track and visualize their baby's growth journey — including weight, height, and other milestones over time. Each baby gets a unique code-based profile, and all data is stored securely in Google Sheets, making it simple to manage without a dedicated database.
+
+## ✨ Features
+
+- **Code-based Access** — Enter your baby's personal code to instantly access their profile. No login required.
+- **Profile Creation** — Set up a new baby profile in seconds with name, birth date, and other details.
+- **Growth Dashboard** — View comprehensive stats on weight, height, and other tracked metrics at a glance.
+- **Growth Charts** — Beautiful, interactive charts to visualize progress over time using Recharts.
+- **Add / Edit Records** — Log new health records and update or correct previous entries anytime.
+- **Mobile-Optimized** — Designed for use on phones with smooth keyboard-aware scrolling.
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Framework** | [Next.js 16](https://nextjs.org/) (App Router) |
+| **UI Library** | React 19 |
+| **Styling** | Tailwind CSS v4 |
+| **Charts** | [Recharts](https://recharts.org/) |
+| **Backend / Database** | Google Sheets via [Google APIs](https://googleapis.dev/) |
+| **Icons** | React Icons |
+| **Deployment** | [Vercel](https://vercel.com/) |
+
+## 🚀 Getting Started (Local Development)
+
+### Prerequisites
+- Node.js 18+
+- A Google Cloud project with **Google Sheets API** enabled
+- A Google Service Account with credentials
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/dangochinh/pethuitracker.git
+   cd pethuitracker/pe-thui
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env.local` file at the root of the `pe-thui` folder with the following variables:
+   ```env
+   GOOGLE_SHEET_ID=your_google_sheet_id
+   GOOGLE_CLIENT_EMAIL=your_service_account_email
+   GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 📁 Project Structure
+
+```
+pe-thui/
+├── app/
+│   ├── [code]/         # Dynamic route: baby's dashboard page
+│   ├── api/            # Next.js API routes (Google Sheets integration)
+│   ├── components/     # UI components (Dashboard, Charts, Modals...)
+│   ├── lib/            # Utility functions and Google API helpers
+│   ├── globals.css     # Global styles
+│   └── page.js         # Landing / login page
+├── public/             # Static assets
+├── scripts/            # Utility scripts
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 👤 Author
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Đặng Ngọc Chính**
+- Portfolio: [dangochinh.github.io](https://dangochinh.github.io/)
+- GitHub: [@dangochinh](https://github.com/dangochinh)
