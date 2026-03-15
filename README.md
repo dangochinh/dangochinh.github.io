@@ -14,7 +14,7 @@
 
 ## 🌐 Trải Nghiệm Thực Tế (Production)
 Trò chơi hiện đã hoạt động toàn diện và hoàn hảo trên môi trường web. Mời bạn tham gia gọi số hoặc dò Lô Tô ngay tại địa chỉ:
-👉 **[Lô Tô Online - Play Now!](https://dangochinh.github.io/)**
+👉 **[Lô Tô Online - Play Now!](https://loto-online81.surge.sh/)**
 
 ---
 
