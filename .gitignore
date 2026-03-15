@@ -27,3 +27,11 @@ Thumbs.db
 
 # Firebase cache
 .firebase/
+
+# Other Projects
+asset/
+bingo-master/
+loto-game/
+masoi/
+index.html
+VietlottDashboard/
