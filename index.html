@@ -4,30 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dang Ngoc Chinh Portfolio</title>
-    <!-- Favicon -->
+    <title>Đặng Ngọc Chính — IT Project Manager &amp; AI Systems Builder</title>
+    <meta name="description"
+        content="Portfolio of Đặng Ngọc Chính — PMP® & PMI-ACP® Certified IT Project Manager, Business Analyst, and Full-Stack AI Builder with 9+ years of experience.">
     <link rel="icon" type="image/png" href="https://github.com/dangochinh.png">
-    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        /* ═══════════════════════════════════════════════════════════════════════
+           DESIGN SYSTEM — Inspired by React Bits (DavidHDev/react-bits)
+                           & Magic UI (magicuidesign/magicui)
+           ═══════════════════════════════════════════════════════════════════════ */
+        @property --beam-angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
         :root {
-            --bg-color: #0f172a;
-            --surface-color: rgba(30, 41, 59, 0.7);
-            --surface-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-primary: #06b6d4;
-            /* Cyan */
-            --accent-secondary: #3b82f6;
-            /* Blue */
-            --gradient-text: linear-gradient(135deg, #06b6d4, #3b82f6);
-            --font-heading: 'Outfit', sans-serif;
-            --font-body: 'Inter', sans-serif;
+            --bg: #060609;
+            --bg-elevated: #0b0b11;
+            --surface: rgba(255, 255, 255, 0.025);
+            --surface-strong: rgba(255, 255, 255, 0.045);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.16);
+            --text: #f4f4f5;
+            --text-secondary: #a1a1aa;
+            --text-dim: #71717a;
+            --cyan: #22d3ee;
+            --indigo: #818cf8;
+            --blue: #3b82f6;
+            --emerald: #34d399;
+            --amber: #fbbf24;
+            --font-display: 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Inter', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            --radius: 18px;
+            --radius-sm: 12px;
+            --radius-xs: 8px;
         }
 
         * {
@@ -36,843 +55,1581 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg);
+            color-scheme: dark;
+        }
+
         body {
             font-family: var(--font-body);
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            background-image:
-                radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
-            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Typography */
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: var(--font-heading);
-            font-weight: 600;
+        ::selection {
+            background: rgba(34, 211, 238, 0.25);
+            color: #fff;
         }
 
-        .gradient-text {
-            background: var(--gradient-text);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent;
-            /* Prevent descenders from being horizontally clipped by the background box */
-            padding-bottom: 0.15em;
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
         }
 
-        /* Layout */
         .container {
-            max-width: 1200px;
+            max-width: 1180px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
         }
 
-        header.hero {
-            min-height: 100vh;
+        /* ═══════════════════════════════════════════════════════════════════════
+           MAGIC UI: Animated Grid Pattern + REACT BITS: Aurora Canvas
+           ═══════════════════════════════════════════════════════════════════════ */
+        .hero-backdrop {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .aurora-layer {
+            position: absolute;
+            top: -35%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1400px;
+            height: 760px;
+            background:
+                radial-gradient(ellipse 45% 50% at 35% 40%, rgba(34, 211, 238, 0.14), transparent 70%),
+                radial-gradient(ellipse 40% 50% at 68% 35%, rgba(129, 140, 248, 0.14), transparent 70%),
+                radial-gradient(ellipse 50% 40% at 50% 60%, rgba(59, 130, 246, 0.08), transparent 75%);
+            filter: blur(48px);
+            animation: auroraDrift 16s ease-in-out infinite alternate;
+        }
+
+        @keyframes auroraDrift {
+            0% {
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            100% {
+                transform: translateX(-48%) translateY(20px) scale(1.06);
+            }
+        }
+
+        .animated-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, #000 35%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, #000 35%, transparent 100%);
+        }
+
+        .grid-squares {
+            position: absolute;
+            inset: 0;
+            mask-image: radial-gradient(ellipse 65% 55% at 50% 35%, #000 30%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 35%, #000 30%, transparent 100%);
+        }
+
+        .grid-pulse-cell {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background: rgba(34, 211, 238, 0.08);
+            opacity: 0;
+            animation: cellPulse 5s ease-in-out infinite;
+        }
+
+        @keyframes cellPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        #particleCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.55;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           REACT BITS: Floating Pill Navigation
+           ═══════════════════════════════════════════════════════════════════════ */
+        .nav-wrapper {
+            position: fixed;
+            top: 1.15rem;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 0 1rem;
+            pointer-events: none;
+        }
+
+        .pill-nav {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.45rem 0.55rem 0.45rem 0.9rem;
+            background: rgba(11, 11, 17, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 9999px;
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .pill-nav.scrolled {
+            background: rgba(9, 9, 14, 0.88);
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .nav-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text);
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.92rem;
+            letter-spacing: -0.02em;
+            padding-right: 0.4rem;
+        }
+
+        .nav-brand-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cyan), var(--indigo));
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.6);
+        }
+
+        .nav-links {
+            position: relative;
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 0.15rem;
+        }
+
+        .nav-link {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 0.42rem 0.9rem;
+            border-radius: 9999px;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fff;
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.09);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.95rem;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(129, 140, 248, 0.16));
+            border: 1px solid rgba(34, 211, 238, 0.28);
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.26), rgba(129, 140, 248, 0.26));
+            border-color: rgba(34, 211, 238, 0.5);
+            transform: translateY(-1px);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           HERO SECTION — React Bits BlurText + ShinyText + Magic UI ShimmerButton
+           ═══════════════════════════════════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 96vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            text-align: center;
-            position: relative;
-            padding: 4rem 1rem;
-            animation: fadeIn 1.2s ease-out;
+            padding: 7.5rem 1.5rem 5rem;
+            overflow: hidden;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 880px;
+            margin: 0 auto;
+            text-align: center;
+        }
 
+        /* React Bits: ShinyText Badge */
+        .shiny-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.42rem 1rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.75rem;
+            animation: blurFadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .status-ping {
+            position: relative;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            flex-shrink: 0;
+        }
+
+        .status-ping::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 1px solid var(--emerald);
+            animation: pingRing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes pingRing {
+            0% { transform: scale(0.8); opacity: 0.9; }
+            80%, 100% { transform: scale(2.3); opacity: 0; }
+        }
+
+        .shiny-text {
+            background: linear-gradient(120deg, #a1a1aa 35%, #ffffff 50%, #a1a1aa 65%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineSweep 4.5s linear infinite;
+        }
+
+        @keyframes shineSweep {
+            0% { background-position: 100% 0; }
+            100% { background-position: -120% 0; }
+        }
+
+        /* React Bits: BlurText Headline */
+        .hero-title {
+            font-size: clamp(2.75rem, 6.8vw, 5.15rem);
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            line-height: 1.12;
+            margin-bottom: 1.1rem;
+        }
+
+        .blur-word {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(12px);
+            transform: translateY(18px);
+            animation: blurWordIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .blur-word.accent {
+            background: linear-gradient(135deg, #ffffff 10%, var(--cyan) 55%, var(--indigo) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes blurWordIn {
             to {
                 opacity: 1;
+                filter: blur(0);
                 transform: translateY(0);
             }
         }
 
-        .hero h1 {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            /* Using native system fonts for perfect Vietnamese diacritics rendering */
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+        .hero-role {
+            font-family: var(--font-mono);
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            color: var(--cyan);
+            letter-spacing: 0.04em;
+            margin-bottom: 1.25rem;
+            opacity: 0;
+            animation: blurFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
         }
 
-        .hero h2 {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            /* Reduced slightly to fit better */
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.18rem);
             color: var(--text-secondary);
-            font-weight: 400;
-            margin-bottom: 2rem;
-            max-width: 800px;
-            /* Increased max width to prevent awkward wrapping */
-            text-wrap: balance;
-            /* Allows for better balancing if it must wrap */
+            max-width: 670px;
+            margin: 0 auto 2rem;
+            line-height: 1.75;
+            opacity: 0;
+            animation: blurFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
         }
 
-        .badges {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            padding: 0.5rem 1rem;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            border-radius: 9999px;
-            color: #22d3ee;
-            font-family: var(--font-heading);
+        .hero-subtitle strong {
+            color: var(--text);
             font-weight: 600;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            text-decoration: none;
-            transition: all 0.3s ease;
+        }
+
+        /* Certifications */
+        .hero-certs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.65rem;
+            margin-bottom: 2.25rem;
+            opacity: 0;
+            animation: blurFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+        }
+
+        .cert-pill {
             display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.95rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+        }
+
+        .cert-pill i {
+            color: var(--cyan);
+            font-size: 0.8rem;
+        }
+
+        a.cert-pill:hover {
+            border-color: rgba(34, 211, 238, 0.4);
+            background: rgba(34, 211, 238, 0.07);
+            transform: translateY(-2px);
+        }
+
+        /* Magic UI: Shimmer Button + Secondary CTA */
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.9rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: blurFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.65s forwards;
+        }
+
+        .shimmer-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.85rem 1.85rem;
+            border-radius: 9999px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            background: #0d111a;
+            overflow: hidden;
+            isolation: isolate;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.35), 0 12px 35px -8px rgba(34, 211, 238, 0.35);
+        }
+
+        .shimmer-btn::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: conic-gradient(from var(--beam-angle), transparent 0deg, transparent 270deg, var(--cyan) 320deg, var(--indigo) 350deg, transparent 360deg);
+            animation: spinBeam 3.5s linear infinite;
+            z-index: -2;
+        }
+
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            inset: 1.5px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #0b1623, #0f172a);
+            z-index: -1;
+        }
+
+        .shimmer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.55), 0 18px 42px -8px rgba(34, 211, 238, 0.45);
+        }
+
+        @keyframes spinBeam {
+            to { --beam-angle: 360deg; }
+        }
+
+        .ghost-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.85rem 1.65rem;
+            border-radius: 9999px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.92rem;
+            transition: all 0.25s ease;
+        }
+
+        .ghost-btn:hover {
+            background: var(--surface-strong);
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Executive Metrics Strip */
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            max-width: 760px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: blurFadeIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.78s forwards;
+        }
+
+        .metric-cell {
+            background: rgba(10, 10, 16, 0.86);
+            backdrop-filter: blur(12px);
+            padding: 1.15rem 0.9rem;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff, var(--cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-label {
+            font-size: 0.74rem;
+            color: var(--text-dim);
+            margin-top: 0.15rem;
+            font-weight: 500;
+        }
+
+        @keyframes blurFadeIn {
+            from {
+                opacity: 0;
+                filter: blur(8px);
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           MAGIC UI: Dual-Track Marquee Ticker
+           ═══════════════════════════════════════════════════════════════════════ */
+        .marquee-section {
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.01);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-mask {
+            mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 0.85rem;
+            animation: marqueeLeft 36s linear infinite;
+        }
+
+        .marquee-track.reverse {
+            animation: marqueeRight 40s linear infinite;
+        }
+
+        .marquee-section:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes marqueeRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .marquee-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            transition: border-color 0.25s, color 0.25s;
+        }
+
+        .marquee-chip i {
+            color: var(--cyan);
+            font-size: 0.78rem;
+        }
+
+        .marquee-chip.domain i {
+            color: var(--indigo);
+        }
+
+        .marquee-chip:hover {
+            border-color: rgba(34, 211, 238, 0.35);
+            color: var(--text);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           SHARED SECTION LAYOUT + MAGIC UI BlurFade
+           ═══════════════════════════════════════════════════════════════════════ */
+        section {
+            padding: 6.5rem 0;
+            position: relative;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .section-header {
+            margin-bottom: 3.25rem;
+        }
+
+        .section-header.center {
+            text-align: center;
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 0.85rem;
+        }
+
+        .section-eyebrow::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--cyan);
+        }
+
+        .section-title {
+            font-size: clamp(1.9rem, 4vw, 2.85rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 0.85rem;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .section-header.center .section-desc {
+            margin: 0 auto;
+        }
+
+        .blur-fade {
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(22px);
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .blur-fade.visible {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           MAGIC UI BentoGrid + REACT BITS SpotlightCard — ABOUT SECTION
+           ═══════════════════════════════════════════════════════════════════════ */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.1rem;
+        }
+
+        .spotlight-card {
+            position: relative;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.85rem;
+            overflow: hidden;
+            transition: border-color 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                    rgba(34, 211, 238, 0.08),
+                    rgba(129, 140, 248, 0.03) 35%,
+                    transparent 65%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+
+        .spotlight-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .bento-span-4 { grid-column: span 4; }
+        .bento-span-3 { grid-column: span 3; }
+        .bento-span-2 { grid-column: span 2; }
+        .bento-span-6 { grid-column: span 6; }
+
+        .bento-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-xs);
+            background: rgba(34, 211, 238, 0.08);
+            border: 1px solid rgba(34, 211, 238, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            font-size: 1rem;
+            margin-bottom: 1.15rem;
+        }
+
+        .bento-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+
+        .bento-text {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.72;
+        }
+
+        .pill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.15rem;
+        }
+
+        .ui-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.38rem 0.85rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid var(--border);
+            font-size: 0.79rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .ui-pill:hover {
+            border-color: rgba(34, 211, 238, 0.35);
+            color: var(--text);
+            background: rgba(34, 211, 238, 0.06);
+        }
+
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+
+        .region-box {
+            padding: 0.85rem;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border);
+        }
+
+        .region-name {
+            font-weight: 600;
+            font-size: 0.86rem;
+            color: var(--text);
+            display: flex;
             align-items: center;
             gap: 0.4rem;
         }
 
-        a.badge:hover {
-            background: rgba(6, 182, 212, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
-        }
-
-        .contact-links {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-btn.primary {
-            background: var(--gradient-text);
-            color: white;
-            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
-        }
-
-        .contact-btn.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(6, 182, 212, 0.4);
-        }
-
-        .contact-btn.secondary {
-            background: var(--surface-color);
-            color: var(--text-primary);
-            border: 1px solid var(--surface-border);
-            backdrop-filter: blur(10px);
-        }
-
-        .contact-btn.secondary:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* New UI Components & Animations */
-        .badge-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-primary);
+        .region-name .dot {
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            position: relative;
+            background: var(--cyan);
         }
 
-        .pulse-dot::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--accent-primary);
-            border-radius: 50%;
-            animation: pulse-ring 1.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        .region-sub {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.2rem;
         }
 
-        @keyframes pulse-ring {
-            0% {
-                transform: scale(0.33);
-                opacity: 1;
-            }
-
-            80%,
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-
-        .cert-badge {
-            padding: 0.6rem 1.2rem;
-            background: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            border-radius: 12px;
-            color: var(--accent-primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .cert-badge:hover {
-            border-color: var(--accent-primary);
-            background: rgba(6, 182, 212, 0.05);
-        }
-
-        /* About Section Enhancements */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .skill-item {
+        .creds-bar {
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+
+        .creds-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+        }
+
+        .cred-card {
+            display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-secondary);
+            padding: 0.75rem 1.15rem;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.25s ease;
         }
 
-        .skill-item i {
-            color: var(--accent-primary);
-            font-size: 1.1rem;
+        .cred-card:hover {
+            border-color: rgba(34, 211, 238, 0.4);
+            background: rgba(34, 211, 238, 0.06);
+            transform: translateY(-2px);
         }
 
-        .domain-card {
-            background: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .domain-item {
+        .cred-badge-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: rgba(34, 211, 238, 0.12);
+            color: var(--cyan);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 0.75rem;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.02);
-            margin-bottom: 0.75rem;
-            transition: background 0.3s;
-        }
-
-        .domain-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .domain-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-primary);
-            border-radius: 50%;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
-            border: 1px solid rgba(6, 182, 212, 0.2);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .client-tag {
-            padding: 0.4rem 1rem;
-            background: var(--bg-color);
-            border: 1px solid var(--surface-border);
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* Vertical Timeline */
-        .v-timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .v-timeline::before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent-primary), transparent);
-        }
-
-        .v-timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            padding-left: 2rem;
-        }
-
-        .v-timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2rem;
-            top: 5px;
-            width: 16px;
-            height: 16px;
-            background: var(--bg-color);
-            border: 3px solid var(--accent-primary);
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 0;
-            border-top: 1px solid var(--surface-border);
-        }
-
-        .section-header {
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Experience Section */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background: var(--surface-border);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            right: -8px;
-            background-color: var(--bg-color);
-            border: 4px solid var(--accent-primary);
-            top: 24px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .left {
-            left: 0;
-        }
-
-        .right {
-            left: 50%;
-        }
-
-        .right::after {
-            left: -8px;
-        }
-
-        .timeline-content {
-            padding: 2rem;
-            background: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-color: rgba(6, 182, 212, 0.4);
-        }
-
-        .timeline-date {
-            color: var(--accent-primary);
-            font-weight: 600;
+            justify-content: center;
             font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            display: block;
         }
 
-        .timeline-role {
-            font-size: 1.25rem;
-            margin-bottom: 0.25rem;
-            color: #fff;
+        .cred-name {
+            font-weight: 600;
+            font-size: 0.88rem;
+            line-height: 1.25;
         }
 
-        .timeline-company {
-            color: #3b82f6;
-            font-weight: 500;
-            margin-bottom: 1rem;
+        .cred-issuer {
+            font-size: 0.73rem;
+            color: var(--text-dim);
         }
 
-        .timeline-desc {
+        /* ═══════════════════════════════════════════════════════════════════════
+           PROJECTS — Magic UI BorderBeam + React Bits TiltedCard & Filter Bar
+           ═══════════════════════════════════════════════════════════════════════ */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.1rem;
+            border-radius: 9999px;
+            background: var(--surface);
+            border: 1px solid var(--border);
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
 
-        .timeline-desc ul {
-            padding-left: 1.2rem;
-            margin-top: 0.5rem;
+        .filter-btn:hover {
+            color: var(--text);
+            border-color: var(--border-hover);
         }
 
-        .timeline-desc li {
-            margin-bottom: 0.3rem;
+        .filter-btn.active {
+            background: rgba(34, 211, 238, 0.12);
+            border-color: rgba(34, 211, 238, 0.4);
+            color: var(--cyan);
         }
 
-        /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.35rem;
         }
 
         .project-card {
-            background: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            border-radius: 20px;
-            padding: 2.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1100px;
+            display: flex;
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
+
+        .project-card.featured-span {
+            grid-column: 1 / -1;
+        }
+
+        .project-card-inner {
             position: relative;
-            overflow: hidden;
+            width: 100%;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.85rem;
             display: flex;
             flex-direction: column;
-            height: 100%;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.25s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .project-card::before {
+        .project-card-inner::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-text);
+            inset: 0;
+            background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                    rgba(34, 211, 238, 0.085),
+                    transparent 60%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .project-card:hover::before {
+        .project-card-inner:hover::before {
             opacity: 1;
         }
 
-        .project-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--accent-primary);
+        .project-card-inner:hover {
+            border-color: rgba(255, 255, 255, 0.16);
+            box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Magic UI: BorderBeam on Featured Card */
+        .border-beam-card {
+            border-color: rgba(34, 211, 238, 0.22);
+            background: linear-gradient(145deg, rgba(14, 18, 28, 0.96), rgba(9, 9, 14, 0.98));
+        }
+
+        .border-beam-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: conic-gradient(from var(--beam-angle), transparent 0deg, transparent 275deg, var(--cyan) 318deg, var(--indigo) 348deg, transparent 360deg);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            animation: spinBeam 6s linear infinite;
+            pointer-events: none;
+        }
+
+        .featured-split {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .featured-blueprint {
+            background: rgba(0, 0, 0, 0.36);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-sm);
+            padding: 1.35rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .blueprint-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .blueprint-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .blueprint-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .blueprint-rows {
+            display: grid;
+            gap: 0.7rem;
+        }
+
+        .blueprint-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: var(--radius-xs);
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.8rem;
+        }
+
+        .blueprint-key {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-dim);
+        }
+
+        .blueprint-val {
+            font-weight: 600;
+            font-size: 0.78rem;
+            color: var(--cyan);
+            text-align: right;
+        }
+
+        .project-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .project-type {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--cyan);
+            letter-spacing: 0.02em;
+        }
+
+        .project-badge {
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.22rem 0.6rem;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+
+        .badge-featured {
+            background: rgba(34, 211, 238, 0.14);
+            border: 1px solid rgba(34, 211, 238, 0.35);
+            color: var(--cyan);
+        }
+
+        .badge-new {
+            background: rgba(52, 211, 153, 0.14);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            color: var(--emerald);
         }
 
         .project-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.28rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.65rem;
             color: #fff;
+        }
+
+        .featured-span .project-title {
+            font-size: 1.65rem;
         }
 
         .project-desc {
             color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
+            font-size: 0.89rem;
+            line-height: 1.68;
+            margin-bottom: 1.15rem;
             flex-grow: 1;
         }
 
-        .tech-stack {
+        .tech-tags {
             display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            margin-top: auto;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 1.2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            flex-wrap: wrap;
+            gap: 0.38rem;
+            margin-bottom: 1.15rem;
         }
 
-        .tech-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-
-        .tech-label {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.85rem;
-            min-width: 70px;
-        }
-
-        .tech-value {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.4;
-        }
-
-        .project-links {
-            margin-top: 1.5rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            text-decoration: none;
-            color: var(--text-primary);
-            font-size: 0.9rem;
+        .tech-tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
             font-weight: 500;
+            padding: 0.22rem 0.6rem;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            color: var(--text-secondary);
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .project-card-inner:hover .tech-tag {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .project-arch {
+            padding: 0.85rem 1rem;
+            background: rgba(0, 0, 0, 0.34);
+            border: 1px solid rgba(255, 255, 255, 0.055);
+            border-radius: var(--radius-xs);
+            margin-bottom: 1.25rem;
+        }
+
+        .arch-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 0.3rem;
+        }
+
+        .arch-text {
+            font-size: 0.81rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 0.65rem;
+            margin-top: auto;
+            padding-top: 1.05rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .proj-btn {
+            flex: 1;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.62rem 0.85rem;
+            border-radius: var(--radius-xs);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .proj-btn.live {
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.22);
+            color: var(--cyan);
+        }
+
+        .proj-btn.live:hover {
+            background: rgba(34, 211, 238, 0.18);
+            border-color: rgba(34, 211, 238, 0.45);
+        }
+
+        .proj-btn.repo {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .proj-btn.repo:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text);
+            border-color: var(--border-hover);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           EXPERIENCE TIMELINE
+           ═══════════════════════════════════════════════════════════════════════ */
+        .timeline {
+            position: relative;
+            max-width: 820px;
+            margin: 0 auto;
+            padding-left: 2.25rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--cyan), var(--indigo) 50%, transparent);
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 1.75rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.65rem 1.85rem;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .tl-item:hover {
+            border-color: var(--border-hover);
+            transform: translateX(4px);
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -2.25rem;
+            top: 1.9rem;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--cyan);
+            transform: translateX(-0.5px);
+        }
+
+        .tl-item.current::before {
+            background: var(--cyan);
+            box-shadow: 0 0 14px rgba(34, 211, 238, 0.55);
+        }
+
+        .tl-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tl-role {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.01em;
+        }
+
+        .tl-company {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-top: 0.15rem;
+        }
+
+        .tl-date {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            color: var(--text-dim);
+            padding: 0.3rem 0.7rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .tl-body {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .tl-body p + p {
+            margin-top: 0.5rem;
+        }
+
+        .tl-body strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════════
+           CONTACT & FOOTER
+           ═══════════════════════════════════════════════════════════════════════ */
+        .contact-box {
+            position: relative;
+            background: linear-gradient(155deg, rgba(16, 20, 32, 0.9), rgba(9, 9, 14, 0.95));
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .contact-glow {
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 520px;
+            height: 240px;
+            background: radial-gradient(ellipse, rgba(34, 211, 238, 0.14), transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+        }
+
+        .contact-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.95rem 1.45rem;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .contact-card i {
+            color: var(--cyan);
+            font-size: 1.05rem;
+        }
+
+        .contact-card:hover {
+            border-color: rgba(34, 211, 238, 0.4);
+            background: rgba(34, 211, 238, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .copy-hint {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        footer {
+            padding: 3.5rem 0 2.25rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, var(--cyan), var(--indigo));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #060609;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.75rem;
+        }
+
+        .footer-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .footer-desc {
+            color: var(--text-dim);
+            font-size: 0.86rem;
+            line-height: 1.65;
+            max-width: 320px;
+        }
+
+        .footer-heading {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-secondary);
+            margin-bottom: 0.9rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.86rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             transition: color 0.2s;
         }
 
-        .project-link:hover {
-            color: var(--accent-primary);
+        .footer-links a:hover {
+            color: var(--cyan);
         }
 
-        /* Skills Highlights */
-        .skills-grid {
+        .footer-bottom {
+            padding-top: 1.75rem;
+            border-top: 1px solid var(--border);
             display: flex;
+            justify-content: space-between;
             flex-wrap: wrap;
             gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
+            color: var(--text-dim);
+            font-size: 0.8rem;
         }
 
-        .skill-tag {
-            padding: 0.8rem 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            transition: all 0.3s;
-        }
-
-        .skill-tag:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Contact Section */
-        #contact {
-            padding: 5rem 0;
-            background: linear-gradient(to bottom, transparent, rgba(30, 41, 59, 0.4));
-        }
-
-        .contact-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .contact-info {
-            display: flex;
-            gap: 3rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            text-decoration: none;
-            padding: 1rem 2rem;
-            background: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--accent-primary);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--accent-primary);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid var(--surface-border);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Scroll to Top Button */
-        #scrollTopBtn {
+        /* Scroll Top */
+        #scrollTop {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: 1.75rem;
+            right: 1.75rem;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            background: var(--gradient-text);
-            color: white;
-            border: none;
-            outline: none;
-            cursor: pointer;
+            background: rgba(15, 15, 22, 0.85);
+            border: 1px solid var(--border);
+            color: var(--text);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            cursor: pointer;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
+            transform: translateY(10px);
+            transition: all 0.25s ease;
+            backdrop-filter: blur(12px);
             z-index: 999;
         }
 
-        #scrollTopBtn.visible {
+        #scrollTop.visible {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
-        #scrollTopBtn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+        #scrollTop:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            transform: translateY(-2px);
         }
 
-        /* Navigation Bar */
-        #navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--surface-border);
-            z-index: 1000;
-            transition: transform 0.3s ease;
-            transform: translateY(-100%);
-            /* Hidden by default at very top */
-        }
-
-        #navbar.scrolled {
-            transform: translateY(0);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-brand {
-            font-family: var(--font-heading);
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            text-decoration: none;
-            background: var(--gradient-text);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--accent-primary);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--gradient-text);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        /* Responsive Adjustments */
-        @media screen and (max-width: 992px) {
-            .about-grid {
+        /* ═══════════════════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .featured-split {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+            }
+            .bento-span-4,
+            .bento-span-2 {
+                grid-column: span 3;
             }
         }
 
-        @media screen and (max-width: 768px) {
-            .timeline::after {
-                left: 31px;
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                top: 0.75rem;
             }
-
-            .timeline-item {
+            .nav-brand,
+            .nav-cta {
+                display: none;
+            }
+            .pill-nav {
+                padding: 0.35rem;
+            }
+            .nav-link {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.72rem;
+            }
+            .hero {
+                min-height: auto;
+                padding: 5.75rem 1.25rem 3.5rem;
+            }
+            .shiny-badge {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.85rem;
+                gap: 0.45rem;
+                max-width: 100%;
+            }
+            .hero-actions {
+                gap: 0.65rem;
+            }
+            .shimmer-btn {
                 width: 100%;
-                padding-left: 70px;
-                padding-right: 0;
+                justify-content: center;
             }
-
-            .timeline-item::after {
-                left: 23px;
+            .ghost-btn {
+                flex: 1 1 calc(50% - 0.35rem);
+                justify-content: center;
+                padding: 0.78rem 0.9rem;
+                font-size: 0.84rem;
             }
-
-            .right {
-                left: 0;
+            .hero-metrics {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
-
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .bento-span-4,
+            .bento-span-3,
+            .bento-span-2,
+            .bento-span-6 {
+                grid-column: span 1;
+            }
+            .region-grid {
+                grid-template-columns: 1fr;
+            }
             .projects-grid {
                 grid-template-columns: 1fr;
             }
-
-            /* Fix Mobile Navbar */
-            .nav-container {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
+            .timeline {
+                padding-left: 1.75rem;
             }
-
-            .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            .tl-item {
+                padding: 1.35rem;
             }
-
-            .nav-link {
-                font-size: 0.9rem;
+            .tl-item::before {
+                left: -1.75rem;
             }
-
-            /* Fix Project Cards Tech Stack */
-            .tech-item {
-                flex-direction: column;
-                gap: 0.2rem;
-                margin-bottom: 0.8rem;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
+            section {
+                padding: 4.5rem 0;
+            }
+        }
 
-            .tech-label {
-                color: var(--accent-primary);
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -880,145 +1637,249 @@
 
 <body>
 
-    <!-- Sticky Navigation Bar -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-brand">DNC.</a>
+    <!-- ═══ FLOATING PILL NAV (React Bits PillNav) ═══ -->
+    <div class="nav-wrapper">
+        <nav class="pill-nav" id="navbar" aria-label="Primary Navigation">
+            <a href="#home" class="nav-brand">
+                <span class="nav-brand-dot"></span>
+                DNC.
+            </a>
             <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-        </div>
-    </nav>
+            <a href="https://github.com/dangochinh" target="_blank" rel="noopener" class="nav-cta">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+        </nav>
+    </div>
 
-    <!-- Hero Section -->
+    <!-- ═══ HERO SECTION ═══ -->
     <header class="hero" id="home">
-        <div class="container">
-            <h1 class="gradient-text"
-                style="font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800;">
-                Đặng Ngọc Chính</h1>
-            <h2
-                style="font-size: clamp(1.2rem, 4vw, 1.8rem); margin-top: -0.5rem; margin-bottom: 2rem; color: var(--text-secondary); font-weight: 500;">
-                IT Project Manager | Business Analyst | Scrum Master | Agile Practitioner
-            </h2>
-            <p
-                style="color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin: 0 auto 2.5rem; line-height: 1.6;">
-                9+ years of experience leading agile teams, managing complex projects, and driving business
-                transformation in logistics, e-commerce, and enterprise systems.
-            </p>
+        <div class="hero-backdrop" aria-hidden="true">
+            <div class="aurora-layer"></div>
+            <div class="animated-grid"></div>
+            <div class="grid-squares" id="gridSquares"></div>
+            <canvas id="particleCanvas"></canvas>
+        </div>
 
-            <div class="badges" style="margin-bottom: 3rem;">
-                <a href="https://www.credly.com/badges/fff17ef0-4c6d-49f9-8086-2ee1f59eafa8" target="_blank"
-                    class="cert-badge" style="text-decoration: none;"><i class="fa-solid fa-trophy"></i> PMP®
-                    Certified</a>
-                <a href="https://www.credly.com/badges/65688aae-1b06-4fd3-9b90-a667320beaaf" target="_blank"
-                    class="cert-badge" style="text-decoration: none;"><i class="fa-solid fa-bullseye"></i> PMI-ACP®</a>
-                <a href="#experience" class="cert-badge" style="text-decoration: none;"><i class="fa-solid fa-star"></i>
-                    9+ Years Experience</a>
+        <div class="hero-inner">
+            <div class="shiny-badge">
+                <span class="status-ping"></span>
+                <span class="shiny-text">PMP® &amp; PMI-ACP® Certified · Open to Strategic Roles</span>
             </div>
 
-            <div class="contact-links">
-                <a href="#projects" class="contact-btn primary">
-                    View My Work <i class="fa-solid fa-arrow-down"></i>
+            <h1 class="hero-title">
+                <span class="blur-word" style="animation-delay: 0.05s;">Đặng</span>
+                <span class="blur-word" style="animation-delay: 0.13s;">Ngọc</span>
+                <span class="blur-word accent" style="animation-delay: 0.21s;">Chính</span>
+            </h1>
+
+            <p class="hero-role">IT PROJECT MANAGER &middot; BUSINESS ANALYST &middot; AI SYSTEMS BUILDER</p>
+
+            <p class="hero-subtitle">
+                <strong>9+ years</strong> leading agile enterprise delivery across Logistics, E-Commerce, and Insurance
+                — paired with hands-on engineering across <strong>7 live full-stack &amp; AI applications</strong>.
+            </p>
+
+            <div class="hero-certs">
+                <a href="https://www.credly.com/badges/fff17ef0-4c6d-49f9-8086-2ee1f59eafa8" target="_blank"
+                    rel="noopener" class="cert-pill">
+                    <i class="fa-solid fa-award"></i> PMP® Certified (PMI)
                 </a>
-                <!-- <a href="https://github.com/dangochinh" target="_blank" class="contact-btn secondary">
-                    <i class="fa-brands fa-github"></i> GitHub
-                </a> -->
-                <a href="#contact" class="contact-btn secondary" style="background: rgba(255, 255, 255, 0.05);">
-                    <i class="fa-solid fa-envelope"></i> Get In Touch
+                <a href="https://www.credly.com/badges/65688aae-1b06-4fd3-9b90-a667320beaaf" target="_blank"
+                    rel="noopener" class="cert-pill">
+                    <i class="fa-solid fa-bolt"></i> PMI-ACP® Agile Practitioner
                 </a>
+                <span class="cert-pill">
+                    <i class="fa-solid fa-layer-group"></i> ASEAN · Japan · Vietnam
+                </span>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#projects" class="shimmer-btn">
+                    Explore Projects <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <a href="https://github.com/dangochinh" target="_blank" rel="noopener" class="ghost-btn">
+                    <i class="fa-brands fa-github"></i> GitHub Profile
+                </a>
+                <a href="#contact" class="ghost-btn">
+                    <i class="fa-solid fa-paper-plane"></i> Get In Touch
+                </a>
+            </div>
+
+            <div class="hero-metrics">
+                <div class="metric-cell">
+                    <div class="metric-val"><span class="count-up" data-target="9" data-suffix="+">0</span></div>
+                    <div class="metric-label">Years Experience</div>
+                </div>
+                <div class="metric-cell">
+                    <div class="metric-val"><span class="count-up" data-target="20" data-suffix="+">0</span></div>
+                    <div class="metric-label">Enterprise Systems</div>
+                </div>
+                <div class="metric-cell">
+                    <div class="metric-val"><span class="count-up" data-target="7" data-suffix="">0</span></div>
+                    <div class="metric-label">Shipped Projects</div>
+                </div>
+                <div class="metric-cell">
+                    <div class="metric-val"><span class="count-up" data-target="8" data-suffix="">0</span></div>
+                    <div class="metric-label">ASEAN Countries</div>
+                </div>
             </div>
         </div>
     </header>
 
-    <style>
-        @keyframes bounce {
+    <!-- ═══ MARQUEE TICKER (Magic UI Marquee) ═══ -->
+    <div class="marquee-section" aria-label="Core Stack and Domains">
+        <div class="marquee-mask">
+            <div class="marquee-track">
+                <span class="marquee-chip"><i class="fa-brands fa-react"></i> Next.js 16 &amp; React 19</span>
+                <span class="marquee-chip"><i class="fa-solid fa-code"></i> TypeScript</span>
+                <span class="marquee-chip"><i class="fa-brands fa-python"></i> Python &amp; FastAPI</span>
+                <span class="marquee-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI &amp; Ollama</span>
+                <span class="marquee-chip"><i class="fa-solid fa-film"></i> ComfyUI &amp; FFmpeg</span>
+                <span class="marquee-chip"><i class="fa-solid fa-cloud"></i> Cloudflare Workers</span>
+                <span class="marquee-chip"><i class="fa-solid fa-database"></i> Supabase &amp; Firestore</span>
+                <span class="marquee-chip"><i class="fa-solid fa-table"></i> Google Sheets API</span>
+                <span class="marquee-chip"><i class="fa-solid fa-vial"></i> Playwright E2E</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="marquee-chip"><i class="fa-brands fa-react"></i> Next.js 16 &amp; React 19</span>
+                <span class="marquee-chip"><i class="fa-solid fa-code"></i> TypeScript</span>
+                <span class="marquee-chip"><i class="fa-brands fa-python"></i> Python &amp; FastAPI</span>
+                <span class="marquee-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> Gemini AI &amp; Ollama</span>
+                <span class="marquee-chip"><i class="fa-solid fa-film"></i> ComfyUI &amp; FFmpeg</span>
+                <span class="marquee-chip"><i class="fa-solid fa-cloud"></i> Cloudflare Workers</span>
+                <span class="marquee-chip"><i class="fa-solid fa-database"></i> Supabase &amp; Firestore</span>
+                <span class="marquee-chip"><i class="fa-solid fa-table"></i> Google Sheets API</span>
+                <span class="marquee-chip"><i class="fa-solid fa-vial"></i> Playwright E2E</span>
+            </div>
+            <div class="marquee-track reverse">
+                <span class="marquee-chip domain"><i class="fa-solid fa-trophy"></i> PMP® Project Management</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-arrows-spin"></i> PMI-ACP® Scrum Master</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-truck-fast"></i> Logistics &amp; SCM / WMS</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-cart-shopping"></i> E-Commerce &amp; B2B APIs</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-shield-halved"></i> Insurance Mega Apps</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-diagram-project"></i> Enterprise ERP</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-robot"></i> AI Workflow Automation</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-chart-line"></i> Data &amp; Analytics</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="marquee-chip domain"><i class="fa-solid fa-trophy"></i> PMP® Project Management</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-arrows-spin"></i> PMI-ACP® Scrum Master</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-truck-fast"></i> Logistics &amp; SCM / WMS</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-cart-shopping"></i> E-Commerce &amp; B2B APIs</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-shield-halved"></i> Insurance Mega Apps</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-diagram-project"></i> Enterprise ERP</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-robot"></i> AI Workflow Automation</span>
+                <span class="marquee-chip domain"><i class="fa-solid fa-chart-line"></i> Data &amp; Analytics</span>
+            </div>
+        </div>
+    </div>
 
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-10px);
-            }
-
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-    </style>
-
-    <!-- About Section -->
+    <!-- ═══ ABOUT — Magic UI BentoGrid + React Bits SpotlightCard ═══ -->
     <section id="about">
         <div class="container">
-            <div class="section-header">
-                <h2 class="gradient-text" style="font-size: 2.5rem;">About & Core Competencies</h2>
-                <p>9+ years of experience leading agile teams and managing complex projects from planning to delivery.
-                </p>
+            <div class="section-header blur-fade">
+                <div class="section-eyebrow">About &amp; Competencies</div>
+                <h2 class="section-title">Leadership Meets Execution</h2>
+                <p class="section-desc">Bridging enterprise project governance with modern full-stack and AI product
+                    engineering.</p>
             </div>
 
-            <div class="about-grid">
-                <!-- Left Column: Bio & Skills -->
-                <div class="slide-up">
-                    <p
-                        style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2.5rem;">
-                        Experienced Project Manager and Scrum Master with a strong track record in the logistics and
-                        supply chain industry.
-                        Proven ability in leading agile teams, implementing Scrum frameworks, and managing complex
-                        projects from planning to delivery.
-                        Skilled in stakeholder communication, problem-solving, and optimizing timeline, cost, and
-                        resource efficiency to meet business goals.
-                    </p>
+            <div class="bento-grid">
+                <!-- Executive Bio -->
+                <div class="spotlight-card bento-span-4 blur-fade">
+                    <div class="bento-icon"><i class="fa-solid fa-compass"></i></div>
+                    <h3 class="bento-title">Executive Profile</h3>
+                    <p class="bento-text">Experienced IT Project Manager, Business Analyst Lead, and Scrum Master with
+                        9+ years delivering complex enterprise systems across supply chain, warehouse management (WMS),
+                        e-commerce, and insurance. Beyond governance and stakeholder alignment, I actively architect
+                        and ship production AI pipelines, PWAs, and real-time web apps end-to-end.</p>
+                </div>
 
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary);">Core Skills</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                        <div class="skill-item"><i class="fa-solid fa-circle-check"></i> Project Management</div>
-                        <div class="skill-item"><i class="fa-solid fa-circle-check"></i> Scrum/Agile</div>
-                        <div class="skill-item"><i class="fa-solid fa-circle-check"></i> Requirements Analysis</div>
-                        <div class="skill-item"><i class="fa-solid fa-circle-check"></i> Technical Implementation</div>
-                        <div class="skill-item"><i class="fa-solid fa-circle-check"></i> Stakeholder Communication</div>
-                        <div class="skill-item"><i class="fa-solid fa-circle-check"></i> Process Optimization</div>
+                <!-- Delivery Focus -->
+                <div class="spotlight-card bento-span-2 blur-fade">
+                    <div class="bento-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3 class="bento-title">Delivery Edge</h3>
+                    <p class="bento-text">Hands-on fluency in code, APIs, and AI tooling enables tighter technical
+                        scoping, faster risk mitigation, and zero translation gap between business and engineering
+                        teams.</p>
+                </div>
+
+                <!-- Core Leadership Skills -->
+                <div class="spotlight-card bento-span-3 blur-fade">
+                    <div class="bento-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                    <h3 class="bento-title">Management &amp; BA Capabilities</h3>
+                    <div class="pill-list">
+                        <span class="ui-pill">Project Delivery &amp; Governance</span>
+                        <span class="ui-pill">Scrum &amp; Agile Scaling</span>
+                        <span class="ui-pill">Requirements Engineering</span>
+                        <span class="ui-pill">Technical Architecture</span>
+                        <span class="ui-pill">Stakeholder Alignment</span>
+                        <span class="ui-pill">Process Optimization</span>
                     </div>
                 </div>
 
-                <!-- Right Column: Domains & Clients -->
-                <div class="slide-up" style="transition-delay: 0.1s;">
-                    <!-- Industry Domains -->
-                    <div class="domain-card">
-                        <h3 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--text-primary);">Industry
-                            Domains</h3>
-                        <div class="domain-item">
-                            <div class="domain-dot"></div>
-                            <span style="color: var(--text-secondary);">Logistics & Supply Chain</span>
+                <!-- Markets & Industry Domains -->
+                <div class="spotlight-card bento-span-3 blur-fade">
+                    <div class="bento-icon"><i class="fa-solid fa-earth-asia"></i></div>
+                    <h3 class="bento-title">Industry Domains &amp; Markets</h3>
+                    <div class="pill-list" style="margin-top: 0.75rem;">
+                        <span class="ui-pill">Logistics &amp; Supply Chain</span>
+                        <span class="ui-pill">E-Commerce</span>
+                        <span class="ui-pill">Insurance</span>
+                        <span class="ui-pill">Enterprise ERP</span>
+                    </div>
+                    <div class="region-grid">
+                        <div class="region-box">
+                            <div class="region-name"><span class="dot"></span> Japan</div>
+                            <div class="region-sub">SCM / Fashion WMS</div>
                         </div>
-                        <div class="domain-item">
-                            <div class="domain-dot"></div>
-                            <span style="color: var(--text-secondary);">E-commerce</span>
+                        <div class="region-box">
+                            <div class="region-name"><span class="dot"></span> ASEAN</div>
+                            <div class="region-sub">8-Country CCS Rollout</div>
                         </div>
-                        <div class="domain-item">
-                            <div class="domain-dot"></div>
-                            <span style="color: var(--text-secondary);">Insurance</span>
-                        </div>
-                        <div class="domain-item">
-                            <div class="domain-dot"></div>
-                            <span style="color: var(--text-secondary);">ERP Systems</span>
+                        <div class="region-box">
+                            <div class="region-name"><span class="dot"></span> Vietnam</div>
+                            <div class="region-sub">Logistics &amp; B2B APIs</div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Served Clients -->
-                    <div class="domain-card" style="padding: 1.5rem;">
-                        <h4 style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-primary); opacity: 0.8;">
-                            Served Clients</h4>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-                            <span class="client-tag">ASEAN</span>
-                            <span class="client-tag">Japan Market</span>
-                            <span class="client-tag">Vietnam</span>
+                <!-- Verified Credentials Strip -->
+                <div class="spotlight-card bento-span-6 blur-fade">
+                    <div class="creds-bar">
+                        <div>
+                            <h3 class="bento-title" style="margin-bottom: 0.25rem;">Verified Credentials</h3>
+                            <p class="bento-text" style="font-size: 0.85rem;">Internationally accredited PMI
+                                certifications and active open-source engineering profile.</p>
+                        </div>
+                        <div class="creds-items">
+                            <a href="https://www.credly.com/badges/fff17ef0-4c6d-49f9-8086-2ee1f59eafa8" target="_blank"
+                                rel="noopener" class="cred-card">
+                                <div class="cred-badge-icon"><i class="fa-solid fa-trophy"></i></div>
+                                <div>
+                                    <div class="cred-name">PMP® Certified</div>
+                                    <div class="cred-issuer">Project Management Institute</div>
+                                </div>
+                            </a>
+                            <a href="https://www.credly.com/badges/65688aae-1b06-4fd3-9b90-a667320beaaf" target="_blank"
+                                rel="noopener" class="cred-card">
+                                <div class="cred-badge-icon"><i class="fa-solid fa-bolt"></i></div>
+                                <div>
+                                    <div class="cred-name">PMI-ACP®</div>
+                                    <div class="cred-issuer">Agile Certified Practitioner</div>
+                                </div>
+                            </a>
+                            <a href="https://github.com/dangochinh" target="_blank" rel="noopener" class="cred-card">
+                                <div class="cred-badge-icon"><i class="fa-brands fa-github"></i></div>
+                                <div>
+                                    <div class="cred-name">@dangochinh</div>
+                                    <div class="cred-issuer">9 Public Repositories</div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1026,488 +1887,686 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" style="position: relative; overflow: hidden;">
-        <!-- Background accent -->
-        <div style="position: absolute; inset: 0; z-index: -10; overflow: hidden; pointer-events: none;">
-            <div
-                style="position: absolute; bottom: -50px; right: -50px; width: 300px; height: 300px; background: var(--accent-primary); opacity: 0.05; filter: blur(100px); border-radius: 50%;">
-            </div>
-        </div>
-
+    <!-- ═══ PROJECTS — Magic UI BorderBeam + React Bits TiltedCard ═══ -->
+    <div class="section-divider"></div>
+    <section id="projects">
         <div class="container">
-            <div class="section-header" style="text-align: center; margin: 0 auto 4rem; max-width: 800px;">
-                <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 1rem;">Featured Projects</h2>
-                <p style="margin: 0 auto; color: var(--text-secondary); font-size: 1.1rem;">Recent applications I've
-                    developed, showcasing various technologies and architectures.</p>
+            <div class="section-header center blur-fade">
+                <div class="section-eyebrow" style="justify-content: center;">GitHub Showcase</div>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-desc">Ordered by system architecture &amp; technical complexity — spanning AI
+                    production pipelines, autonomous daemons, PWAs, and real-time multiplayer apps.</p>
+            </div>
+
+            <div class="filter-bar blur-fade" role="tablist" aria-label="Filter projects by category">
+                <button class="filter-btn active" data-filter="all">All Projects (7)</button>
+                <button class="filter-btn" data-filter="ai">AI &amp; Automation (4)</button>
+                <button class="filter-btn" data-filter="web">Full-Stack &amp; Data (5)</button>
+                <button class="filter-btn" data-filter="realtime">Real-Time &amp; Interactive (2)</button>
             </div>
 
             <div class="projects-grid">
-                <!-- Project 1: Babie Tracker (FEATURED) -->
-                <div class="project-card slide-up" style="border-color: rgba(6, 182, 212, 0.3);">
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                            <h3 class="project-title" style="margin-bottom: 0;">Babie Tracker</h3>
-                            <span style="background: var(--gradient-text); color: white; font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 9999px; font-weight: 700; letter-spacing: 0.05em;">FEATURED</span>
-                        </div>
-                        <p style="color: var(--accent-primary); font-size: 0.85rem; font-weight: 600; opacity: 0.8;">Full-Stack PWA · Mobile-First</p>
-                    </div>
-                    <p class="project-desc" style="margin-bottom: 1.5rem; font-size: 0.95rem;">A comprehensive child growth tracking application with WHO growth chart visualization, vaccination scheduling, PWA push notifications, and Telegram bot integration for real-time alerts.</p>
-                    <div style="margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 700;">Tech Stack</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Next.js</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">TypeScript</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Google Sheets API</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Telegram Bot</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">PWA</span>
-                        </div>
-                    </div>
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 700;">Architecture</p>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Server-side rendered Next.js app with Google Sheets as backend database, cron-based automation, Telegram bot webhook integration, and offline-capable PWA with push notifications.</p>
-                    </div>
-                    <div class="project-links" style="padding-top: 1.5rem; border-top: 1px solid var(--surface-border); display: flex; gap: 1rem;">
-                        <a href="https://pethui.vercel.app/" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
-                        </a>
-                        <a href="https://github.com/dangochinh/pethuitracker" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-brands fa-github"></i> Code
-                        </a>
-                    </div>
-                </div>
 
-                <!-- Project 2: Loto Online -->
-                <div class="project-card slide-up" style="transition-delay: 0.1s;">
-                    <div style="margin-bottom: 1.5rem;">
-                        <h3 class="project-title" style="margin-bottom: 0.5rem;">Loto Online</h3>
-                        <p style="color: var(--accent-primary); font-size: 0.85rem; font-weight: 600; opacity: 0.8;">Real-time Multiplayer Web App</p>
-                    </div>
-                    <p class="project-desc" style="margin-bottom: 1.5rem; font-size: 0.95rem;">An interactive multiplayer online bingo game with real-time room management, digital tickets, and live draw synchronization powered by WebSockets.</p>
-                    <div style="margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 700;">Tech Stack</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">React</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">TypeScript</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Node.js</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Supabase</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Socket.io</span>
-                        </div>
-                    </div>
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 700;">Architecture</p>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Client-Server architecture with real-time WebSocket synchronization for instantaneous game state updates and Supabase for persistent data.</p>
-                    </div>
-                    <div class="project-links" style="padding-top: 1.5rem; border-top: 1px solid var(--surface-border); display: flex; gap: 1rem;">
-                        <a href="https://loto-online81.surge.sh/" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
-                        </a>
-                        <a href="https://github.com/dangochinh/loto-online" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-brands fa-github"></i> Code
-                        </a>
-                    </div>
-                </div>
+                <!-- 1. Babie Tracker — FEATURED FULL-WIDTH CARD WITH MAGIC UI BORDER BEAM -->
+                <article class="project-card featured-span blur-fade" data-category="ai web">
+                    <div class="project-card-inner border-beam-card">
+                        <div class="border-beam-ring" aria-hidden="true"></div>
+                        <div class="featured-split">
+                            <div style="display: flex; flex-direction: column;">
+                                <div class="project-top">
+                                    <span class="project-type">Full-Stack AI &amp; Mobile-First PWA</span>
+                                    <span class="project-badge badge-featured">★ Featured</span>
+                                </div>
+                                <h3 class="project-title">Babie Tracker</h3>
+                                <p class="project-desc">A mobile-first child growth and health tracking platform featuring
+                                    WHO growth curve analytics, vaccination milestone tracking, QR code family sharing,
+                                    Gemini AI-assisted insights, and PWA web-push notifications.</p>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Next.js 16</span>
+                                    <span class="tech-tag">React 19</span>
+                                    <span class="tech-tag">Gemini AI</span>
+                                    <span class="tech-tag">Google Sheets API</span>
+                                    <span class="tech-tag">Firestore</span>
+                                    <span class="tech-tag">Recharts</span>
+                                    <span class="tech-tag">Web Push PWA</span>
+                                    <span class="tech-tag">Playwright</span>
+                                </div>
+                                <div class="project-actions" style="border-top: none; padding-top: 0.4rem;">
+                                    <a href="https://pethui.vercel.app/" target="_blank" rel="noopener"
+                                        class="proj-btn live">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Live App
+                                    </a>
+                                    <a href="https://github.com/dangochinh/pethuitracker" target="_blank" rel="noopener"
+                                        class="proj-btn repo">
+                                        <i class="fa-brands fa-github"></i> View Source
+                                    </a>
+                                </div>
+                            </div>
 
-                <!-- Project 3: Vietlott Dashboard -->
-                <div class="project-card slide-up" style="transition-delay: 0.2s;">
-                    <div style="margin-bottom: 1.5rem;">
-                        <h3 class="project-title" style="margin-bottom: 0.5rem;">Vietlott Dashboard</h3>
-                        <p style="color: var(--accent-primary); font-size: 0.85rem; font-weight: 600; opacity: 0.8;">Automated Data Pipeline · Web App</p>
-                    </div>
-                    <p class="project-desc" style="margin-bottom: 1.5rem; font-size: 0.95rem;">A data visualization dashboard with automated Python scraper via GitHub Actions, tracking historical lottery results with analytical insights and statistical trends.</p>
-                    <div style="margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 700;">Tech Stack</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Next.js</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Python</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Google Sheets</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">GitHub Actions</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Chart.js</span>
+                            <div class="featured-blueprint">
+                                <div class="blueprint-header">
+                                    <span>SYSTEM BLUEPRINT</span>
+                                    <div class="blueprint-dots"><span></span><span></span><span></span></div>
+                                </div>
+                                <div class="blueprint-rows">
+                                    <div class="blueprint-row">
+                                        <span class="blueprint-key">FRAMEWORK</span>
+                                        <span class="blueprint-val">Next.js 16 App Router + Tailwind v4</span>
+                                    </div>
+                                    <div class="blueprint-row">
+                                        <span class="blueprint-key">DATA LAYER</span>
+                                        <span class="blueprint-val">Google Sheets API + Cloud Firestore</span>
+                                    </div>
+                                    <div class="blueprint-row">
+                                        <span class="blueprint-key">INTELLIGENCE</span>
+                                        <span class="blueprint-val">@google/genai + Recharts Analytics</span>
+                                    </div>
+                                    <div class="blueprint-row">
+                                        <span class="blueprint-key">DELIVERY</span>
+                                        <span class="blueprint-val">Web Push + QR Profiles + E2E Tested</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 700;">Architecture</p>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Automated CI/CD pipeline with Python scraper on GitHub Actions cron, Google Sheets as data layer, and Next.js frontend for interactive visualization.</p>
-                    </div>
-                    <div class="project-links" style="padding-top: 1.5rem; border-top: 1px solid var(--surface-border); display: flex; gap: 1rem;">
-                        <a href="https://vietlott-dashboard.vercel.app/" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
-                        </a>
-                        <a href="https://github.com/dangochinh/vietlotdashboard" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-brands fa-github"></i> Code
-                        </a>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Project 4: GameTime -->
-                <div class="project-card slide-up" style="transition-delay: 0.3s;">
-                    <div style="margin-bottom: 1.5rem;">
-                        <h3 class="project-title" style="margin-bottom: 0.5rem;">GameTime</h3>
-                        <p style="color: var(--accent-primary); font-size: 0.85rem; font-weight: 600; opacity: 0.8;">AI-Powered Game · Interactive</p>
-                    </div>
-                    <p class="project-desc" style="margin-bottom: 1.5rem; font-size: 0.95rem;">An AI-powered interactive game application leveraging Google Gemini API for intelligent gameplay mechanics and dynamic content generation.</p>
-                    <div style="margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 700;">Tech Stack</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">TypeScript</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Gemini API</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Vite</span>
+                <!-- 2. PePeApp — NEW -->
+                <article class="project-card blur-fade" data-category="ai web">
+                    <div class="project-card-inner">
+                        <div class="project-top">
+                            <span class="project-type">Local AI Video Factory</span>
+                            <span class="project-badge badge-new">New</span>
+                        </div>
+                        <h3 class="project-title">PePeApp</h3>
+                        <p class="project-desc">End-to-end automated AI video factory that transforms news &amp; ideas
+                            into 60-second vertical videos — orchestrating search research, LLM scripting, ComfyUI clip
+                            generation, TTS voiceover, and FFmpeg assembly.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python 3.12</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Next.js 16</span>
+                            <span class="tech-tag">Ollama (Qwen 2.5)</span>
+                            <span class="tech-tag">ComfyUI</span>
+                            <span class="tech-tag">FFmpeg</span>
+                            <span class="tech-tag">Socket.io</span>
+                        </div>
+                        <div class="project-arch">
+                            <div class="arch-label">Pipeline</div>
+                            <div class="arch-text">Topic &rarr; DDGS Research &rarr; Scene Script &rarr; ComfyUI Clips
+                                &rarr; TTS &rarr; FFmpeg 9:16 Merge with live WebSocket UI progress.</div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/dangochinh/PePeApp" target="_blank" rel="noopener"
+                                class="proj-btn repo">
+                                <i class="fa-brands fa-github"></i> Source Code
+                            </a>
                         </div>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 700;">Architecture</p>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Client-side application with Gemini AI integration for real-time content generation and interactive game logic.</p>
-                    </div>
-                    <div class="project-links" style="padding-top: 1.5rem; border-top: 1px solid var(--surface-border); display: flex; gap: 1rem;">
-                        <a href="https://gametime-wine.vercel.app/" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
-                        </a>
-                        <a href="https://github.com/dangochinh/gametime" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-brands fa-github"></i> Code
-                        </a>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Project 5: BrandScout -->
-                <div class="project-card slide-up" style="transition-delay: 0.4s;">
-                    <div style="margin-bottom: 1.5rem;">
-                        <h3 class="project-title" style="margin-bottom: 0.5rem;">BrandScout</h3>
-                        <p style="color: var(--accent-primary); font-size: 0.85rem; font-weight: 600; opacity: 0.8;">Web Application</p>
-                    </div>
-                    <p class="project-desc" style="margin-bottom: 1.5rem; font-size: 0.95rem;">A brand discovery and analysis web application built with Next.js, enabling users to explore and evaluate brand identities and market positioning.</p>
-                    <div style="margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.75rem; font-weight: 700;">Tech Stack</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">Next.js</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">React</span>
-                            <span class="client-tag" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; border-color: rgba(6, 182, 212, 0.3); color: var(--accent-primary);">JavaScript</span>
+                <!-- 3. AIEarnMoney (Pepe Nuôi Thân) — NEW -->
+                <article class="project-card blur-fade" data-category="ai web">
+                    <div class="project-card-inner">
+                        <div class="project-top">
+                            <span class="project-type">Autonomous AI Daemon</span>
+                            <span class="project-badge badge-new">New</span>
+                        </div>
+                        <h3 class="project-title">Pepe Nuôi Thân (AIEarnMoney)</h3>
+                        <p class="project-desc">Autonomous AI digital product &amp; affiliate automation platform
+                            running a 24/7 headless daemon — publishing 1,900+ SEO/affiliate scripts, operating
+                            @mucmuc4bot on Telegram, and serving browser VietQR &amp; SEO tools.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Cloudflare Workers</span>
+                            <span class="tech-tag">Cloudflare Pages</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Telegram Bot</span>
+                            <span class="tech-tag">VietQR</span>
+                        </div>
+                        <div class="project-arch">
+                            <div class="arch-label">Architecture</div>
+                            <div class="arch-text">Headless automation daemon with automated Git sync, edge serverless
+                                Cloudflare Workers API, and instant Pages deployment.</div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://ai-earn-money.pages.dev/" target="_blank" rel="noopener"
+                                class="proj-btn live">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
+                            </a>
+                            <a href="https://github.com/dangochinh/AIEarnMoney" target="_blank" rel="noopener"
+                                class="proj-btn repo">
+                                <i class="fa-brands fa-github"></i> Code
+                            </a>
                         </div>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 700;">Architecture</p>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Server-side rendered Next.js application with modular component architecture and responsive design.</p>
+                </article>
+
+                <!-- 4. Loto Online -->
+                <article class="project-card blur-fade" data-category="realtime">
+                    <div class="project-card-inner">
+                        <div class="project-top">
+                            <span class="project-type">Real-Time Multiplayer</span>
+                        </div>
+                        <h3 class="project-title">Loto Online</h3>
+                        <p class="project-desc">Real-time multiplayer Vietnamese Bingo (Lô Tô) game featuring shareable
+                            room codes, interactive digital tickets, Host draw controls, near-win highlights, auto-mark,
+                            and seamless session reconnection.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React 19</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Vite</span>
+                            <span class="tech-tag">Supabase Realtime</span>
+                            <span class="tech-tag">Tailwind CSS</span>
+                        </div>
+                        <div class="project-arch">
+                            <div class="arch-label">Architecture</div>
+                            <div class="arch-text">Event-driven multiplayer state synchronized over Supabase WebSocket
+                                channels with simultaneous Bingo detection.</div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://loto-online81.surge.sh/" target="_blank" rel="noopener"
+                                class="proj-btn live">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
+                            </a>
+                            <a href="https://github.com/dangochinh/loto-online" target="_blank" rel="noopener"
+                                class="proj-btn repo">
+                                <i class="fa-brands fa-github"></i> Code
+                            </a>
+                        </div>
                     </div>
-                    <div class="project-links" style="padding-top: 1.5rem; border-top: 1px solid var(--surface-border); display: flex; gap: 1rem;">
-                        <a href="https://brandscout-plum.vercel.app/" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
-                        </a>
-                        <a href="https://github.com/dangochinh/brandscout" target="_blank" style="flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; background: linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1)); color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(6, 182, 212, 0.2); transition: all 0.3s ease;">
-                            <i class="fa-brands fa-github"></i> Code
-                        </a>
+                </article>
+
+                <!-- 5. Vietlott Dashboard -->
+                <article class="project-card blur-fade" data-category="web">
+                    <div class="project-card-inner">
+                        <div class="project-top">
+                            <span class="project-type">Automated Data Pipeline</span>
+                        </div>
+                        <h3 class="project-title">Vietlott Dashboard</h3>
+                        <p class="project-desc">Automated lottery analytics &amp; Ticket Lab platform powered by a
+                            scheduled Python scraper on GitHub Actions, storing Mega 6/45 &amp; Power 6/55 history in
+                            Google Sheets with statistical insights.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Next.js 16</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Recharts</span>
+                            <span class="tech-tag">SWR</span>
+                            <span class="tech-tag">Google Sheets</span>
+                            <span class="tech-tag">GitHub Actions</span>
+                            <span class="tech-tag">Playwright</span>
+                        </div>
+                        <div class="project-arch">
+                            <div class="arch-label">Architecture</div>
+                            <div class="arch-text">Daily CI/CD Python scraper writing to Google Sheets, paired with an
+                                SWR-cached Next.js dashboard and E2E test suite.</div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://vietlott-dashboard.vercel.app/" target="_blank" rel="noopener"
+                                class="proj-btn live">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
+                            </a>
+                            <a href="https://github.com/dangochinh/vietlotdashboard" target="_blank" rel="noopener"
+                                class="proj-btn repo">
+                                <i class="fa-brands fa-github"></i> Code
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </article>
+
+                <!-- 6. Brand Scout -->
+                <article class="project-card blur-fade" data-category="ai web">
+                    <div class="project-card-inner">
+                        <div class="project-top">
+                            <span class="project-type">AI Market Intelligence</span>
+                        </div>
+                        <h3 class="project-title">Brand Scout</h3>
+                        <p class="project-desc">Bilingual (VI/EN) AI research &amp; pitch system for Shopee and TikTok
+                            Shop brands — estimating monthly sales, identifying hero products, scoring Philippines market
+                            fit, and exporting reports to Excel.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Next.js 16</span>
+                            <span class="tech-tag">React 19</span>
+                            <span class="tech-tag">AI Research</span>
+                            <span class="tech-tag">XLSX Export</span>
+                            <span class="tech-tag">CSS Modules</span>
+                        </div>
+                        <div class="project-arch">
+                            <div class="arch-label">Architecture</div>
+                            <div class="arch-text">Server-rendered Next.js workspace with automated e-commerce brand
+                                evaluation, pitch generation, and XLSX export.</div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://brandscout-plum.vercel.app/" target="_blank" rel="noopener"
+                                class="proj-btn live">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
+                            </a>
+                            <a href="https://github.com/dangochinh/brandscout" target="_blank" rel="noopener"
+                                class="proj-btn repo">
+                                <i class="fa-brands fa-github"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 7. GameTime -->
+                <article class="project-card blur-fade" data-category="realtime">
+                    <div class="project-card-inner">
+                        <div class="project-top">
+                            <span class="project-type">Interactive Party App</span>
+                        </div>
+                        <h3 class="project-title">GameTime (Đoán Bài Hát)</h3>
+                        <p class="project-desc">Interactive Guess-the-Song quiz &amp; karaoke web app with timed YouTube
+                            audio snippets, customizable song playlists, smooth Motion transitions, answer reveals, and
+                            live sing-along mode.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React 19</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Vite 6</span>
+                            <span class="tech-tag">Motion</span>
+                            <span class="tech-tag">Tailwind v4</span>
+                            <span class="tech-tag">YouTube Embed</span>
+                        </div>
+                        <div class="project-arch">
+                            <div class="arch-label">Architecture</div>
+                            <div class="arch-text">Client-side React SPA with persistent playlist state, timestamped
+                                YouTube playback, and Motion physics animations.</div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://gametime-wine.vercel.app/" target="_blank" rel="noopener"
+                                class="proj-btn live">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
+                            </a>
+                            <a href="https://github.com/dangochinh/gametime" target="_blank" rel="noopener"
+                                class="proj-btn repo">
+                                <i class="fa-brands fa-github"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
             </div>
         </div>
     </section>
 
-        <!-- Experience Section -->
+    <!-- ═══ EXPERIENCE TIMELINE ═══ -->
+    <div class="section-divider"></div>
     <section id="experience">
         <div class="container">
-            <div class="section-header">
-                <h2 class="gradient-text">Experience Highlights</h2>
-                <p>A brief timeline of my professional journey in software development and project management.</p>
+            <div class="section-header blur-fade">
+                <div class="section-eyebrow">Career Journey</div>
+                <h2 class="section-title">Experience Highlights</h2>
+                <p class="section-desc">9+ years leading cross-functional teams, B2B integrations, and large-scale
+                    enterprise transformation.</p>
             </div>
 
-            <div class="v-timeline" style="max-width: 800px; margin: 0 auto;">
-                <div class="v-timeline-item slide-up">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 0.5rem;">
+            <div class="timeline">
+                <div class="tl-item current blur-fade">
+                    <div class="tl-head">
                         <div>
-                            <h3 style="font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.25rem;">Project
-                                Manager & Senior Business Analyst</h3>
-                            <p style="color: var(--accent-primary); font-weight: 500;">FPT Software</p>
+                            <h3 class="tl-role">Project Manager &amp; Senior Business Analyst</h3>
+                            <div class="tl-company">FPT Software</div>
                         </div>
-                        <div
-                            style="color: var(--text-secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                            <i class="fa-solid fa-calendar-days"></i> 08/2021 - Present
-                        </div>
+                        <span class="tl-date">08/2021 — Present</span>
                     </div>
-                    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-                        <p style="margin-bottom: 0.5rem;">• <strong>Project Manager/Scrum Master (09/2022 -
-                                Present)</strong>: Managed SCM/WMS (Supply Chain Management/ Warehouse Management
-                            System) for Japan market fashion holdings and akaWMS. Led Scrum events and tracked delivery
-                            timelines.</p>
-                        <p>• <strong>Senior Business Analyst (08/2021 - 08/2022)</strong>: Senior BA for an Insurance
-                            Mega App (Project Mega App), tracking activity and performance policy.</p>
+                    <div class="tl-body">
+                        <p><strong>Project Manager / Scrum Master (09/2022 – Present):</strong> Directed SCM &amp; WMS
+                            delivery for major Japan-market fashion holdings and akaWMS. Facilitated Scrum ceremonies
+                            and governed milestone execution.</p>
+                        <p><strong>Senior Business Analyst (08/2021 – 08/2022):</strong> Led requirements &amp; policy
+                            activity tracking for an enterprise Insurance Mega App.</p>
                     </div>
                 </div>
 
-                <div class="v-timeline-item slide-up" style="transition-delay: 0.1s;">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                <div class="tl-item blur-fade">
+                    <div class="tl-head">
                         <div>
-                            <h3 style="font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.25rem;">Business
-                                Analyst Team Lead</h3>
-                            <p style="color: var(--accent-primary); font-weight: 500;">DSC Logistics</p>
+                            <h3 class="tl-role">Business Analyst Team Lead</h3>
+                            <div class="tl-company">DSC Logistics</div>
                         </div>
-                        <div
-                            style="color: var(--text-secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                            <i class="fa-solid fa-calendar-days"></i> 10/2020 - 09/2021
-                        </div>
+                        <span class="tl-date">10/2020 — 09/2021</span>
                     </div>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-                        Developed logistics systems for clients including NestCo, ThanhBuoi, Tasetco, and GSDP.
-                    </p>
-                </div>
-
-                <div class="v-timeline-item slide-up" style="transition-delay: 0.2s;">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 0.5rem;">
-                        <div>
-                            <h3 style="font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.25rem;">Business
-                                Analyst Leader</h3>
-                            <p style="color: var(--accent-primary); font-weight: 500;">FPT Software</p>
-                        </div>
-                        <div
-                            style="color: var(--text-secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                            <i class="fa-solid fa-calendar-days"></i> 11/2017 - 10/2020
-                        </div>
-                    </div>
-                    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-                        <p style="margin-bottom: 0.5rem;">• <strong>CCS of U ASEAN</strong>: Requirements gathering
-                            across 8 ASEAN countries, verification of new functions.</p>
-                        <p>• <strong>MEMs & CBP eMobiz</strong>: Produced specifications and verified deployment
-                            packages for robust backend support.</p>
+                    <div class="tl-body">
+                        <p>Led BA team designing and delivering logistics management platforms for enterprise clients
+                            including NestCo, ThanhBuoi, Tasetco, and GSDP.</p>
                     </div>
                 </div>
 
-                <div class="v-timeline-item slide-up" style="transition-delay: 0.3s;">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                <div class="tl-item blur-fade">
+                    <div class="tl-head">
                         <div>
-                            <h3 style="font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.25rem;">Business
-                                Analyst</h3>
-                            <p style="color: var(--accent-primary); font-weight: 500;">IG LOGISTICS</p>
+                            <h3 class="tl-role">Business Analyst Leader</h3>
+                            <div class="tl-company">FPT Software</div>
                         </div>
-                        <div
-                            style="color: var(--text-secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                            <i class="fa-solid fa-calendar-days"></i> 08/2017 - 11/2017
-                        </div>
+                        <span class="tl-date">11/2017 — 10/2020</span>
                     </div>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-                        Planned new features and designed wireframes for CRM and operations systems.
-                    </p>
+                    <div class="tl-body">
+                        <p><strong>CCS of U ASEAN:</strong> Conducted multi-country requirements gathering across 8 ASEAN
+                            markets and led functional verification.</p>
+                        <p><strong>MEMs &amp; CBP eMobiz:</strong> Authored technical specifications and verified
+                            production deployment packages for backend platforms.</p>
+                    </div>
                 </div>
 
-                <div class="v-timeline-item slide-up" style="transition-delay: 0.4s;">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                <div class="tl-item blur-fade">
+                    <div class="tl-head">
                         <div>
-                            <h3 style="font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.25rem;">Product
-                                Owner & Production Assistant</h3>
-                            <p style="color: var(--accent-primary); font-weight: 500;">Giaohangnhanh.vn</p>
+                            <h3 class="tl-role">Business Analyst</h3>
+                            <div class="tl-company">IG Logistics</div>
                         </div>
-                        <div
-                            style="color: var(--text-secondary); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
-                            <i class="fa-solid fa-calendar-days"></i> 02/2016 - 09/2017
-                        </div>
+                        <span class="tl-date">08/2017 — 11/2017</span>
                     </div>
-                    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-                        <p style="margin-bottom: 0.5rem;">• <strong>Product Owner</strong>: Rolled out API v3 for B2B.
-                            Managed integrations for Shopee, Lazada, Tiki, Sendo.</p>
-                        <p>• <strong>Production Assistant</strong>: Supported API integration and improved
-                            customer-facing features.</p>
+                    <div class="tl-body">
+                        <p>Scoped new product capabilities and designed functional wireframes for CRM and core
+                            logistics operations systems.</p>
+                    </div>
+                </div>
+
+                <div class="tl-item blur-fade">
+                    <div class="tl-head">
+                        <div>
+                            <h3 class="tl-role">Product Owner &amp; Production Assistant</h3>
+                            <div class="tl-company">Giaohangnhanh.vn (GHN)</div>
+                        </div>
+                        <span class="tl-date">02/2016 — 09/2017</span>
+                    </div>
+                    <div class="tl-body">
+                        <p><strong>Product Owner:</strong> Launched B2B API v3 and managed e-commerce integrations with
+                            Shopee, Lazada, Tiki, and Sendo.</p>
+                        <p><strong>Production Assistant:</strong> Supported partner API onboarding and customer-facing
+                            portal enhancements.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- ═══ CONTACT SECTION ═══ -->
+    <div class="section-divider"></div>
     <section id="contact">
         <div class="container">
-            <div class="contact-content">
-                <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 1rem;">Get In Touch</h2>
-                <p style="color: var(--text-secondary); max-width: 600px; font-size: 1.1rem;">
-                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your
-                    vision. Feel free to reach out!
-                </p>
+            <div class="contact-box blur-fade">
+                <div class="contact-glow" aria-hidden="true"></div>
+                <div class="section-eyebrow" style="justify-content: center;">Let's Connect</div>
+                <h2 class="section-title">Open to Impactful Work</h2>
+                <p class="section-desc" style="margin: 0 auto;">Whether you're looking for an experienced IT Project
+                    Manager, Agile Scrum Lead, or AI Product Builder — feel free to reach out.</p>
 
-                <div class="contact-info">
-                    <a href="mailto:dangochinh@gmail.com" class="contact-item">
-                        <i class="fa-solid fa-envelope contact-icon"></i>
+                <div class="contact-cards">
+                    <button type="button" class="contact-card" id="copyEmailBtn" title="Click to copy email">
+                        <i class="fa-solid fa-envelope"></i>
                         <span>dangochinh@gmail.com</span>
+                        <span class="copy-hint" id="copyHint">Copy</span>
+                    </button>
+                    <a href="mailto:dangochinh@gmail.com" class="contact-card">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Send Email</span>
                     </a>
-                    <!-- <a href="tel:+84363839007" class="contact-item">
-                        <i class="fa-solid fa-phone contact-icon"></i>
-                        <span>036 3839 007</span>
-                    </a> -->
-                    <a href="https://www.linkedin.com/in/chính-đặng-977456114/" target="_blank" class="contact-item">
-                        <i class="fa-brands fa-linkedin contact-icon"></i>
-                        <span>LinkedIn Profile</span>
+                    <a href="https://www.linkedin.com/in/chính-đặng-977456114/" target="_blank" rel="noopener"
+                        class="contact-card">
+                        <i class="fa-brands fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/dangochinh" target="_blank" rel="noopener" class="contact-card">
+                        <i class="fa-brands fa-github"></i>
+                        <span>GitHub</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer
-        style="padding: 4rem 0 2rem; border-top: 1px solid var(--surface-border); background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px);">
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
         <div class="container">
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
-                <!-- Column 1: Brand -->
-                <div class="slide-up" style="text-align: left;">
-                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
-                        <div
-                            style="width: 40px; height: 40px; background: var(--gradient-text); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 0.9rem;">
-                            DNC</div>
-                        <span style="font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem;">Dang Ngoc
-                            Chinh</span>
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <div class="footer-logo">DNC</div>
+                        <span class="footer-name">Đặng Ngọc Chính</span>
                     </div>
-                    <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
-                        IT Project Manager & Business Analyst.
-                    </p>
+                    <p class="footer-desc">IT Project Manager, Business Analyst &amp; Full-Stack AI Builder.<br>PMP®
+                        &amp; PMI-ACP® Certified Professional.</p>
                 </div>
-
-                <!-- Column 2: Quick Links -->
-                <div class="slide-up" style="transition-delay: 0.1s; text-align: left;">
-                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.1rem;">Quick Links</h4>
-                    <ul style="list-style: none; display: grid; gap: 0.75rem;">
-                        <li><a href="#about"
-                                style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
-                                onmouseover="this.style.color='var(--accent-primary)'"
-                                onmouseout="this.style.color='var(--text-secondary)'">About</a></li>
-                        <li><a href="#projects"
-                                style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
-                                onmouseover="this.style.color='var(--accent-primary)'"
-                                onmouseout="this.style.color='var(--text-secondary)'">Projects</a></li>
-                        <li><a href="#experience"
-                                style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
-                                onmouseover="this.style.color='var(--accent-primary)'"
-                                onmouseout="this.style.color='var(--text-secondary)'">Experience</a></li>
-                        <li><a href="#contact"
-                                style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
-                                onmouseover="this.style.color='var(--accent-primary)'"
-                                onmouseout="this.style.color='var(--text-secondary)'">Contact</a></li>
+                <div>
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-
-                <!-- Column 3: Connect -->
-                <div class="slide-up" style="transition-delay: 0.2s; text-align: left;">
-                    <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.1rem;">Connect</h4>
-                    <ul style="list-style: none; display: grid; gap: 0.75rem;">
-                        <li><a href="https://linkedin.com/in/dangochinh" target="_blank"
-                                style="color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;"
-                                onmouseover="this.style.color='var(--accent-primary)'"
-                                onmouseout="this.style.color='var(--text-secondary)'"><i
+                <div>
+                    <h4 class="footer-heading">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.linkedin.com/in/chính-đặng-977456114/" target="_blank" rel="noopener"><i
                                     class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
-                        <li><a href="https://github.com/dangochinh" target="_blank"
-                                style="color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;"
-                                onmouseover="this.style.color='var(--accent-primary)'"
-                                onmouseout="this.style.color='var(--text-secondary)'"><i
+                        <li><a href="https://github.com/dangochinh" target="_blank" rel="noopener"><i
                                     class="fa-brands fa-github"></i> GitHub</a></li>
-                        <li><a href="mailto:dangochinh@gmail.com"
-                                style="color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.3s;"
-                                onmouseover="this.style.color='var(--accent-primary)'"
-                                onmouseout="this.style.color='var(--text-secondary)'"><i
-                                    class="fa-solid fa-envelope"></i> Email</a></li>
+                        <li><a href="mailto:dangochinh@gmail.com"><i class="fa-solid fa-envelope"></i>
+                                dangochinh@gmail.com</a></li>
                     </ul>
                 </div>
             </div>
-
-            <div
-                style="padding-top: 2rem; border-top: 1px solid var(--surface-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+            <div class="footer-bottom">
                 <p>&copy; 2026 Đặng Ngọc Chính. All rights reserved.</p>
-                <p>PMP® & PMI-ACP® Certified Professional</p>
+                <p>PMP® &amp; PMI-ACP® Certified · Ho Chi Minh City, Vietnam</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scroll To Top Button -->
-    <button id="scrollTopBtn" title="Go to top">
+    <button id="scrollTop" title="Back to top" aria-label="Scroll to top">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- Simple Scroll Animation Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                let delay = 0;
-                entries.forEach(entry => {
+            // ── 1. Magic UI Animated Grid Pulse Squares ──
+            const gridSquares = document.getElementById('gridSquares');
+            if (gridSquares && !prefersReducedMotion) {
+                const cellSize = 56;
+                const cols = Math.ceil(window.innerWidth / cellSize);
+                const rows = Math.ceil(window.innerHeight / cellSize);
+                const count = Math.min(20, Math.floor((cols * rows) / 14));
+                for (let i = 0; i < count; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'grid-pulse-cell';
+                    const col = Math.floor(Math.random() * cols);
+                    const row = Math.floor(Math.random() * rows);
+                    cell.style.left = `${col * cellSize + 1}px`;
+                    cell.style.top = `${row * cellSize + 1}px`;
+                    cell.style.animationDelay = `${(Math.random() * 5).toFixed(2)}s`;
+                    cell.style.animationDuration = `${(4 + Math.random() * 4).toFixed(2)}s`;
+                    gridSquares.appendChild(cell);
+                }
+            }
+
+            // ── 2. React Bits Subtle Particle Field ──
+            const canvas = document.getElementById('particleCanvas');
+            if (canvas && !prefersReducedMotion) {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                let width = 0;
+                let height = 0;
+
+                const initParticles = () => {
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    width = canvas.width = rect.width;
+                    height = canvas.height = rect.height;
+                    const total = Math.min(48, Math.floor(width / 28));
+                    particles = Array.from({ length: total }, () => ({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        r: Math.random() * 1.4 + 0.5,
+                        vx: (Math.random() - 0.5) * 0.25,
+                        vy: (Math.random() - 0.5) * 0.25,
+                        alpha: Math.random() * 0.45 + 0.15
+                    }));
+                };
+
+                const renderParticles = () => {
+                    ctx.clearRect(0, 0, width, height);
+                    for (const p of particles) {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        if (p.x < 0) p.x = width;
+                        if (p.x > width) p.x = 0;
+                        if (p.y < 0) p.y = height;
+                        if (p.y > height) p.y = 0;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(34, 211, 238, ${p.alpha})`;
+                        ctx.fill();
+                    }
+                    requestAnimationFrame(renderParticles);
+                };
+
+                initParticles();
+                renderParticles();
+                window.addEventListener('resize', initParticles);
+            }
+
+            // ── 3. Magic UI BlurFade Scroll Reveal ──
+            const fadeObserver = new IntersectionObserver((entries) => {
+                let stagger = 0;
+                entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }, delay);
-                        delay += 150; // Stagger effect
-                        observer.unobserve(entry.target);
+                        setTimeout(() => entry.target.classList.add('visible'), stagger);
+                        stagger += 70;
+                        fadeObserver.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.08 });
 
-            const animateElements = document.querySelectorAll('.v-timeline-item, .project-card, .section-header, .skill-item, .domain-card, .stat-card, .slide-up');
+            document.querySelectorAll('.blur-fade').forEach((el) => fadeObserver.observe(el));
 
-            animateElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'all 0.6s ease-out';
-                observer.observe(el);
+            // ── 4. React Bits CountUp Animation ──
+            const countObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.target || '0', 10);
+                    const suffix = el.dataset.suffix || '';
+                    if (prefersReducedMotion) {
+                        el.textContent = `${target}${suffix}`;
+                        countObserver.unobserve(el);
+                        return;
+                    }
+                    const duration = 1100;
+                    const start = performance.now();
+                    const tick = (now) => {
+                        const p = Math.min(1, (now - start) / duration);
+                        const eased = 1 - Math.pow(1 - p, 3);
+                        el.textContent = `${Math.round(target * eased)}${suffix}`;
+                        if (p < 1) requestAnimationFrame(tick);
+                    };
+                    requestAnimationFrame(tick);
+                    countObserver.unobserve(el);
+                });
+            }, { threshold: 0.4 });
+
+            document.querySelectorAll('.count-up').forEach((el) => countObserver.observe(el));
+
+            // ── 5. React Bits SpotlightCard & TiltedCard Hover ──
+            document.querySelectorAll('.spotlight-card').forEach((card) => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
             });
 
-            setTimeout(() => {
-                document.querySelectorAll('.project-card').forEach(card => {
-                    card.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            document.querySelectorAll('.project-card').forEach((wrapper) => {
+                const inner = wrapper.querySelector('.project-card-inner');
+                if (!inner) return;
+                wrapper.addEventListener('mousemove', (e) => {
+                    const rect = wrapper.getBoundingClientRect();
+                    const mx = e.clientX - rect.left;
+                    const my = e.clientY - rect.top;
+                    inner.style.setProperty('--mouse-x', `${mx}px`);
+                    inner.style.setProperty('--mouse-y', `${my}px`);
+                    if (!prefersReducedMotion && window.innerWidth > 900) {
+                        const rx = -((my - rect.height / 2) / rect.height) * 5;
+                        const ry = ((mx - rect.width / 2) / rect.width) * 5;
+                        inner.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+                    }
                 });
-                document.querySelectorAll('.timeline-content').forEach(content => {
-                    content.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                wrapper.addEventListener('mouseleave', () => {
+                    inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
                 });
-            }, 1000);
+            });
 
-            // Scroll to Top & Navbar Logic
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            // ── 6. Project Category Filter ──
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            filterBtns.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach((b) => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter;
+                    projectCards.forEach((card) => {
+                        const cats = (card.dataset.category || '').split(' ');
+                        const show = filter === 'all' || cats.includes(filter);
+                        card.classList.toggle('hidden', !show);
+                        if (show) card.classList.add('visible');
+                    });
+                });
+            });
+
+            // ── 7. Sticky PillNav Active Highlight & Scroll Top ──
             const navbar = document.getElementById('navbar');
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    scrollTopBtn.classList.add('visible');
-                    navbar.classList.add('scrolled');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
-                    navbar.classList.remove('scrolled');
-                }
-            });
-
-            scrollTopBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // Active Section Highlighting
-            const sections = document.querySelectorAll('section, header.hero');
+            const scrollTopBtn = document.getElementById('scrollTop');
+            const sections = document.querySelectorAll('header.hero, section');
             const navLinks = document.querySelectorAll('.nav-link');
 
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    // Adjusted offset for better trigger point
-                    if (scrollY >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
+            const onScroll = () => {
+                const y = window.scrollY;
+                navbar.classList.toggle('scrolled', y > 40);
+                scrollTopBtn.classList.toggle('visible', y > 400);
+
+                let current = 'home';
+                sections.forEach((sec) => {
+                    if (y >= sec.offsetTop - 220) {
+                        current = sec.getAttribute('id') || current;
                     }
                 });
-
-                // Force 'contact' to be active if scrolled to the absolute bottom
-                if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 50) {
+                if ((window.innerHeight + Math.round(y)) >= document.body.offsetHeight - 40) {
                     current = 'contact';
                 }
+                navLinks.forEach((link) => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+                });
+            };
 
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}` || (current === 'home' && link.getAttribute('href') === '#')) {
-                        link.classList.add('active');
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ── 8. One-Click Email Copy ──
+            const copyBtn = document.getElementById('copyEmailBtn');
+            const copyHint = document.getElementById('copyHint');
+            if (copyBtn && copyHint) {
+                copyBtn.addEventListener('click', async () => {
+                    try {
+                        await navigator.clipboard.writeText('dangochinh@gmail.com');
+                        copyHint.textContent = 'Copied!';
+                        copyHint.style.color = '#34d399';
+                        setTimeout(() => {
+                            copyHint.textContent = 'Copy';
+                            copyHint.style.color = '';
+                        }, 2000);
+                    } catch {
+                        window.location.href = 'mailto:dangochinh@gmail.com';
                     }
                 });
-            });
+            }
         });
     </script>
 </body>
