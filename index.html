@@ -2506,7 +2506,7 @@
                                 <div class="cred-badge-icon"><i class="fa-brands fa-github"></i></div>
                                 <div>
                                     <div class="cred-name">@dangochinh</div>
-                                    <div class="cred-issuer">9 Public Repositories</div>
+                                    <div class="cred-issuer">Full-Stack &amp; AI Repositories</div>
                                 </div>
                             </a>
                         </div>
@@ -2653,9 +2653,9 @@
 
             <div class="filter-bar blur-fade" role="tablist" aria-label="Filter projects by category">
                 <button class="filter-btn active" data-filter="all">All Projects (7)</button>
-                <button class="filter-btn" data-filter="ai">AI &amp; Automation (4)</button>
+                <button class="filter-btn" data-filter="ai">AI &amp; Automation (5)</button>
                 <button class="filter-btn" data-filter="web">Full-Stack &amp; Data (5)</button>
-                <button class="filter-btn" data-filter="realtime">Real-Time &amp; Interactive (2)</button>
+                <button class="filter-btn" data-filter="realtime">Bots &amp; Real-Time (3)</button>
             </div>
 
             <div class="projects-grid">
@@ -2758,8 +2758,44 @@
                     </div>
                 </article>
 
-                <!-- 3. AIEarnMoney (Pepe Nuôi Thân) — NEW -->
-                <article class="project-card blur-fade" data-category="ai web">
+                <!-- 3. AI Reup Bot — NEW -->
+                <article class="project-card blur-fade" data-category="ai realtime">
+                    <div class="project-card-inner">
+                        <div class="project-top">
+                            <span class="project-type">AI Video Reup &amp; Auto-Scheduler</span>
+                            <span class="project-badge badge-new">New</span>
+                        </div>
+                        <h3 class="project-title">AI Reup Bot</h3>
+                        <p class="project-desc">Automated multi-platform video pipeline for Telegram, Instagram &amp;
+                            Facebook &rarr; TikTok / YouTube. Features SSRF-hardened downloading, FFmpeg 9:16
+                            normalization, AI captioning via Ollama, smart slot scheduling, and web dashboard.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python 3.12</span>
+                            <span class="tech-tag">aiogram 3</span>
+                            <span class="tech-tag">aiohttp</span>
+                            <span class="tech-tag">FFmpeg</span>
+                            <span class="tech-tag">yt-dlp</span>
+                            <span class="tech-tag">Ollama / LLM</span>
+                            <span class="tech-tag">SQLAlchemy</span>
+                            <span class="tech-tag">TikTok API v2</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-arch">
+                            <div class="arch-label">Architecture</div>
+                            <div class="arch-text">Async worker queue + SQLite persistence, OAuth2 token lifecycle,
+                                8h/14h collision-cascade scheduler, and Studio browser automation.</div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/dangochinh/reup-bot" target="_blank" rel="noopener"
+                                class="proj-btn repo">
+                                <i class="fa-brands fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. AIEarnMoney (Pepe Nuôi Thân) — NEW -->
+                <article class="project-card blur-fade" data-category="ai web realtime">
                     <div class="project-card-inner">
                         <div class="project-top">
                             <span class="project-type">Autonomous AI Daemon</span>
@@ -2795,7 +2831,7 @@
                     </div>
                 </article>
 
-                <!-- 4. Loto Online -->
+                <!-- 5. Loto Online -->
                 <article class="project-card blur-fade" data-category="realtime">
                     <div class="project-card-inner">
                         <div class="project-top">
@@ -2830,7 +2866,7 @@
                     </div>
                 </article>
 
-                <!-- 5. Vietlott Dashboard -->
+                <!-- 6. Vietlott Dashboard -->
                 <article class="project-card blur-fade" data-category="web">
                     <div class="project-card-inner">
                         <div class="project-top">
@@ -2867,7 +2903,7 @@
                     </div>
                 </article>
 
-                <!-- 6. Brand Scout -->
+                <!-- 7. Brand Scout -->
                 <article class="project-card blur-fade" data-category="ai web">
                     <div class="project-card-inner">
                         <div class="project-top">
@@ -2895,42 +2931,6 @@
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
                             </a>
                             <a href="https://github.com/dangochinh/brandscout" target="_blank" rel="noopener"
-                                class="proj-btn repo">
-                                <i class="fa-brands fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 7. GameTime -->
-                <article class="project-card blur-fade" data-category="realtime">
-                    <div class="project-card-inner">
-                        <div class="project-top">
-                            <span class="project-type">Interactive Party App</span>
-                        </div>
-                        <h3 class="project-title">GameTime (Đoán Bài Hát)</h3>
-                        <p class="project-desc">Interactive Guess-the-Song quiz &amp; karaoke web app with timed YouTube
-                            audio snippets, customizable song playlists, smooth Motion transitions, answer reveals, and
-                            live sing-along mode.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">React 19</span>
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">Vite 6</span>
-                            <span class="tech-tag">Motion</span>
-                            <span class="tech-tag">Tailwind v4</span>
-                            <span class="tech-tag">YouTube Embed</span>
-                        </div>
-                        <div class="project-arch">
-                            <div class="arch-label">Architecture</div>
-                            <div class="arch-text">Client-side React SPA with persistent playlist state, timestamped
-                                YouTube playback, and Motion physics animations.</div>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://gametime-wine.vercel.app/" target="_blank" rel="noopener"
-                                class="proj-btn live">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
-                            </a>
-                            <a href="https://github.com/dangochinh/gametime" target="_blank" rel="noopener"
                                 class="proj-btn repo">
                                 <i class="fa-brands fa-github"></i> Code
                             </a>
@@ -3529,13 +3529,15 @@
             const getAiAnswer = (rawQuery) => {
                 const q = rawQuery.toLowerCase();
 
-                if (q.includes('pepeapp') || q.includes('aiearn') || q.includes('video') || q.includes('daemon')) {
+                if (q.includes('reup') || q.includes('pepeapp') || q.includes('aiearn') || q.includes('video') || q.includes('daemon')) {
                     return {
-                        html: `Hai hệ thống AI nổi bật gần đây của anh Chính:<br><br>
-• <strong>PePeApp</strong> — Local AI Video Production Factory dùng <strong>Python 3.12 + FastAPI + Next.js 16 + Socket.io</strong>. Pipeline tự động biến chủ đề thành video dọc 60s (9:16): DDGS Research &rarr; Ollama (Qwen 2.5) viết 6 scenes &rarr; ComfyUI render clip &rarr; edge-tts lồng tiếng &rarr; FFmpeg ghép video.<br><br>
-• <strong>Pepe Nuôi Thân (AIEarnMoney)</strong> — Hệ thống AI thương mại số &amp; affiliate tự hành 24/7, sinh hơn 1,900+ kịch bản SEO/affiliate, vận hành bot Telegram <strong>@mucmuc4bot</strong>, công cụ SEO/VietQR trên trình duyệt và tự động deploy lên <strong>Cloudflare Workers &amp; Pages</strong>.`,
+                        html: `Ba hệ thống AI Automation &amp; Video nổi bật của anh Chính:<br><br>
+• <strong>PePeApp</strong> — Local AI Video Production Factory (<strong>Python 3.12 + FastAPI + Next.js 16 + Socket.io</strong>): biến chủ đề thành video dọc 60s (DDGS &rarr; Ollama Qwen 2.5 &rarr; ComfyUI &rarr; edge-tts &rarr; FFmpeg).<br><br>
+• <strong>AI Reup Bot</strong> — Hệ thống tự động tải &amp; reup video từ Telegram/Instagram/Facebook sang TikTok &amp; YouTube (<strong>Python 3.12 + aiogram 3 + aiohttp + yt-dlp + FFmpeg + Ollama + SQLAlchemy + TikTok API v2 + Docker</strong>) kèm chống SSRF và lịch đăng thông minh.<br><br>
+• <strong>Pepe Nuôi Thân (AIEarnMoney)</strong> — AI daemon tự hành 24/7 sinh hơn 1,900+ kịch bản SEO/affiliate, bot Telegram <strong>@mucmuc4bot</strong>, triển khai trên <strong>Cloudflare Workers &amp; Pages</strong>.`,
                         links: [
                             { label: 'Visit AIEarnMoney Live', href: 'https://ai-earn-money.pages.dev/', external: true },
+                            { label: 'AI Reup Bot Repo', href: 'https://github.com/dangochinh/reup-bot', external: true },
                             { label: 'PePeApp Repo', href: 'https://github.com/dangochinh/PePeApp', external: true },
                             { label: 'Xem AI Lab', href: '#ai-lab', external: false }
                         ]
@@ -3572,7 +3574,7 @@ Cả hai chứng chỉ đều có thể xác thực trực tiếp qua <strong>Cr
                     return {
                         html: `Anh/chị có thể liên hệ trực tiếp với anh <strong>Đặng Ngọc Chính</strong> qua các kênh sau:<br><br>
 • <strong>Email:</strong> dangochinh@gmail.com<br>
-• <strong>GitHub:</strong> github.com/dangochinh (9 public repos)<br>
+• <strong>GitHub:</strong> github.com/dangochinh<br>
 • <strong>LinkedIn:</strong> Hồ sơ Đặng Ngọc Chính (TP.HCM, Việt Nam)`,
                         links: [
                             { label: 'Send Email', href: 'mailto:dangochinh@gmail.com', external: true },
@@ -3584,16 +3586,16 @@ Cả hai chứng chỉ đều có thể xác thực trực tiếp qua <strong>Cr
 
                 if (q.includes('dự án') || q.includes('project') || q.includes('ai') || q.includes('stack') || q.includes('babie') || q.includes('brand')) {
                     return {
-                        html: `Anh Chính hiện có <strong>7 sản phẩm live &amp; open-source</strong> kết hợp AI, Data Pipeline và Web Full-Stack:<br><br>
+                        html: `Anh Chính hiện có <strong>7 sản phẩm nổi bật</strong> kết hợp AI, Video Automation, Data Pipeline và Web Full-Stack:<br><br>
 1. <strong>Babie Tracker</strong> (Featured) — Next.js 16, React 19, Gemini AI, Google Sheets, Firestore, Recharts, Web Push PWA.<br>
 2. <strong>PePeApp</strong> — Python FastAPI + Ollama Qwen 2.5 + ComfyUI + FFmpeg AI Video Factory.<br>
-3. <strong>Pepe Nuôi Thân (AIEarnMoney)</strong> — Autonomous AI Daemon + Cloudflare Workers + Telegram Bot.<br>
-4. <strong>Brand Scout</strong> — Next.js AI E-Commerce Market Research &amp; Pitch (Philippines/Shopee/TikTok).<br>
-5. Cùng <strong>Loto Online</strong> (Supabase Realtime), <strong>Vietlott Dashboard</strong> (Python GitHub Actions + Next.js), và <strong>GameTime</strong> (React 19 + Motion).`,
+3. <strong>AI Reup Bot</strong> — Python 3.12, aiogram 3, aiohttp, FFmpeg, yt-dlp, Ollama, TikTok API v2 &amp; Docker.<br>
+4. <strong>Pepe Nuôi Thân (AIEarnMoney)</strong> — Autonomous AI Daemon + Cloudflare Workers + Telegram Bot.<br>
+5. Cùng <strong>Loto Online</strong> (Supabase Realtime), <strong>Vietlott Dashboard</strong> (Python GitHub Actions + Next.js), và <strong>Brand Scout</strong> (Next.js AI Market Intelligence).`,
                         links: [
                             { label: 'Lọc Dự Án AI', href: '#projects', external: false, filter: 'ai' },
                             { label: 'Babie Tracker Live', href: 'https://pethui.vercel.app/', external: true },
-                            { label: 'Brand Scout Live', href: 'https://brandscout-plum.vercel.app/', external: true }
+                            { label: 'AI Reup Bot', href: 'https://github.com/dangochinh/reup-bot', external: true }
                         ]
                     };
                 }
