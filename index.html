@@ -1539,260 +1539,164 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════════════
-           AI ARCHITECTURE LAB — Magic UI AnimatedBeam + Spotlight Capabilities
+           HERO INLINE ASK DNC AI BAR — Magic UI BorderBeam + Streaming Reply
            ═══════════════════════════════════════════════════════════════════════ */
-        .ai-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            padding: 0.85rem 1.55rem;
-            border-radius: 9999px;
-            background: linear-gradient(135deg, rgba(244, 63, 94, 0.16), rgba(251, 146, 60, 0.14));
-            border: 1px solid rgba(244, 63, 94, 0.4);
-            color: #ffe4e6;
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 0.92rem;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .ai-btn i {
-            color: var(--ember);
-        }
-
-        .ai-btn:hover {
-            background: linear-gradient(135deg, rgba(244, 63, 94, 0.26), rgba(251, 146, 60, 0.24));
-            border-color: rgba(244, 63, 94, 0.68);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px -10px rgba(244, 63, 94, 0.45);
-        }
-
-        .ai-lab-shell {
+        .hero-ai-box {
             position: relative;
-            background: linear-gradient(155deg, rgba(24, 12, 14, 0.96), rgba(11, 7, 9, 0.98));
-            border: 1px solid rgba(244, 63, 94, 0.22);
-            border-radius: 22px;
-            padding: 1.75rem;
+            max-width: 760px;
+            margin: 0 auto 2rem;
+            background: rgba(18, 10, 12, 0.88);
+            border: 1px solid rgba(251, 146, 60, 0.28);
+            border-radius: 18px;
+            padding: 0.75rem 0.9rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            text-align: left;
             overflow: hidden;
-            margin-bottom: 1.35rem;
+            opacity: 0;
+            animation: blurFadeIn 0.82s cubic-bezier(0.22, 1, 0.36, 1) 0.72s forwards;
+            box-shadow: 0 18px 50px -20px rgba(251, 146, 60, 0.25);
         }
 
-        .ai-lab-topbar {
+        .hero-ai-form {
+            position: relative;
+            z-index: 1;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding-bottom: 1.25rem;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 1.75rem;
+            gap: 0.65rem;
         }
 
-        .ai-lab-status {
+        .hero-ai-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.18), rgba(244, 63, 94, 0.18));
+            border: 1px solid rgba(251, 146, 60, 0.35);
+            color: var(--ember);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .hero-ai-input {
+            flex: 1;
+            min-width: 0;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .hero-ai-input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .hero-ai-submit {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            font-family: var(--font-mono);
-            font-size: 0.76rem;
-            color: var(--text-secondary);
+            gap: 0.4rem;
+            padding: 0.55rem 1.05rem;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--ember), var(--crimson));
+            border: none;
+            color: #080506;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
-        .ai-tabs {
+        .hero-ai-submit:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        .hero-ai-chips {
+            position: relative;
+            z-index: 1;
             display: flex;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 0.45rem;
+            gap: 0.4rem;
+            margin-top: 0.65rem;
+            padding-top: 0.65rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .ai-tab {
-            padding: 0.42rem 0.95rem;
+        .hero-ai-chip-label {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            margin-right: 0.2rem;
+        }
+
+        .hero-ai-chip {
+            padding: 0.28rem 0.7rem;
             border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.035);
             border: 1px solid var(--border);
             color: var(--text-secondary);
             font-family: var(--font-body);
-            font-size: 0.8rem;
-            font-weight: 500;
+            font-size: 0.74rem;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .ai-tab:hover {
-            color: var(--text);
-            border-color: var(--border-hover);
+        .hero-ai-chip:hover {
+            color: #fff;
+            border-color: rgba(251, 146, 60, 0.45);
+            background: rgba(251, 146, 60, 0.1);
         }
 
-        .ai-tab.active {
-            background: rgba(244, 63, 94, 0.16);
-            border-color: rgba(244, 63, 94, 0.45);
-            color: #ffe4e6;
-        }
-
-        .beam-stage {
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 4.5rem;
-            align-items: center;
-            padding: 1rem 0.5rem;
-        }
-
-        .beam-svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .beam-path-bg {
-            fill: none;
-            stroke: rgba(255, 255, 255, 0.07);
-            stroke-width: 1.5;
-        }
-
-        .beam-path-pulse {
-            fill: none;
-            stroke: url(#beamGrad);
-            stroke-width: 2.2;
-            stroke-linecap: round;
-            stroke-dasharray: 48 180;
-            animation: beamFlow 2.8s linear infinite;
-        }
-
-        .beam-path-pulse.delay-1 { animation-delay: -0.9s; }
-        .beam-path-pulse.delay-2 { animation-delay: -1.8s; }
-
-        @keyframes beamFlow {
-            from { stroke-dashoffset: 228; }
-            to { stroke-dashoffset: 0; }
-        }
-
-        .beam-col {
+        .hero-ai-reply {
             position: relative;
             z-index: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
+            display: none;
+            margin-top: 0.75rem;
+            padding: 0.95rem 1rem;
+            border-radius: 12px;
+            background: rgba(10, 6, 7, 0.9);
+            border: 1px solid rgba(251, 146, 60, 0.22);
+            font-size: 0.87rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
         }
 
-        .beam-node {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.85rem 1rem;
-            border-radius: var(--radius-sm);
-            background: rgba(20, 11, 13, 0.94);
-            border: 1px solid var(--border);
-            transition: all 0.25s ease;
+        .hero-ai-reply.open {
+            display: block;
         }
 
-        .beam-node:hover {
-            border-color: rgba(251, 146, 60, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .beam-node-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 9px;
-            background: rgba(251, 146, 60, 0.09);
-            border: 1px solid rgba(251, 146, 60, 0.2);
-            color: var(--ember);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.92rem;
-            flex-shrink: 0;
-        }
-
-        .beam-node.output .beam-node-icon {
-            background: rgba(244, 63, 94, 0.11);
-            border-color: rgba(244, 63, 94, 0.25);
-            color: var(--crimson);
-        }
-
-        .beam-node-title {
-            font-weight: 600;
-            font-size: 0.88rem;
-            color: var(--text);
-            line-height: 1.25;
-        }
-
-        .beam-node-sub {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            margin-top: 0.15rem;
-        }
-
-        .beam-hub {
-            position: relative;
-            z-index: 2;
-            width: 175px;
-            padding: 1.35rem 1rem;
-            border-radius: 20px;
-            background: radial-gradient(circle at 50% 0%, rgba(251, 146, 60, 0.16), rgba(18, 10, 12, 0.98) 70%);
-            border: 1px solid rgba(251, 146, 60, 0.35);
-            text-align: center;
-            box-shadow: 0 0 40px -10px rgba(251, 146, 60, 0.32);
-        }
-
-        .beam-hub-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 0.7rem;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(244, 63, 94, 0.2));
-            border: 1px solid rgba(251, 146, 60, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            color: var(--ember);
-        }
-
-        .beam-hub-title {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 0.95rem;
+        .hero-ai-reply strong {
             color: #fff;
         }
 
-        .beam-hub-sub {
+        .hero-ai-reply-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
             font-family: var(--font-mono);
-            font-size: 0.68rem;
+            font-size: 0.7rem;
             color: var(--ember);
-            margin-top: 0.25rem;
         }
 
-        .ai-caps-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 1rem;
+        .hero-ai-reply-close {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0.15rem 0.35rem;
         }
 
-        .ai-cap-card {
-            padding: 1.35rem;
-        }
-
-        .ai-cap-card .bento-icon {
-            width: 36px;
-            height: 36px;
-            margin-bottom: 0.85rem;
-            font-size: 0.9rem;
-        }
-
-        .ai-cap-card .bento-title {
-            font-size: 0.98rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .ai-cap-card .bento-text {
-            font-size: 0.83rem;
-            line-height: 1.58;
+        .hero-ai-reply-close:hover {
+            color: #fff;
         }
 
         /* ═══════════════════════════════════════════════════════════════════════
@@ -1817,7 +1721,16 @@
             box-shadow: 0 12px 35px -6px rgba(0, 0, 0, 0.75), 0 0 24px -6px rgba(244, 63, 94, 0.45);
             backdrop-filter: blur(14px);
             z-index: 998;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        #aiFab.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
         #aiFab i {
@@ -2137,19 +2050,6 @@
             .bento-span-2 {
                 grid-column: span 3;
             }
-            .ai-caps-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-            .beam-stage {
-                grid-template-columns: 1fr;
-                gap: 1.15rem;
-            }
-            .beam-svg {
-                display: none;
-            }
-            .beam-hub {
-                width: 100%;
-            }
         }
 
         @media (max-width: 768px) {
@@ -2172,12 +2072,12 @@
                 display: none;
             }
             .nav-link {
-                font-size: 0.68rem;
-                padding: 0.36rem 0.42rem;
+                font-size: 0.74rem;
+                padding: 0.38rem 0.58rem;
             }
             .hero {
                 min-height: auto;
-                padding: 5.75rem 1.25rem 3.5rem;
+                padding: 5.5rem 1.25rem 3.25rem;
             }
             .shiny-badge {
                 font-size: 0.7rem;
@@ -2188,8 +2088,7 @@
             .hero-actions {
                 gap: 0.65rem;
             }
-            .shimmer-btn,
-            .ai-btn {
+            .shimmer-btn {
                 width: 100%;
                 justify-content: center;
             }
@@ -2198,6 +2097,13 @@
                 justify-content: center;
                 padding: 0.78rem 0.9rem;
                 font-size: 0.84rem;
+            }
+            .hero-ai-form {
+                flex-wrap: wrap;
+            }
+            .hero-ai-submit {
+                width: 100%;
+                justify-content: center;
             }
             .hero-metrics {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2212,9 +2118,6 @@
                 grid-column: span 1;
             }
             .region-grid {
-                grid-template-columns: 1fr;
-            }
-            .ai-caps-grid {
                 grid-template-columns: 1fr;
             }
             .projects-grid {
@@ -2269,7 +2172,6 @@
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#ai-lab" class="nav-link">AI Lab</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -2325,19 +2227,47 @@
                 </span>
             </div>
 
-            <div class="hero-actions">
+            <div class="hero-actions" style="margin-bottom: 1.75rem;">
                 <a href="#projects" class="shimmer-btn">
                     Explore Projects <i class="fa-solid fa-arrow-down"></i>
                 </a>
-                <button type="button" class="ai-btn" data-open-ai>
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Ask DNC AI
-                </button>
                 <a href="https://github.com/dangochinh" target="_blank" rel="noopener" class="ghost-btn">
                     <i class="fa-brands fa-github"></i> GitHub Profile
                 </a>
                 <a href="#contact" class="ghost-btn">
                     <i class="fa-solid fa-paper-plane"></i> Get In Touch
                 </a>
+            </div>
+
+            <!-- Inline Interactive Ask DNC AI Prompt Bar -->
+            <div class="hero-ai-box" id="heroAiBox">
+                <div class="border-beam-ring" aria-hidden="true"></div>
+                <form class="hero-ai-form" id="heroAiForm">
+                    <div class="hero-ai-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <input type="text" class="hero-ai-input" id="heroAiInput"
+                        placeholder="Ask DNC AI about PM experience, AI Reup Bot, PePeApp, or tech stack..."
+                        autocomplete="off" aria-label="Ask DNC AI">
+                    <button type="submit" class="hero-ai-submit">
+                        Ask AI <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+                <div class="hero-ai-chips">
+                    <span class="hero-ai-chip-label">TRY:</span>
+                    <button type="button" class="hero-ai-chip" data-hero-prompt="Các dự án AI nổi bật đã làm?">Dự án AI nổi bật</button>
+                    <button type="button" class="hero-ai-chip" data-hero-prompt="Chi tiết AI Reup Bot &amp; PePeApp?">AI Reup Bot &amp; PePeApp</button>
+                    <button type="button" class="hero-ai-chip" data-hero-prompt="Tóm tắt kinh nghiệm PM &amp; BA?">9+ năm PM &amp; BA</button>
+                    <button type="button" class="hero-ai-chip" data-hero-prompt="Chứng chỉ PMP và PMI-ACP?">Chứng chỉ PMP® / PMI-ACP®</button>
+                </div>
+                <div class="hero-ai-reply" id="heroAiReply" aria-live="polite">
+                    <div class="hero-ai-reply-top">
+                        <span>● DNC PORTFOLIO AI RESPONSE</span>
+                        <button type="button" class="hero-ai-reply-close" id="heroAiClose" aria-label="Close inline response">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <div id="heroAiReplyText"></div>
+                    <div class="ai-msg-links" id="heroAiReplyLinks" style="margin-top: 0.65rem;"></div>
+                </div>
             </div>
 
             <div class="hero-metrics">
@@ -2511,130 +2441,6 @@
                             </a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══ AI ENGINEERING LAB — Magic UI AnimatedBeam + SpotlightCard ═══ -->
-    <div class="section-divider"></div>
-    <section id="ai-lab">
-        <div class="container">
-            <div class="section-header center blur-fade">
-                <div class="section-eyebrow" style="justify-content: center;">AI Systems &amp; Workflows</div>
-                <h2 class="section-title">AI Engineering Architecture</h2>
-                <p class="section-desc">How cloud &amp; local LLMs, generative media pipelines, and autonomous daemons
-                    power real production products and agile delivery.</p>
-            </div>
-
-            <div class="ai-lab-shell blur-fade">
-                <div class="border-beam-ring" aria-hidden="true"></div>
-                <div class="ai-lab-topbar">
-                    <div class="ai-lab-status">
-                        <span class="status-ping"></span>
-                        <span id="aiLabModeLabel">MODE: FULL_AI_ECOSYSTEM · CLOUD + LOCAL INFERENCE</span>
-                    </div>
-                    <div class="ai-tabs" role="tablist" aria-label="AI Architecture Flows">
-                        <button type="button" class="ai-tab active" data-ai-tab="ecosystem">Full AI Ecosystem</button>
-                        <button type="button" class="ai-tab" data-ai-tab="pepeapp">PePeApp Factory</button>
-                        <button type="button" class="ai-tab" data-ai-tab="pm">PM + AI Delivery</button>
-                    </div>
-                </div>
-
-                <!-- Magic UI AnimatedBeam Interactive Graph -->
-                <div class="beam-stage" id="beamStage">
-                    <svg class="beam-svg" id="beamSvg" aria-hidden="true">
-                        <defs>
-                            <linearGradient id="beamGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1100" y2="0">
-                                <stop offset="0%" stop-color="#fb923c" />
-                                <stop offset="50%" stop-color="#fbbf24" />
-                                <stop offset="100%" stop-color="#f43f5e" />
-                            </linearGradient>
-                        </defs>
-                        <g id="beamPaths"></g>
-                    </svg>
-
-                    <div class="beam-col" id="beamInputs">
-                        <div class="beam-node">
-                            <div class="beam-node-icon"><i class="fa-solid fa-brain"></i></div>
-                            <div>
-                                <div class="beam-node-title">Google Gemini API</div>
-                                <div class="beam-node-sub">@google/genai · Cloud Reasoning</div>
-                            </div>
-                        </div>
-                        <div class="beam-node">
-                            <div class="beam-node-icon"><i class="fa-solid fa-microchip"></i></div>
-                            <div>
-                                <div class="beam-node-title">Ollama (Qwen 2.5)</div>
-                                <div class="beam-node-sub">Local LLM Scripting on M4</div>
-                            </div>
-                        </div>
-                        <div class="beam-node">
-                            <div class="beam-node-icon"><i class="fa-solid fa-film"></i></div>
-                            <div>
-                                <div class="beam-node-title">ComfyUI &amp; edge-tts</div>
-                                <div class="beam-node-sub">Video Clips &amp; Voice Synthesis</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="beam-hub" id="beamHub">
-                        <div class="beam-hub-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                        <div class="beam-hub-title">DNC AI Core</div>
-                        <div class="beam-hub-sub">FastAPI · Next.js · Workers</div>
-                    </div>
-
-                    <div class="beam-col" id="beamOutputs">
-                        <div class="beam-node output">
-                            <div class="beam-node-icon"><i class="fa-solid fa-video"></i></div>
-                            <div>
-                                <div class="beam-node-title">PePeApp 60s Video Factory</div>
-                                <div class="beam-node-sub">Topic &rarr; FFmpeg 9:16 + WebSocket</div>
-                            </div>
-                        </div>
-                        <div class="beam-node output">
-                            <div class="beam-node-icon"><i class="fa-solid fa-robot"></i></div>
-                            <div>
-                                <div class="beam-node-title">AIEarnMoney Daemon</div>
-                                <div class="beam-node-sub">1,900+ SEO Scripts &amp; @mucmuc4bot</div>
-                            </div>
-                        </div>
-                        <div class="beam-node output">
-                            <div class="beam-node-icon"><i class="fa-solid fa-chart-pie"></i></div>
-                            <div>
-                                <div class="beam-node-title">Babie Tracker &amp; Brand Scout</div>
-                                <div class="beam-node-sub">AI Growth Insights &amp; Brand Pitch</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4 AI Capability Pillars -->
-            <div class="ai-caps-grid">
-                <div class="spotlight-card ai-cap-card blur-fade">
-                    <div class="bento-icon"><i class="fa-solid fa-cubes"></i></div>
-                    <h3 class="bento-title">Hybrid LLM Stack</h3>
-                    <p class="bento-text">Combining cloud Gemini API intelligence with privacy-first local Ollama (Qwen
-                        2.5) inference for zero-cost iteration.</p>
-                </div>
-                <div class="spotlight-card ai-cap-card blur-fade">
-                    <div class="bento-icon"><i class="fa-solid fa-clapperboard"></i></div>
-                    <h3 class="bento-title">Multimodal Pipelines</h3>
-                    <p class="bento-text">Orchestrating ComfyUI video generation, neural TTS voiceovers, and FFmpeg
-                        assembly in real-time WebSocket UIs.</p>
-                </div>
-                <div class="spotlight-card ai-cap-card blur-fade">
-                    <div class="bento-icon"><i class="fa-solid fa-gears"></i></div>
-                    <h3 class="bento-title">Autonomous Daemons</h3>
-                    <p class="bento-text">24/7 headless workers running content engines, Telegram bots, and automated
-                        Git/Cloudflare Pages deployments.</p>
-                </div>
-                <div class="spotlight-card ai-cap-card blur-fade">
-                    <div class="bento-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3 class="bento-title">AI-Native Governance</h3>
-                    <p class="bento-text">Applying PMP®/PMI-ACP® rigor with rapid AI prototyping and Playwright E2E
-                        verification for dependable shipping.</p>
                 </div>
             </div>
         </div>
@@ -3141,15 +2947,15 @@
                         Anh/chị có thể chọn câu hỏi gợi ý bên dưới hoặc nhập bất kỳ câu hỏi nào về <strong>dự án AI</strong>, <strong>kinh nghiệm quản lý</strong>, hoặc <strong>tech stack</strong>.
                     </div>
                     <div class="ai-msg-links">
-                        <a href="#ai-lab" class="ai-link-chip" data-close-navigate><i class="fa-solid fa-diagram-project"></i> AI Architecture Lab</a>
                         <a href="#projects" class="ai-link-chip" data-close-navigate><i class="fa-solid fa-code"></i> All 7 Projects</a>
+                        <a href="#experience" class="ai-link-chip" data-close-navigate><i class="fa-solid fa-briefcase"></i> 9+ Yrs Experience</a>
                     </div>
                 </div>
             </div>
 
             <div class="ai-prompts" id="aiPrompts">
                 <button type="button" class="ai-prompt-chip" data-prompt="Các dự án AI nổi bật đã làm?">Các dự án AI nổi bật?</button>
-                <button type="button" class="ai-prompt-chip" data-prompt="Kiến trúc PePeApp &amp; AIEarnMoney?">Kiến trúc PePeApp &amp; AIEarnMoney?</button>
+                <button type="button" class="ai-prompt-chip" data-prompt="Chi tiết AI Reup Bot &amp; PePeApp?">AI Reup Bot &amp; PePeApp?</button>
                 <button type="button" class="ai-prompt-chip" data-prompt="Tóm tắt kinh nghiệm PM &amp; BA?">Kinh nghiệm PM &amp; BA?</button>
                 <button type="button" class="ai-prompt-chip" data-prompt="Chứng chỉ PMP và PMI-ACP?">Chứng chỉ PMP® / PMI-ACP®?</button>
                 <button type="button" class="ai-prompt-chip" data-prompt="How to contact Chính?">Contact &amp; Links</button>
@@ -3302,124 +3108,7 @@
                 });
             });
 
-            // ── 6. AI Lab AnimatedBeam Tab Switcher ──
-            const aiLabModes = {
-                ecosystem: {
-                    label: 'MODE: FULL_AI_ECOSYSTEM · CLOUD + LOCAL INFERENCE',
-                    hub: { icon: 'fa-wand-magic-sparkles', title: 'DNC AI Core', sub: 'FastAPI · Next.js · Workers' },
-                    inputs: [
-                        { icon: 'fa-brain', title: 'Google Gemini API', sub: '@google/genai · Cloud Reasoning' },
-                        { icon: 'fa-microchip', title: 'Ollama (Qwen 2.5)', sub: 'Local LLM Scripting on M4' },
-                        { icon: 'fa-film', title: 'ComfyUI & edge-tts', sub: 'Video Clips & Voice Synthesis' }
-                    ],
-                    outputs: [
-                        { icon: 'fa-video', title: 'PePeApp 60s Video Factory', sub: 'Topic → FFmpeg 9:16 + WebSocket' },
-                        { icon: 'fa-robot', title: 'AIEarnMoney Daemon', sub: '1,900+ SEO Scripts & @mucmuc4bot' },
-                        { icon: 'fa-chart-pie', title: 'Babie Tracker & Brand Scout', sub: 'AI Growth Insights & Brand Pitch' }
-                    ]
-                },
-                pepeapp: {
-                    label: 'MODE: PEPEAPP_PIPELINE · LOCAL 60S SHORT VIDEO FACTORY',
-                    hub: { icon: 'fa-gears', title: 'FastAPI Worker', sub: 'WS Progress · Async Queue' },
-                    inputs: [
-                        { icon: 'fa-magnifying-glass', title: 'DDGS Research Engine', sub: 'Topic → Article + 6 Key Points' },
-                        { icon: 'fa-pen-nib', title: 'Ollama Scene Scripter', sub: 'Qwen 2.5 · 6-Scene Narration' },
-                        { icon: 'fa-photo-film', title: 'ComfyUI + edge-tts', sub: 'Visual Clips + vi-VN Voiceover' }
-                    ],
-                    outputs: [
-                        { icon: 'fa-film', title: 'FFmpeg 9:16 Assembler', sub: '1080×1920 H.264 + SRT Subtitles' },
-                        { icon: 'fa-desktop', title: 'Next.js 16 Dashboard', sub: 'Live Shot List via Socket.io / WS' },
-                        { icon: 'fa-vial', title: 'Playwright E2E Suite', sub: 'End-to-End Pipeline Verification' }
-                    ]
-                },
-                pm: {
-                    label: 'MODE: AGILE_PM_AI · ENTERPRISE GOVERNANCE + RAPID SHIPPING',
-                    hub: { icon: 'fa-compass', title: 'PMP® + AI Lead', sub: '9+ Yrs Enterprise + Full-Stack' },
-                    inputs: [
-                        { icon: 'fa-sitemap', title: 'BA & Domain Scoping', sub: 'SCM/WMS · Insurance · E-Commerce' },
-                        { icon: 'fa-code-branch', title: 'AI Rapid Prototyping', sub: 'Zero Business-to-Dev Friction' },
-                        { icon: 'fa-vial-circle-check', title: 'Automated QA & CI/CD', sub: 'GitHub Actions · Playwright Tests' }
-                    ],
-                    outputs: [
-                        { icon: 'fa-earth-asia', title: 'Multi-Market Rollouts', sub: 'Japan · 8 ASEAN Countries · Vietnam' },
-                        { icon: 'fa-bolt', title: 'Faster Sprint Velocity', sub: 'PMI-ACP® Scrum Execution' },
-                        { icon: 'fa-rocket', title: '7 Live Shipped Products', sub: 'Vercel · Cloudflare · Surge' }
-                    ]
-                }
-            };
-
-            const renderBeamCol = (el, items, isOutput) => {
-                if (!el) return;
-                el.innerHTML = items.map(item => `
-                    <div class="beam-node${isOutput ? ' output' : ''}">
-                        <div class="beam-node-icon"><i class="fa-solid ${item.icon}"></i></div>
-                        <div>
-                            <div class="beam-node-title">${item.title}</div>
-                            <div class="beam-node-sub">${item.sub}</div>
-                        </div>
-                    </div>
-                `).join('');
-            };
-
-            const aiTabs = document.querySelectorAll('.ai-tab');
-            const aiModeLabel = document.getElementById('aiLabModeLabel');
-            const beamInputs = document.getElementById('beamInputs');
-            const beamOutputs = document.getElementById('beamOutputs');
-            const beamHub = document.getElementById('beamHub');
-
-            aiTabs.forEach((tab) => {
-                tab.addEventListener('click', () => {
-                    const key = tab.dataset.aiTab;
-                    const cfg = aiLabModes[key];
-                    if (!cfg) return;
-                    aiTabs.forEach((t) => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    if (aiModeLabel) aiModeLabel.textContent = cfg.label;
-                    if (beamHub) {
-                        beamHub.innerHTML = `
-                            <div class="beam-hub-icon"><i class="fa-solid ${cfg.hub.icon}"></i></div>
-                            <div class="beam-hub-title">${cfg.hub.title}</div>
-                            <div class="beam-hub-sub">${cfg.hub.sub}</div>
-                        `;
-                    }
-                    renderBeamCol(beamInputs, cfg.inputs, false);
-                    renderBeamCol(beamOutputs, cfg.outputs, true);
-                    requestAnimationFrame(updateBeams);
-                });
-            });
-
-            const updateBeams = () => {
-                const stage = document.getElementById('beamStage');
-                const svg = document.getElementById('beamSvg');
-                const group = document.getElementById('beamPaths');
-                if (!stage || !svg || !group || !beamHub || window.innerWidth <= 1024) return;
-                const sr = stage.getBoundingClientRect();
-                const hr = beamHub.getBoundingClientRect();
-                svg.setAttribute('viewBox', `0 0 ${sr.width} ${sr.height}`);
-                const hubLeftX = hr.left - sr.left;
-                const hubRightX = hr.right - sr.left;
-                const hubY = hr.top - sr.top + hr.height / 2;
-                let markup = '';
-                const buildCurve = (x1, y1, x2, y2, delayClass) => {
-                    const midX = (x1 + x2) / 2;
-                    const d = `M ${x1.toFixed(1)} ${y1.toFixed(1)} C ${midX.toFixed(1)} ${y1.toFixed(1)}, ${midX.toFixed(1)} ${y2.toFixed(1)}, ${x2.toFixed(1)} ${y2.toFixed(1)}`;
-                    return `<path class="beam-path-bg" d="${d}" /><path class="beam-path-pulse ${delayClass}" d="${d}" />`;
-                };
-                beamInputs.querySelectorAll('.beam-node').forEach((node, i) => {
-                    const nr = node.getBoundingClientRect();
-                    markup += buildCurve(nr.right - sr.left, nr.top - sr.top + nr.height / 2, hubLeftX, hubY, i ? `delay-${i}` : '');
-                });
-                beamOutputs.querySelectorAll('.beam-node').forEach((node, i) => {
-                    const nr = node.getBoundingClientRect();
-                    markup += buildCurve(hubRightX, hubY, nr.left - sr.left, nr.top - sr.top + nr.height / 2, i ? `delay-${i}` : '');
-                });
-                group.innerHTML = markup;
-            };
-
-            requestAnimationFrame(updateBeams);
-            window.addEventListener('resize', updateBeams);
-
-            // ── 7. Project Category Filter ──
+            // ── 6. Project Category Filter ──
             const filterBtns = document.querySelectorAll('.filter-btn');
             const projectCards = document.querySelectorAll('.project-card');
             filterBtns.forEach((btn) => {
@@ -3439,6 +3128,7 @@
             // ── 8. Sticky PillNav Active Highlight & Scroll Top ──
             const navbar = document.getElementById('navbar');
             const scrollTopBtn = document.getElementById('scrollTop');
+            const aiFab = document.getElementById('aiFab');
             const sections = document.querySelectorAll('header.hero, section');
             const navLinks = document.querySelectorAll('.nav-link');
 
@@ -3446,6 +3136,7 @@
                 const y = window.scrollY;
                 navbar.classList.toggle('scrolled', y > 40);
                 scrollTopBtn.classList.toggle('visible', y > 400);
+                if (aiFab) aiFab.classList.toggle('visible', y > 400);
 
                 let current = 'home';
                 sections.forEach((sec) => {
@@ -3538,8 +3229,7 @@
                         links: [
                             { label: 'Visit AIEarnMoney Live', href: 'https://ai-earn-money.pages.dev/', external: true },
                             { label: 'AI Reup Bot Repo', href: 'https://github.com/dangochinh/reup-bot', external: true },
-                            { label: 'PePeApp Repo', href: 'https://github.com/dangochinh/PePeApp', external: true },
-                            { label: 'Xem AI Lab', href: '#ai-lab', external: false }
+                            { label: 'PePeApp Repo', href: 'https://github.com/dangochinh/PePeApp', external: true }
                         ]
                     };
                 }
@@ -3604,64 +3294,15 @@ Cả hai chứng chỉ đều có thể xác thực trực tiếp qua <strong>Cr
                     html: `Cảm ơn anh/chị đã quan tâm! Anh <strong>Đặng Ngọc Chính</strong> là <strong>IT Project Manager (PMP®, PMI-ACP®)</strong> với <strong>9+ năm kinh nghiệm</strong> quản trị hệ thống doanh nghiệp (SCM/WMS, Logistics, E-Commerce, Insurance) và trực tiếp phát triển <strong>7 ứng dụng AI &amp; Full-Stack</strong> trên GitHub.<br><br>
 Anh/chị có thể hỏi cụ thể về: <strong>dự án AI</strong>, <strong>PePeApp</strong>, <strong>AIEarnMoney</strong>, <strong>kinh nghiệm FPT Software</strong>, hoặc <strong>thông tin liên hệ</strong>.`,
                     links: [
-                        { label: 'Xem AI Architecture Lab', href: '#ai-lab', external: false },
-                        { label: 'Xem Featured Projects', href: '#projects', external: false }
+                        { label: 'Xem Featured Projects', href: '#projects', external: false },
+                        { label: 'Xem Experience', href: '#experience', external: false }
                     ]
                 };
             };
 
-            const appendUserMsg = (text) => {
-                const msg = document.createElement('div');
-                msg.className = 'ai-msg user';
-                const bubble = document.createElement('div');
-                bubble.className = 'ai-bubble';
-                bubble.textContent = text;
-                msg.appendChild(bubble);
-                aiChatBody.appendChild(msg);
-                aiChatBody.scrollTop = aiChatBody.scrollHeight;
-            };
-
-            const streamBotMsg = (answer) => {
-                if (streamTimer) clearInterval(streamTimer);
-                const msg = document.createElement('div');
-                msg.className = 'ai-msg bot';
-                const bubble = document.createElement('div');
-                bubble.className = 'ai-bubble';
-                msg.appendChild(bubble);
-                aiChatBody.appendChild(msg);
-
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = answer.html.replace(/<br\s*\/?>/gi, '\n');
-                const fullText = (tempDiv.textContent || '').trim();
-
-                if (prefersReducedMotion) {
-                    bubble.innerHTML = answer.html;
-                    attachLinks(msg, answer.links);
-                    aiChatBody.scrollTop = aiChatBody.scrollHeight;
-                    return;
-                }
-
-                let idx = 0;
-                const step = Math.max(3, Math.ceil(fullText.length / 40));
-                streamTimer = setInterval(() => {
-                    idx += step;
-                    if (idx >= fullText.length) {
-                        clearInterval(streamTimer);
-                        streamTimer = null;
-                        bubble.innerHTML = answer.html;
-                        attachLinks(msg, answer.links);
-                    } else {
-                        const safe = fullText.slice(0, idx).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\n/g, '<br>');
-                        bubble.innerHTML = `${safe}<span class="typing-cursor"></span>`;
-                    }
-                    aiChatBody.scrollTop = aiChatBody.scrollHeight;
-                }, 18);
-            };
-
-            const attachLinks = (msgEl, links) => {
+            const buildLinkChips = (container, links, onLocalClick) => {
+                container.innerHTML = '';
                 if (!links || !links.length) return;
-                const row = document.createElement('div');
-                row.className = 'ai-msg-links';
                 links.forEach((l) => {
                     const a = document.createElement('a');
                     a.className = 'ai-link-chip';
@@ -3677,12 +3318,67 @@ Anh/chị có thể hỏi cụ thể về: <strong>dự án AI</strong>, <strong
                                 const fb = document.querySelector(`.filter-btn[data-filter="${l.filter}"]`);
                                 if (fb) fb.click();
                             }
-                            closeAiModal();
+                            if (onLocalClick) onLocalClick();
                         });
                     }
-                    row.appendChild(a);
+                    container.appendChild(a);
                 });
-                msgEl.appendChild(row);
+            };
+
+            const streamInto = (targetEl, answer, linksEl, onDone, onLocalClick) => {
+                if (streamTimer) clearInterval(streamTimer);
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = answer.html.replace(/<br\s*\/?>/gi, '\n');
+                const fullText = (tempDiv.textContent || '').trim();
+
+                if (prefersReducedMotion) {
+                    targetEl.innerHTML = answer.html;
+                    buildLinkChips(linksEl, answer.links, onLocalClick);
+                    if (onDone) onDone();
+                    return;
+                }
+
+                let idx = 0;
+                const step = Math.max(3, Math.ceil(fullText.length / 40));
+                streamTimer = setInterval(() => {
+                    idx += step;
+                    if (idx >= fullText.length) {
+                        clearInterval(streamTimer);
+                        streamTimer = null;
+                        targetEl.innerHTML = answer.html;
+                        buildLinkChips(linksEl, answer.links, onLocalClick);
+                    } else {
+                        const safe = fullText.slice(0, idx).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\n/g, '<br>');
+                        targetEl.innerHTML = `${safe}<span class="typing-cursor"></span>`;
+                    }
+                    if (onDone) onDone();
+                }, 18);
+            };
+
+            const appendUserMsg = (text) => {
+                const msg = document.createElement('div');
+                msg.className = 'ai-msg user';
+                const bubble = document.createElement('div');
+                bubble.className = 'ai-bubble';
+                bubble.textContent = text;
+                msg.appendChild(bubble);
+                aiChatBody.appendChild(msg);
+                aiChatBody.scrollTop = aiChatBody.scrollHeight;
+            };
+
+            const streamBotMsg = (answer) => {
+                const msg = document.createElement('div');
+                msg.className = 'ai-msg bot';
+                const bubble = document.createElement('div');
+                bubble.className = 'ai-bubble';
+                const linksRow = document.createElement('div');
+                linksRow.className = 'ai-msg-links';
+                msg.appendChild(bubble);
+                msg.appendChild(linksRow);
+                aiChatBody.appendChild(msg);
+                streamInto(bubble, answer, linksRow, () => {
+                    aiChatBody.scrollTop = aiChatBody.scrollHeight;
+                }, closeAiModal);
             };
 
             document.querySelectorAll('[data-close-navigate]').forEach((a) => {
@@ -3709,6 +3405,44 @@ Anh/chị có thể hỏi cụ thể về: <strong>dự án AI</strong>, <strong
                     const val = aiInput.value;
                     aiInput.value = '';
                     askAssistant(val);
+                });
+            }
+
+            // ── Hero Inline AI Bar ──
+            const heroAiForm = document.getElementById('heroAiForm');
+            const heroAiInput = document.getElementById('heroAiInput');
+            const heroAiReply = document.getElementById('heroAiReply');
+            const heroAiReplyText = document.getElementById('heroAiReplyText');
+            const heroAiReplyLinks = document.getElementById('heroAiReplyLinks');
+            const heroAiClose = document.getElementById('heroAiClose');
+
+            const askInlineHero = (query) => {
+                const q = query.trim();
+                if (!q || !heroAiReply || !heroAiReplyText || !heroAiReplyLinks) return;
+                heroAiReply.classList.add('open');
+                heroAiReplyLinks.innerHTML = '';
+                const ans = getAiAnswer(q);
+                streamInto(heroAiReplyText, ans, heroAiReplyLinks, null, null);
+            };
+
+            document.querySelectorAll('.hero-ai-chip').forEach((chip) => {
+                chip.addEventListener('click', () => {
+                    const q = chip.dataset.heroPrompt || chip.textContent;
+                    if (heroAiInput) heroAiInput.value = q;
+                    askInlineHero(q);
+                });
+            });
+
+            if (heroAiForm && heroAiInput) {
+                heroAiForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    askInlineHero(heroAiInput.value);
+                });
+            }
+
+            if (heroAiClose && heroAiReply) {
+                heroAiClose.addEventListener('click', () => {
+                    heroAiReply.classList.remove('open');
                 });
             }
         });
